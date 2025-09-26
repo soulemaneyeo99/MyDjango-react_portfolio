@@ -1,4 +1,3 @@
-// vercel.json
 {
   "framework": "vite",
   "buildCommand": "npm run build",
