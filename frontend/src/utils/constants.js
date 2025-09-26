@@ -12,8 +12,8 @@ export const PERSONAL_INFO = {
   phone2: '+225 0700896230',
   university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
   degree: 'Licence en Informatique - Spécialité DAS',
-  profileImage: '/static/img/moi2.jpg', // Votre vraie photo
-  heroBackground: '/static/img/hero-bg.jpg',
+  profileImage: '/images/moi2.jpg', // Votre vraie photo
+  heroBackground: '/images/hero-bg.jpg',
   social: {
     github: 'https://github.com/soulemaneyeo99/',
     linkedin: 'https://www.linkedin.com/in/souleymane-yeo-422ba42b0/',
@@ -48,10 +48,10 @@ export const FEATURED_PROJECTS = [
     techStack: ['Django', 'FastAPI', 'React', 'PostgreSQL', 'IA', 'Tailwind CSS'],
     status: 'En développement',
     category: 'Plateforme Éducative',
-    image: '/static/img/OpotuCI.png',
+    image: '/images/OpotuCI.png',
     images: [
-      { image: '/static/img/OpotuCI.png', caption: 'Interface principale' },
-      { image: '/static/img/OpotuCI (2).png', caption: 'Dashboard utilisateur' }
+      { image: '/images/OpotuCI.png', caption: 'Interface principale' },
+      { image: '/images/OpotuCI (2).png', caption: 'Dashboard utilisateur' }
     ],
     demoUrl: '#', // Remplacez par votre URL de démo quand disponible
     sourceUrl: 'https://github.com/soulemaneyeo99/OpportuCI',
@@ -85,13 +85,13 @@ export const FEATURED_PROJECTS = [
     techStack: ['Django', 'Bootstrap', 'JavaScript', 'SQLite', 'CSS3'],
     status: 'En ligne',
     category: 'E-commerce',
-    image: '/static/img/portfolio/e-comerceclienDjango.jpg',
+    image: '/images/portfolio/e-comerceclienDjango.jpg',
     images: [
-      { image: '/static/img/portfolio/e-comerceclienDjango.jpg', caption: 'Interface client' },
-      { image: '/static/img/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
-      { image: '/static/img/portfolio/e-comercelogin.jpg', caption: 'Page de connexion' },
-      { image: '/static/img/portfolio/ecomercemmande.jpg', caption: 'Gestion des commandes' },
-      { image: '/static/img/portfolio/ecomerceregister.jpg', caption: 'Inscription' }
+      { image: '/images/portfolio/e-comerceclienDjango.jpg', caption: 'Interface client' },
+      { image: '/images/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
+      { image: '/images/portfolio/e-comercelogin.jpg', caption: 'Page de connexion' },
+      { image: '/images/portfolio/ecomercemmande.jpg', caption: 'Gestion des commandes' },
+      { image: '/images/portfolio/ecomerceregister.jpg', caption: 'Inscription' }
     ],
     demoUrl: 'https://commerce99.pythonanywhere.com/',
     sourceUrl: 'https://github.com/soulemaneyeo99/ecommerce-django',
@@ -125,9 +125,9 @@ export const FEATURED_PROJECTS = [
     techStack: ['FastAPI', 'React', 'Tailwind CSS', 'PostgreSQL', 'JWT', 'Vite'],
     status: 'Complété',
     category: 'E-commerce',
-    image: '/static/img/Fastapiecommerce.jpeg',
+    image: '/images/Fastapiecommerce.jpeg',
     images: [
-      { image: '/static/img/Fastapiecommerce.jpeg', caption: 'Interface principale' }
+      { image: '/images/Fastapiecommerce.jpeg', caption: 'Interface principale' }
     ],
     demoUrl: '#', // Ajoutez votre URL de démo
     sourceUrl: 'https://github.com/soulemaneyeo99/fastapi-ecommerce',
@@ -161,9 +161,9 @@ export const FEATURED_PROJECTS = [
     techStack: ['React', 'Context API', 'Tailwind CSS', 'Local Storage', 'Hooks'],
     status: 'Complété',
     category: 'Application Web',
-    image: '/static/img/react_todo.jpeg',
+    image: '/images/react_todo.jpeg',
     images: [
-      { image: '/static/img/react_todo.jpeg', caption: 'Interface principale' }
+      { image: '/images/react_todo.jpeg', caption: 'Interface principale' }
     ],
     demoUrl: '#', // Ajoutez votre URL de démo
     sourceUrl: 'https://github.com/soulemaneyeo99/react-todo',
@@ -197,10 +197,10 @@ export const FEATURED_PROJECTS = [
     techStack: ['Django', 'Bootstrap', 'JavaScript', 'CSS3', 'SQLite'],
     status: 'Complété',
     category: 'E-commerce',
-    image: '/static/img/fashionStoreashborard.jpeg',
+    image: '/images/fashionStoreashborard.jpeg',
     images: [
-      { image: '/static/img/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
-      { image: '/static/img/fashionStorelogin.jpeg', caption: 'Page de connexion' }
+      { image: '/images/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
+      { image: '/images/fashionStorelogin.jpeg', caption: 'Page de connexion' }
     ],
     demoUrl: '#', // Ajoutez votre URL de démo
     sourceUrl: 'https://github.com/soulemaneyeo99/fashion-store',

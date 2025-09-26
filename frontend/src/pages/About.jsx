@@ -152,7 +152,7 @@ const About = () => {
             >
               <div className="relative">
                 <img
-                  src="/static/img/me2.jpg"
+                  src="/images/me2.jpg"
                   alt="Souleymane Yeo"
                   className="w-80 h-80 rounded-2xl shadow-2xl object-cover"
                   onError={(e) => {

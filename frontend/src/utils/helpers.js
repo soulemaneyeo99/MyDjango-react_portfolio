@@ -37,7 +37,7 @@ export const formatRelativeDate = (dateString) => {
 
 // Utilitaires pour les images
 export const getMediaUrl = (imagePath) => {
-  if (!imagePath) return '/static/img/placeholder.jpg';
+  if (!imagePath) return '/images/placeholder.jpg';
   if (imagePath.startsWith('http')) return imagePath;
   if (imagePath.startsWith('/static')) return imagePath;
   if (imagePath.startsWith('/')) return imagePath;
@@ -53,17 +53,17 @@ export const getImageUrl = (imagePath) => {
 // Mapping des images locales
 export const getLocalImage = (imageName) => {
   const imageMap = {
-    'profile': '/static/img/moi2.jpg',
-    'hero-bg': '/static/img/hero-bg.jpg',
-    'opportuci': '/static/img/OpotuCI.png',
-    'ecommerce-django': '/static/img/portfolio/e-comerceclienDjango.jpg',
-    'ecommerce-fastapi': '/static/img/Fastapiecommerce.jpeg',
-    'react-todo': '/static/img/react_todo.jpeg',
-    'fashion-store': '/static/img/fashionStoreashborard.jpeg',
-    'django-logo': '/static/img/portfolio/Djagologo.jpg',
+    'profile': '/images/moi2.jpg',
+    'hero-bg': '/images/hero-bg.jpg',
+    'opportuci': '/images/OpotuCI.png',
+    'ecommerce-django': '/images/portfolio/e-comerceclienDjango.jpg',
+    'ecommerce-fastapi': '/images/Fastapiecommerce.jpeg',
+    'react-todo': '/images/react_todo.jpeg',
+    'fashion-store': '/images/fashionStoreashborard.jpeg',
+    'django-logo': '/images/portfolio/Djagologo.jpg',
   };
   
-  return imageMap[imageName] || '/static/img/placeholder.jpg';
+  return imageMap[imageName] || '/images/placeholder.jpg';
 };
 
 // Utilitaires pour le SEO
@@ -322,6 +322,8 @@ export const copyToClipboard = async (text) => {
     }
   }
 };
+
+
 
 // Export default pour la compatibilité
 export default {

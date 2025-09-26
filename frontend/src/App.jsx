@@ -141,9 +141,9 @@ const useAppInitialization = () => {
 
     // Performance: Preload critical resources
     const criticalImages = [
-      '/static/img/moi2.jpg',
-      '/static/img/hero-bg.jpg',
-      '/static/img/OpotuCI.png'
+      '/images/moi2.jpg',
+      '/images/hero-bg.jpg',
+      '/images/OpotuCI.png'
     ];
 
     criticalImages.forEach(src => {
