@@ -1,9 +1,4 @@
-// ========== frontend/src/utils/constants.js ==========
-// URLs de base
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
-export const MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_BASE_URL || 'http://localhost:8000/media';
-
-// Informations personnelles de Souleymane
+// ========== src/utils/constants.js (Mis à jour avec vos images) ==========
 export const PERSONAL_INFO = {
   name: 'Souleymane Yeo',
   title: 'Développeur Full-Stack',
@@ -17,6 +12,8 @@ export const PERSONAL_INFO = {
   phone2: '+225 0700896230',
   university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
   degree: 'Licence en Informatique - Spécialité DAS',
+  profileImage: '/static/img/moi2.jpg', // Votre vraie photo
+  heroBackground: '/static/img/hero-bg.jpg',
   social: {
     github: 'https://github.com/soulemaneyeo99/',
     linkedin: 'https://www.linkedin.com/in/souleymane-yeo-422ba42b0/',
@@ -25,246 +22,242 @@ export const PERSONAL_INFO = {
   },
 };
 
-// Navigation items - AJOUT MANQUANT
-export const NAV_ITEMS = [
-  { id: 'home', label: 'Accueil', href: '#home', icon: '🏠' },
-  { id: 'about', label: 'À propos', href: '#about', icon: '👨‍💻' },
-  { id: 'skills', label: 'Compétences', href: '#skills', icon: '⚡' },
-  { id: 'projects', label: 'Projets', href: '#projects', icon: '💼' },
-  { id: 'blog', label: 'Blog', href: '#blog', icon: '📝' },
-  { id: 'contact', label: 'Contact', href: '#contact', icon: '📧' },
+// Projets phares avec vos vraies images
+export const FEATURED_PROJECTS = [
+  {
+    id: 'opportunci',
+    title: 'OpportuCI',
+    description: 'Plateforme intelligente centralisant les opportunités académiques pour les étudiants ivoiriens. Une solution complète avec IA pour recommandations personnalisées.',
+    detailed_description: `OpportuCI est ma création la plus ambitieuse : une plateforme révolutionnaire qui centralise toutes les opportunités éducatives en Côte d'Ivoire. 
+
+    🎯 **Problème résolu** : Les étudiants perdent des opportunités par manque d'information centralisée.
+    
+    🚀 **Ma solution** : Une plateforme intelligente avec IA qui recommande personnellement les meilleures opportunités selon le profil de chaque étudiant.
+    
+    ⚙️ **Architecture technique** :
+    - Backend robuste en Django REST Framework
+    - Intelligence artificielle pour les recommandations
+    - Interface React moderne et responsive
+    - Base de données PostgreSQL optimisée
+    
+    📊 **Fonctionnalités clés** :
+    - Système de recommandations IA
+    - Notifications en temps réel
+    - Profils étudiants personnalisés
+    - Dashboard administrateur complet`,
+    techStack: ['Django', 'FastAPI', 'React', 'PostgreSQL', 'IA', 'Tailwind CSS'],
+    status: 'En développement',
+    category: 'Plateforme Éducative',
+    image: '/static/img/OpotuCI.png',
+    images: [
+      { image: '/static/img/OpotuCI.png', caption: 'Interface principale' },
+      { image: '/static/img/OpotuCI (2).png', caption: 'Dashboard utilisateur' }
+    ],
+    demoUrl: '#', // Remplacez par votre URL de démo quand disponible
+    sourceUrl: 'https://github.com/soulemaneyeo99/OpportuCI',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-01-01',
+  },
+  {
+    id: 'ecommerce-django',
+    title: 'E-commerce Django Professionnel',
+    description: 'Plateforme de vente en ligne complète avec système d\'administration avancé, gestion des commandes et interface utilisateur moderne.',
+    detailed_description: `Une plateforme e-commerce complète développée avec Django, démontrant ma maîtrise du développement web full-stack.
+
+    🛒 **Fonctionnalités E-commerce** :
+    - Catalogue produits avec catégories
+    - Panier et système de commandes
+    - Gestion des stocks en temps réel
+    - Système de paiement intégré
+    
+    👨‍💼 **Interface Administrateur** :
+    - Dashboard complet avec statistiques
+    - Gestion des produits et catégories
+    - Suivi des commandes et clients
+    - Rapports de vente détaillés
+    
+    🔐 **Sécurité & Performance** :
+    - Authentification Django robuste
+    - Protection CSRF et XSS
+    - Optimisation des requêtes DB
+    - Cache intelligent`,
+    techStack: ['Django', 'Bootstrap', 'JavaScript', 'SQLite', 'CSS3'],
+    status: 'En ligne',
+    category: 'E-commerce',
+    image: '/static/img/portfolio/e-comerceclienDjango.jpg',
+    images: [
+      { image: '/static/img/portfolio/e-comerceclienDjango.jpg', caption: 'Interface client' },
+      { image: '/static/img/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
+      { image: '/static/img/portfolio/e-comercelogin.jpg', caption: 'Page de connexion' },
+      { image: '/static/img/portfolio/ecomercemmande.jpg', caption: 'Gestion des commandes' },
+      { image: '/static/img/portfolio/ecomerceregister.jpg', caption: 'Inscription' }
+    ],
+    demoUrl: 'https://commerce99.pythonanywhere.com/',
+    sourceUrl: 'https://github.com/soulemaneyeo99/ecommerce-django',
+    featured: true,
+    view_count: 245,
+    created_at: '2024-06-15',
+  },
+  {
+    id: 'ecommerce-fastapi',
+    title: 'E-commerce Modern FastAPI + React',
+    description: 'Application e-commerce moderne avec API FastAPI haute performance et interface React responsive, démonstration de l\'architecture microservices.',
+    detailed_description: `Une architecture moderne e-commerce séparant complètement le backend (FastAPI) du frontend (React), illustrant les meilleures pratiques actuelles.
+
+    ⚡ **Performance FastAPI** :
+    - API ultra-rapide avec validation automatique
+    - Documentation Swagger auto-générée
+    - Authentification JWT stateless
+    - Architecture asynchrone
+    
+    ⚛️ **Interface React Moderne** :
+    - Components réutilisables
+    - State management avec Context API
+    - Interface responsive Tailwind CSS
+    - Lazy loading et optimisations
+    
+    🔄 **Architecture Microservices** :
+    - API REST complètement découplée
+    - Communication via requêtes HTTP
+    - Déploiement indépendant possible
+    - Scalabilité horizontale`,
+    techStack: ['FastAPI', 'React', 'Tailwind CSS', 'PostgreSQL', 'JWT', 'Vite'],
+    status: 'Complété',
+    category: 'E-commerce',
+    image: '/static/img/Fastapiecommerce.jpeg',
+    images: [
+      { image: '/static/img/Fastapiecommerce.jpeg', caption: 'Interface principale' }
+    ],
+    demoUrl: '#', // Ajoutez votre URL de démo
+    sourceUrl: 'https://github.com/soulemaneyeo99/fastapi-ecommerce',
+    featured: true,
+    view_count: 156,
+    created_at: '2024-09-20',
+  },
+  {
+    id: 'react-todo',
+    title: 'Application Todo React Avancée',
+    description: 'Application de gestion de tâches avec React, démontrant la maîtrise des hooks, du state management et des bonnes pratiques frontend.',
+    detailed_description: `Une application Todo sophistiquée qui va bien au-delà des tutoriels basiques, intégrant des fonctionnalités avancées et les meilleures pratiques React.
+
+    🎨 **Interface Utilisateur Avancée** :
+    - Design moderne avec animations fluides
+    - Drag & drop pour réorganiser les tâches
+    - Filtres et recherche en temps réel
+    - Mode sombre/clair
+    
+    ⚛️ **React Moderne** :
+    - Hooks personnalisés pour la logique métier
+    - Context API pour le state global
+    - Components fonctionnels optimisés
+    - Error boundaries et gestion d'erreurs
+    
+    🔧 **Fonctionnalités Avancées** :
+    - Catégories et tags pour les tâches
+    - Dates d'échéance et rappels
+    - Statistiques et rapports
+    - Sauvegarde locale automatique`,
+    techStack: ['React', 'Context API', 'Tailwind CSS', 'Local Storage', 'Hooks'],
+    status: 'Complété',
+    category: 'Application Web',
+    image: '/static/img/react_todo.jpeg',
+    images: [
+      { image: '/static/img/react_todo.jpeg', caption: 'Interface principale' }
+    ],
+    demoUrl: '#', // Ajoutez votre URL de démo
+    sourceUrl: 'https://github.com/soulemaneyeo99/react-todo',
+    featured: false,
+    view_count: 89,
+    created_at: '2024-03-10',
+  },
+  {
+    id: 'fashion-store',
+    title: 'Fashion Store - Boutique Mode',
+    description: 'Boutique en ligne spécialisée dans la mode avec interface élégante, système de recommandations et expérience utilisateur optimisée.',
+    detailed_description: `Un projet e-commerce spécialisé dans la mode, mettant l'accent sur l'expérience utilisateur et le design visuel attractif.
+
+    👗 **Spécialisé Mode** :
+    - Catalogue organisé par catégories mode
+    - Filtres avancés (taille, couleur, marque)
+    - Zoom haute qualité sur les produits
+    - Recommandations basées sur les goûts
+    
+    🎨 **Design & UX** :
+    - Interface élégante et moderne
+    - Navigation intuitive
+    - Processus d'achat simplifié
+    - Responsive design parfait
+    
+    🛒 **Fonctionnalités E-commerce** :
+    - Gestion du panier avancée
+    - Wishlist et favoris
+    - Système de reviews et notes
+    - Intégration réseaux sociaux`,
+    techStack: ['Django', 'Bootstrap', 'JavaScript', 'CSS3', 'SQLite'],
+    status: 'Complété',
+    category: 'E-commerce',
+    image: '/static/img/fashionStoreashborard.jpeg',
+    images: [
+      { image: '/static/img/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
+      { image: '/static/img/fashionStorelogin.jpeg', caption: 'Page de connexion' }
+    ],
+    demoUrl: '#', // Ajoutez votre URL de démo
+    sourceUrl: 'https://github.com/soulemaneyeo99/fashion-store',
+    featured: false,
+    view_count: 67,
+    created_at: '2024-01-15',
+  }
 ];
 
-// Messages d'animation typing - AJOUT MANQUANT
-export const TYPING_MESSAGES = [
-  'Full-Stack Developer',
-  'Python Developer',
-  'Django Expert',
-  'FastAPI Specialist', 
-  'React Enthusiast',
-  'AI Explorer',
-  'Problem Solver',
-  'Code Artisan',
-];
-
-// Compétences techniques
+// Technologies avec couleurs cohérentes
 export const SKILLS = {
   backend: [
     { name: 'Python', level: 90, color: '#3776ab' },
     { name: 'Django/DRF', level: 85, color: '#092e20' },
     { name: 'FastAPI', level: 75, color: '#009688' },
     { name: 'PostgreSQL', level: 70, color: '#336791' },
+    { name: 'SQLite', level: 80, color: '#003b57' },
   ],
   frontend: [
-    { name: 'JavaScript', level: 70, color: '#f7df1e' },
-    { name: 'React', level: 60, color: '#61dafb' },
-    { name: 'HTML5/CSS3', level: 80, color: '#e34f26' },
-    { name: 'Tailwind CSS', level: 75, color: '#06b6d4' },
+    { name: 'JavaScript', level: 75, color: '#f7df1e' },
+    { name: 'React', level: 70, color: '#61dafb' },
+    { name: 'HTML5/CSS3', level: 85, color: '#e34f26' },
+    { name: 'Tailwind CSS', level: 80, color: '#06b6d4' },
+    { name: 'Bootstrap', level: 75, color: '#7952b3' },
   ],
   tools: [
-    { name: 'Git/GitHub', level: 80, color: '#f05032' },
+    { name: 'Git/GitHub', level: 85, color: '#f05032' },
     { name: 'Docker', level: 65, color: '#2496ed' },
-    { name: 'Linux/WSL', level: 70, color: '#fcc624' },
-    { name: 'VS Code', level: 85, color: '#007acc' },
+    { name: 'Linux/WSL', level: 75, color: '#fcc624' },
+    { name: 'VS Code', level: 90, color: '#007acc' },
+    { name: 'Postman', level: 80, color: '#ff6c37' },
   ],
   data: [
     { name: 'NumPy/Pandas', level: 75, color: '#013243' },
-    { name: 'Scikit-learn', level: 65, color: '#f7931e' },
+    { name: 'Scikit-learn', level: 70, color: '#f7931e' },
     { name: 'Matplotlib', level: 70, color: '#11557c' },
-    { name: 'Machine Learning', level: 65, color: '#ff6b6b' },
+    { name: 'Machine Learning', level: 68, color: '#ff6b6b' },
   ],
 };
 
-// Projets phares - AJOUT MANQUANT
-export const FEATURED_PROJECTS = [
-  {
-    id: 'opportuci',
-    title: 'OpportuCI',
-    description: 'Plateforme intelligente centralisant les opportunités académiques en Côte d\'Ivoire',
-    techStack: ['Django', 'FastAPI', 'React', 'PostgreSQL', 'IA'],
-    status: 'En développement',
-    category: 'Plateforme Web',
-    image: '/images/opportuci.png',
-    demoUrl: '#',
-    sourceUrl: '#',
-  },
-  {
-    id: 'ecommerce-modern',
-    title: 'E-commerce React + FastAPI',
-    description: 'Application moderne de vente en ligne avec authentification JWT et interface réactive',
-    techStack: ['React', 'FastAPI', 'Tailwind', 'Vite', 'PostgreSQL'],
-    status: 'Complété',
-    category: 'E-commerce',
-    image: '/images/ecommerce-react.png',
-    demoUrl: '#',
-    sourceUrl: '#',
-  },
-  {
-    id: 'ecommerce-django',
-    title: 'E-commerce Django',
-    description: 'Plateforme de vente en ligne complète avec dashboard administrateur',
-    techStack: ['Django', 'Bootstrap', 'SQLite', 'JavaScript'],
-    status: 'En ligne',
-    category: 'E-commerce',
-    image: '/images/ecommerce-django.png',
-    demoUrl: 'https://commerce99.pythonanywhere.com/',
-    sourceUrl: '#',
-  },
+// Messages d'animation typing plus spécifiques
+export const TYPING_MESSAGES = [
+  'Développeur Full-Stack',
+  'Expert Python/Django',
+  'Spécialiste FastAPI', 
+  'Développeur React',
+  'Passionné d\'IA',
+  'Créateur d\'OpportuCI',
+  'Problem Solver',
+  'Architecte Backend',
 ];
 
-// Types de projets
-export const PROJECT_CATEGORIES = [
-  { id: 'web', name: 'Applications Web', color: '#3b82f6' },
-  { id: 'api', name: 'APIs & Microservices', color: '#10b981' },
-  { id: 'ai', name: 'IA & Machine Learning', color: '#8b5cf6' },
-  { id: 'mobile', name: 'Applications Mobile', color: '#f59e0b' },
-  { id: 'data', name: 'Data Science', color: '#ef4444' },
+// Navigation mise à jour
+export const NAV_ITEMS = [
+  { id: 'home', label: 'Accueil', href: '/', icon: '🏠' },
+  { id: 'about', label: 'À propos', href: '/about', icon: '👨‍💻' },
+  { id: 'projects', label: 'Projets', href: '/projects', icon: '💼' },
+  { id: 'blog', label: 'Blog', href: '/blog', icon: '📝' },
+  { id: 'contact', label: 'Contact', href: '/contact', icon: '📧' },
 ];
-
-// Certifications - AJOUT MANQUANT
-export const CERTIFICATIONS = [
-  {
-    title: 'Introduction à la Data Science',
-    issuer: 'Formation Certifiée',
-    date: '04 Mars 2025',
-    description: 'Formation complète couvrant l\'IA, la Data Science, la visualisation et les bases du machine learning',
-    certificateUrl: '/certificates/data-science.pdf',
-    badge: '🔬',
-  },
-  {
-    title: 'Entrepreneuriat Numérique & Leadership',
-    issuer: 'DigiFemme Program',
-    date: '2024',
-    description: 'Formation sur la création de projets numériques, l\'innovation et la gestion d\'équipe',
-    certificateUrl: '/certificates/digifemme.pdf',
-    badge: '🚀',
-  },
-];
-
-// Routes de l'application
-export const ROUTES = {
-  HOME: '/',
-  ABOUT: '/about',
-  PROJECTS: '/projects',
-  PROJECT_DETAIL: '/projects/:slug',
-  BLOG: '/blog',
-  BLOG_POST: '/blog/:slug',
-  CONTACT: '/contact',
-};
-
-// Formation et expérience
-export const EDUCATION = [
-  {
-    degree: 'Licence en Informatique',
-    school: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
-    location: 'Cocody, Abidjan',
-    period: 'Depuis 2023 (en cours)',
-    specialty: 'Développement d\'Application et e-Service (DAS)',
-    description: 'Formation en informatique avec accent sur le développement web, la programmation orientée objet, et les bases de données.',
-    current: true
-  },
-  {
-    degree: 'Apprentissage Autodidacte',
-    school: 'Formations en ligne et projets personnels',
-    period: 'Depuis 2023 (continu)',
-    description: 'Apprentissage approfondi de Django, FastAPI, JavaScript, React, Git, GitHub, et bases du Machine Learning.',
-    skills: ['Django', 'FastAPI', 'React', 'Machine Learning', 'Git']
-  }
-];
-
-export const EXPERIENCE = [
-  {
-    title: 'Développeur Python / Django Freelance',
-    period: '2023 - Présent',
-    location: 'Abidjan, Côte d\'Ivoire (à distance)',
-    type: 'Freelance',
-    tasks: [
-      'Développement d\'applications web avec Django, FastAPI et PostgreSQL',
-      'Intégration d\'APIs, systèmes d\'authentification, et gestion de base de données',
-      'Création de solutions automatisées pour besoins métiers (facturation, notifications, scrapping)'
-    ]
-  },
-  {
-    title: 'Fondateur du projet OpportuCI',
-    period: 'Depuis 2025 (en cours)',
-    location: 'Projet personnel',
-    type: 'Entrepreneur',
-    tasks: [
-      'Conception et développement d\'une plateforme éducative pour opportunités académiques en Côte d\'Ivoire',
-      'Stack : Django, FastAPI, React, IA. En cours de réalisation',
-      'Gestion complète : base de données, backend, frontend et architecture globale'
-    ]
-  }
-];
-
-// Configuration des couleurs du thème
-export const THEME = {
-  primary: {
-    50: '#eff6ff',
-    100: '#dbeafe',
-    200: '#bfdbfe',
-    300: '#93c5fd',
-    400: '#60a5fa',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-    800: '#1e40af',
-    900: '#1e3a8a',
-  },
-  secondary: {
-    50: '#f8fafc',
-    100: '#f1f5f9',
-    200: '#e2e8f0',
-    300: '#cbd5e1',
-    400: '#94a3b8',
-    500: '#64748b',
-    600: '#475569',
-    700: '#334155',
-    800: '#1e293b',
-    900: '#0f172a',
-  }
-};
-
-// Messages et textes
-export const MESSAGES = {
-  contact: {
-    title: 'Une collaboration ? Une question ? Une idée ? Ou juste un coucou ?',
-    subtitle: 'N\'hésitez pas à me laisser un petit message sympa ! Je réponds toujours avec enthousiasme…',
-    success: 'Message envoyé avec succès ! Merci pour votre confiance.',
-    loading: 'Envoi en cours...'
-  },
-  about: {
-    intro: 'Salut, moi c\'est Souleymane Yeo, développeur backend passionné, basé en Côte d\'Ivoire. Je travaille principalement avec Python, Django et FastAPI.',
-    passion: 'Je m\'intéresse particulièrement à l\'intelligence artificielle, au machine learning et aux LLMs (modèles de langage), avec un fort intérêt pour les LMS.',
-    goal: 'Mon objectif : créer des solutions tech à fort impact éducatif.',
-    current: 'En ce moment, je développe OpportuCI, une plateforme professionnelle dédiée aux étudiants ivoiriens.',
-    future: 'Côté frontend, je suis en pleine montée en compétences avec React. L\'idée ? Devenir un véritable développeur full-stack.'
-  }
-};
-
-// App configuration
-export const APP_CONFIG = {
-  name: import.meta.env.VITE_APP_NAME || 'Souleymane Yeo - Portfolio',
-  description: import.meta.env.VITE_APP_DESCRIPTION || 'Développeur Full-Stack passionné spécialisé en Python, Django, FastAPI et React. Basé en Côte d\'Ivoire.',
-  url: import.meta.env.VITE_APP_URL || 'http://localhost:5173',
-  author: 'Souleymane Yeo',
-  keywords: ['développeur', 'python', 'django', 'fastapi', 'react', 'côte d\'ivoire', 'full-stack'],
-};
-
-export default {
-  API_BASE_URL,
-  MEDIA_BASE_URL,
-  PERSONAL_INFO,
-  NAV_ITEMS,
-  TYPING_MESSAGES,
-  SKILLS,
-  FEATURED_PROJECTS,
-  PROJECT_CATEGORIES,
-  CERTIFICATIONS,
-  ROUTES,
-  EDUCATION,
-  EXPERIENCE,
-  THEME,
-  MESSAGES,
-  APP_CONFIG,
-};

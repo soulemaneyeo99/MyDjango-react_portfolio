@@ -1,7 +1,7 @@
-// ========== frontend/src/components/common/SEOHead.jsx ==========
+// ========== src/components/common/SEOHead.jsx (Amélioré) ==========
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { generateMetaTags } from '../../utils/helpers';
+import { PERSONAL_INFO } from '../../utils/constants';
 
 const SEOHead = ({ 
   title, 
@@ -10,35 +10,89 @@ const SEOHead = ({
   url, 
   type = 'website',
   keywords = [],
-  author = 'Souleymane Yeo'
+  author = PERSONAL_INFO.name,
+  noIndex = false,
+  canonicalUrl
 }) => {
-  const metaTags = generateMetaTags(title, description, image, url);
+  const siteUrl = import.meta.env.VITE_APP_URL || 'https://soulemaneyeo.com';
+  const defaultImage = `${siteUrl}/images/og-image.jpg`;
+  
+  const fullTitle = title ? `${title} | ${PERSONAL_INFO.name}` : `${PERSONAL_INFO.name} - Développeur Full-Stack`;
+  const fullDescription = description || `Portfolio de ${PERSONAL_INFO.name} - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur d'OpportuCI.`;
+  const fullImage = image || defaultImage;
+  const fullUrl = url || siteUrl;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": PERSONAL_INFO.name,
+    "jobTitle": "Développeur Full-Stack",
+    "description": fullDescription,
+    "url": siteUrl,
+    "email": PERSONAL_INFO.email,
+    "telephone": PERSONAL_INFO.phone,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Abidjan",
+      "addressCountry": "CI"
+    },
+    "sameAs": [
+      PERSONAL_INFO.social.github,
+      PERSONAL_INFO.social.linkedin
+    ],
+    "knowsAbout": ["Python", "Django", "FastAPI", "React", "JavaScript", "Machine Learning"],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Université Virtuelle de Côte d'Ivoire"
+    }
+  };
 
   return (
     <Helmet>
-      <title>{metaTags.title}</title>
-      <meta name="description" content={metaTags.description} />
+      {/* Basic Meta Tags */}
+      <title>{fullTitle}</title>
+      <meta name="description" content={fullDescription} />
       <meta name="author" content={author} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl || fullUrl} />
+      
+      {/* Robots */}
+      <meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow'} />
+      
       {/* Open Graph */}
-      <meta property="og:title" content={metaTags['og:title']} />
-      <meta property="og:description" content={metaTags['og:description']} />
-      <meta property="og:image" content={metaTags['og:image']} />
-      <meta property="og:url" content={metaTags['og:url']} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content={metaTags['og:site_name']} />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={fullDescription} />
+      <meta property="og:image" content={fullImage} />
+      <meta property="og:url" content={fullUrl} />
+      <meta property="og:site_name" content={PERSONAL_INFO.name} />
+      <meta property="og:locale" content="fr_FR" />
       
-      {/* Twitter */}
-      <meta name="twitter:card" content={metaTags['twitter:card']} />
-      <meta name="twitter:title" content={metaTags['twitter:title']} />
-      <meta name="twitter:description" content={metaTags['twitter:description']} />
-      <meta name="twitter:image" content={metaTags['twitter:image']} />
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={fullDescription} />
+      <meta name="twitter:image" content={fullImage} />
       
-      {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="canonical" href={url || metaTags['og:url']} />
+      {/* Additional Meta Tags */}
+      <meta name="theme-color" content="#3b82f6" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content={PERSONAL_INFO.name} />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+      
+      {/* Prefetch DNS */}
+      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+      
+      {/* Preload Critical Resources */}
+      <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="" />
     </Helmet>
   );
 };

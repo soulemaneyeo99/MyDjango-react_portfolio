@@ -1,19 +1,31 @@
-// ========== frontend/src/pages/Home.jsx ==========
-import React, { useState, useEffect } from 'react';
+// ========== src/pages/Home.jsx (Version Ultra-Moderne) ==========
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/common/SEOHead';
-import { PERSONAL_INFO, TYPING_MESSAGES, SKILLS, FEATURED_PROJECTS, CERTIFICATIONS } from '../utils/constants';
+import { PERSONAL_INFO, TYPING_MESSAGES, SKILLS, FEATURED_PROJECTS } from '../utils/constants';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const Home = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Animation de typing effect
+  // Effet de souris pour les animations de fond
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Animation de typing effect améliorée
   useEffect(() => {
     const message = TYPING_MESSAGES[currentMessage];
     let currentIndex = 0;
+    setDisplayedText('');
 
     const typeInterval = setInterval(() => {
       if (currentIndex <= message.length) {
@@ -28,142 +40,193 @@ const Home = () => {
           setCurrentMessage((prev) => (prev + 1) % TYPING_MESSAGES.length);
         }, 2000);
       }
-    }, 100);
+    }, 80);
 
     return () => clearInterval(typeInterval);
   }, [currentMessage]);
 
   return (
     <>
-      <SEOHead
+      <SEOHead 
         title="Accueil"
-        description="Portfolio de Souleymane Yeo - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Basé en Côte d'Ivoire."
-        keywords={['développeur', 'python', 'django', 'fastapi', 'react', 'côte d\'ivoire', 'full-stack']}
+        description="Portfolio de Souleymane Yeo - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur d'OpportuCI. Basé en Côte d'Ivoire."
+        keywords={['développeur', 'python', 'django', 'fastapi', 'react', 'côte d\'ivoire', 'full-stack', 'opportunci']}
       />
 
-      {/* Hero Section */}
-      <HeroSection displayedText={displayedText} isTyping={isTyping} />
+      {/* Hero Section Ultra-Moderne */}
+      <HeroSection 
+        displayedText={displayedText} 
+        isTyping={isTyping}
+        mousePosition={mousePosition}
+      />
 
-      {/* About Section */}
-      <AboutSection />
+      {/* Section Présentation Dynamique */}
+      <PresentationSection />
 
-      {/* Skills Section */}
-      <SkillsSection />
+      {/* Section Compétences Interactive */}
+      <InteractiveSkillsSection />
 
-      {/* Featured Projects Section */}
-      <FeaturedProjectsSection />
+      {/* Projets Phares avec Animations */}
+      <FeaturedProjectsShowcase />
 
-      {/* Experience Section */}
-      <ExperienceSection />
+      {/* Section Parcours Timeline */}
+      <TimelineSection />
 
-      {/* Certifications Section */}
-      <CertificationsSection />
+      {/* Section Impact & Statistiques */}
+      <ImpactSection />
 
-      {/* Contact CTA Section */}
-      <ContactCTASection />
+      {/* Call to Action Final */}
+      <FinalCTASection />
     </>
   );
 };
 
-// Hero Section Component
-const HeroSection = ({ displayedText, isTyping }) => {
+// Hero Section avec Effets Visuels Avancés
+const HeroSection = ({ displayedText, isTyping, mousePosition }) => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
 
   return (
     <section 
       ref={targetRef}
-      id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-hero-pattern opacity-5" />
-      
-      {/* Floating Elements */}
+      {/* Background animé avec effet de parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-20 h-20 bg-primary-500/10 rounded-full animate-pulse-slow" />
-        <div className="absolute top-1/4 -left-10 w-32 h-32 bg-gradient-to-br from-primary-400/20 to-purple-500/20 rounded-full animate-bounce-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full animate-pulse-slow" />
+        {/* Particules animées */}
+        <div className="absolute inset-0">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 4}s`,
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Effet de mouse suiveur */}
+        <div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl transition-all duration-300"
+          style={{
+            left: mousePosition.x - 192,
+            top: mousePosition.y - 192,
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Profile Image */}
-          <div className={`mb-8 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className="text-center max-w-6xl mx-auto">
+          {/* Photo de profil avec effet glassmorphism */}
+          <div className={`mb-12 transform transition-all duration-1500 ${hasIntersected ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-20 opacity-0 scale-95'}`}>
             <div className="relative inline-block">
-              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden shadow-large border-4 border-white dark:border-gray-700">
+              <div className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden ring-4 ring-white/30 backdrop-blur-sm shadow-2xl border-2 border-white/20 relative">
                 <img
-                  src="/images/profile.jpg"
+                  src={PERSONAL_INFO.profileImage}
                   alt={PERSONAL_INFO.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(PERSONAL_INFO.name)}&size=200&background=3b82f6&color=ffffff`;
                   }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent" />
               </div>
-              <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-800">
-                <span className="text-2xl">🇨🇮</span>
+              
+              {/* Badge Côte d'Ivoire avec animation */}
+              <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-gradient-to-br from-orange-400 via-white to-green-600 rounded-full flex items-center justify-center border-4 border-white shadow-xl animate-bounce">
+                <span className="text-2xl font-bold">🇨🇮</span>
+              </div>
+              
+              {/* Badge statut en ligne */}
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-3 border-white shadow-lg">
+                <div className="w-full h-full bg-green-400 rounded-full animate-ping" />
               </div>
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className={`transform transition-all duration-1000 delay-300 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                {PERSONAL_INFO.name}
+          {/* Contenu principal avec animations échelonnées */}
+          <div className={`transform transition-all duration-1500 delay-300 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+            {/* Titre principal avec gradient animé */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
+              <span className="block text-white mb-4">Salut, je suis</span>
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
+                {PERSONAL_INFO.name.split(' ')[0]}
+              </span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl text-gray-300 mt-4 font-light">
+                Yeo Souleymane
               </span>
             </h1>
 
-            <div className="mb-8">
-              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4">
-                Je suis{' '}
-                <span className="font-bold text-primary-600 dark:text-primary-400 min-h-[1.5em] inline-block">
-                  {displayedText}
-                  <span className={`border-r-2 border-primary-600 ml-1 ${isTyping ? 'animate-pulse' : ''}`} />
+            {/* Animation typing améliorée */}
+            <div className="mb-12 h-20 md:h-24 flex items-center justify-center">
+              <div className="text-2xl md:text-4xl font-semibold text-blue-300">
+                <span className="text-gray-300">Je suis </span>
+                <span className="relative">
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    {displayedText}
+                  </span>
+                  <span className={`absolute -right-3 top-0 h-full w-1 bg-blue-400 ${isTyping ? 'animate-pulse' : 'animate-ping'}`} />
                 </span>
-              </p>
-              
-              <p className="text-lg text-gray-700 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                {PERSONAL_INFO.subtitle}
-              </p>
+              </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <a
-                href="#projects"
-                className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-full hover:from-primary-600 hover:to-primary-800 transition-all duration-300 font-semibold shadow-colored transform hover:scale-105 inline-flex items-center space-x-2"
+            {/* Description avec animation */}
+            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12 opacity-90">
+              🚀 <strong className="text-white">Créateur d'OpportuCI</strong> • Développeur passionné spécialisé en 
+              <span className="text-blue-400 font-semibold"> Python/Django</span>, 
+              <span className="text-green-400 font-semibold"> FastAPI</span> et 
+              <span className="text-purple-400 font-semibold"> React</span>. 
+              Basé en <span className="text-orange-400 font-semibold">Côte d'Ivoire</span> 🇨🇮
+            </p>
+
+            {/* Boutons CTA avec effets avancés */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+              <Link
+                to="/projects"
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-blue-500/25 overflow-hidden"
               >
-                <span>Voir mes projets</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
+                <span className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span className="relative flex items-center space-x-2">
+                  <span>Découvrir mes projets</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+              </Link>
               
-              <a
-                href="#contact"
-                className="border-2 border-primary-500 text-primary-600 dark:text-primary-400 px-8 py-4 rounded-full hover:bg-primary-500 hover:text-white transition-all duration-300 font-semibold inline-flex items-center space-x-2"
+              <Link
+                to="/contact"
+                className="group px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                <span>Discutons</span>
-              </a>
+                <span className="flex items-center space-x-2">
+                  <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <span>Parlons ensemble</span>
+                </span>
+              </Link>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+            {/* Statistiques impressionnantes */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {[
-                { label: 'Projets réalisés', value: '15+' },
-                { label: 'Technologies maîtrisées', value: '10+' },
-                { label: 'Années d\'expérience', value: '2+' },
-                { label: 'Cafés bus', value: '∞' },
+                { label: 'Projets réalisés', value: '15+', icon: '💼' },
+                { label: 'Lignes de code', value: '50k+', icon: '💻' },
+                { label: 'Tasses de café', value: '∞', icon: '☕' },
+                { label: 'Heures codées', value: '2000+', icon: '⏰' },
               ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">
+                <div 
+                  key={index}
+                  className={`text-center transform transition-all duration-1000 delay-${500 + index * 100} ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                >
+                  <div className="text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-1 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-gray-400 font-medium">
                     {stat.label}
                   </div>
                 </div>
@@ -173,101 +236,124 @@ const HeroSection = ({ displayedText, isTyping }) => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Indicateur de scroll avec animation */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+        </div>
+        <div className="text-white/60 text-xs mt-2 text-center">Scroll</div>
       </div>
     </section>
   );
 };
 
-// About Section Component
-const AboutSection = () => {
+// Section Présentation Moderne avec Animations
+const PresentationSection = () => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
 
   return (
-    <section ref={targetRef} id="about" className="py-20 bg-white dark:bg-gray-900">
+    <section ref={targetRef} className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`max-w-4xl mx-auto transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              À propos de{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                moi
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto rounded-full" />
-          </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Contenu textuel */}
+            <div className={`space-y-8 transform transition-all duration-1000 ${hasIntersected ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                  Transforme tes
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> idées</span>
+                  <br />en solutions digitales
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-8"></div>
+              </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Salut, moi c'est <strong className="text-primary-600 dark:text-primary-400">Souleymane Yeo</strong>, 
-                développeur backend passionné, basé en <strong>Côte d'Ivoire</strong> 🇨🇮. 
-                Je travaille principalement avec <strong>Python</strong> 🐍, <strong>Django</strong> et <strong>FastAPI</strong>, 
-                des outils puissants avec lesquels je construis des architectures solides, maintenables et orientées performance.
-              </p>
+              <div className="space-y-6">
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <strong className="text-blue-600">Passionné par la création</strong>, je développe des applications web robustes et modernes. 
+                  Ma spécialité ? Transformer des besoins complexes en solutions simples et efficaces.
+                </p>
 
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Je m'intéresse particulièrement à l'<strong className="text-purple-600">intelligence artificielle</strong> 🤖, 
-                au <strong>machine learning</strong> et aux <strong>LLMs</strong> (modèles de langage), 
-                avec un fort intérêt pour les <strong>LMS</strong> (systèmes intelligents de gestion d'apprentissage).
-              </p>
-
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                En ce moment, je développe <em className="text-primary-600 font-semibold">OpportuCI</em>, 
-                une plateforme professionnelle dédiée aux étudiants ivoiriens. Elle centralise les meilleures opportunités : 
-                bourses, concours, stages, formations et plus encore 🎯.
-              </p>
-
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Côté frontend, je suis en pleine montée en compétences avec <strong>React</strong> ⚛️. 
-                L'idée ? Devenir un véritable <strong className="text-green-600">développeur full-stack</strong>, 
-                capable de passer sans transition du backend robuste à une interface utilisateur moderne et réactive 👨‍💻.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {/* Education */}
-              <div className="bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                  <span className="mr-2">🎓</span>
-                  Formation
-                </h3>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-white">Licence en Informatique</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Spécialité DAS - En cours</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{PERSONAL_INFO.university}</p>
-                  </div>
+                <div className="space-y-4">
+                  {[
+                    { icon: '🎯', title: 'Vision Claire', desc: 'Je comprends vos besoins et les traduis en solutions techniques' },
+                    { icon: '⚡', title: 'Performance', desc: 'Code optimisé, architecture scalable, expérience utilisateur fluide' },
+                    { icon: '🚀', title: 'Innovation', desc: 'Toujours à la pointe des dernières technologies et tendances' }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start space-x-4 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
+                      <div className="text-2xl">{item.icon}</div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Quick Stats */}
-              <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                  <span className="mr-2">⚡</span>
-                  En quelques chiffres
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">2+</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Années d'expérience</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">90%</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Python mastery</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">15+</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Projets réalisés</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600">∞</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Passion</div>
-                  </div>
+              <Link
+                to="/about"
+                className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-semibold group"
+              >
+                <span>En savoir plus sur mon parcours</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Visualisation interactive des compétences */}
+            <div className={`relative transform transition-all duration-1000 delay-300 ${hasIntersected ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+              <div className="relative">
+                {/* Cercles de compétences avec animations */}
+                <div className="relative w-96 h-96 mx-auto">
+                  {[
+                    { name: 'Python', level: 90, color: '#3776ab', x: 50, y: 20 },
+                    { name: 'Django', level: 85, color: '#092e20', x: 80, y: 40 },
+                    { name: 'FastAPI', level: 75, color: '#009688', x: 70, y: 70 },
+                    { name: 'React', level: 70, color: '#61dafb', x: 30, y: 60 },
+                    { name: 'PostgreSQL', level: 70, color: '#336791', x: 20, y: 30 }
+                  ].map((skill, index) => (
+                    <div
+                      key={skill.name}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                      style={{
+                        left: `${skill.x}%`,
+                        top: `${skill.y}%`,
+                        animationDelay: `${index * 200}ms`
+                      }}
+                    >
+                      <div 
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-2xl hover:scale-110 transition-all duration-300"
+                        style={{ backgroundColor: skill.color }}
+                      >
+                        {skill.level}%
+                      </div>
+                      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="bg-black text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                          {skill.name}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Lignes de connexion animées */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                    <defs>
+                      <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.3" />
+                      </linearGradient>
+                    </defs>
+                    {/* Lignes connectant les compétences */}
+                    <path
+                      d="M 192 76 Q 240 120 270 160 T 200 270 T 100 200 T 80 120 Z"
+                      fill="none"
+                      stroke="url(#line-gradient)"
+                      strokeWidth="2"
+                      strokeDasharray="5,5"
+                      className="animate-pulse"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -278,445 +364,158 @@ const AboutSection = () => {
   );
 };
 
-// Skills Section Component
-const SkillsSection = () => {
+// Section Compétences Interactive Ultra-Moderne
+const InteractiveSkillsSection = () => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
+  const [activeCategory, setActiveCategory] = useState('backend');
 
-  return (
-    <section ref={targetRef} id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Mes{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                Compétences
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Technologies et outils que j'utilise pour créer des solutions innovantes
-            </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto rounded-full mt-6" />
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Backend Skills */}
-            <SkillCategory 
-              title="Backend" 
-              icon="🖥️" 
-              skills={SKILLS.backend}
-              delay="0"
-            />
-
-            {/* Frontend Skills */}
-            <SkillCategory 
-              title="Frontend" 
-              icon="🎨" 
-              skills={SKILLS.frontend}
-              delay="200"
-            />
-
-            {/* Tools Skills */}
-            <SkillCategory 
-              title="Outils & DevOps" 
-              icon="🛠️" 
-              skills={SKILLS.tools}
-              delay="400"
-            />
-
-            {/* Data Skills */}
-            <SkillCategory 
-              title="Data & IA" 
-              icon="🤖" 
-              skills={SKILLS.data}
-              delay="600"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Skill Category Component
-const SkillCategory = ({ title, icon, skills, delay }) => {
-  const { targetRef, hasIntersected } = useIntersectionObserver();
-
-  return (
-    <div 
-      ref={targetRef}
-      className={`bg-white dark:bg-gray-900 rounded-xl shadow-soft p-6 transform transition-all duration-1000 hover:shadow-medium hover:scale-105 ${
-        hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-      }`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className="text-center mb-6">
-        <div className="text-4xl mb-2">{icon}</div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h3>
-      </div>
-      
-      <div className="space-y-4">
-        {skills.map((skill, index) => (
-          <div key={index} className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-700 dark:text-gray-300 font-medium">{skill.name}</span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div
-                className="h-2 rounded-full transition-all duration-1000 ease-out"
-                style={{
-                  width: hasIntersected ? `${skill.level}%` : '0%',
-                  backgroundColor: skill.color,
-                  transitionDelay: `${parseInt(delay) + index * 100}ms`,
-                }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Featured Projects Section Component
-const FeaturedProjectsSection = () => {
-  const { targetRef, hasIntersected } = useIntersectionObserver();
-
-  return (
-    <section ref={targetRef} id="projects" className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Projets{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                Phares
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-6">
-              Découvrez quelques-uns de mes projets les plus significatifs
-            </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto rounded-full" />
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {FEATURED_PROJECTS.map((project, index) => (
-              <ProjectCard key={project.id} project={project} delay={index * 200} />
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              to="/projects"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-full hover:from-primary-600 hover:to-primary-800 transition-all duration-300 font-semibold shadow-colored transform hover:scale-105"
-            >
-              <span>Voir tous les projets</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Project Card Component
-const ProjectCard = ({ project, delay }) => {
-  const { targetRef, hasIntersected } = useIntersectionObserver();
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Complété': return 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100';
-      case 'En développement': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100';
-      case 'En ligne': return 'bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100';
+  const categories = {
+    backend: { 
+      title: 'Backend Expert', 
+      icon: '🔧', 
+      gradient: 'from-blue-500 to-indigo-600',
+      skills: SKILLS.backend 
+    },
+    frontend: { 
+      title: 'Frontend Modern', 
+      icon: '🎨', 
+      gradient: 'from-purple-500 to-pink-600',
+      skills: SKILLS.frontend 
+    },
+    tools: { 
+      title: 'Outils & DevOps', 
+      icon: '⚙️', 
+      gradient: 'from-green-500 to-teal-600',
+      skills: SKILLS.tools 
+    },
+    data: { 
+      title: 'Data & IA', 
+      icon: '🤖', 
+      gradient: 'from-orange-500 to-red-600',
+      skills: SKILLS.data 
     }
   };
 
   return (
-    <div
-      ref={targetRef}
-      className={`bg-white dark:bg-gray-800 rounded-xl shadow-soft hover:shadow-large transition-all duration-500 overflow-hidden group transform ${
-        hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-      }`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className="relative overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-          onError={(e) => {
-          e.target.src = `https://via.placeholder.com/400x300/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;          }}
-        />
-        <div className="absolute top-4 right-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-            {project.status}
-          </span>
-        </div>
+    <section ref={targetRef} className="py-20 bg-gray-900 text-white relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-purple-900/30"></div>
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          />
+        ))}
       </div>
 
-      <div className="p-6">
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-            {project.title}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-            {project.description}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Ma Stack
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Technique</span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Technologies que je maîtrise pour créer des solutions robustes et modernes
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.techStack.slice(0, 4).map((tech, index) => (
-            <span
-              key={index}
-              className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-md text-xs font-medium"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.techStack.length > 4 && (
-            <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-md text-xs">
-              +{project.techStack.length - 4}
-            </span>
-          )}
-        </div>
-
-        <div className="flex space-x-4">
-          {project.demoUrl && project.demoUrl !== '#' && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-1 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors text-sm font-medium"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              <span>Demo</span>
-            </a>
-          )}
-          {project.sourceUrl && project.sourceUrl !== '#' && (
-            <a
-              href={project.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors text-sm font-medium"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span>Code</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Experience Section Component  
-const ExperienceSection = () => {
-  const { targetRef, hasIntersected } = useIntersectionObserver();
-
-  const experiences = [
-    {
-      title: 'Développeur Python / Django Freelance',
-      period: '2023 - Présent',
-      location: 'Abidjan, Côte d\'Ivoire (à distance)',
-      description: 'Développement d\'applications web avec Django, FastAPI et PostgreSQL',
-      achievements: [
-        'Intégration d\'APIs, systèmes d\'authentification JWT',
-        'Gestion de base de données PostgreSQL et optimisation des performances',
-        'Création de solutions automatisées (facturation, notifications, scrapping)',
-      ],
-      icon: '💼',
-      color: 'from-blue-500 to-blue-600',
-    },
-    {
-      title: 'Fondateur du projet OpportuCI',
-      period: 'Depuis 2025 (en cours)',
-      location: 'Projet personnel',
-      description: 'Conception et développement d\'une plateforme éducative pour les opportunités académiques',
-      achievements: [
-        'Stack : Django, FastAPI, React, IA',
-        'Gestion complète du projet de A à Z',
-        'Architecture scalable et moderne',
-      ],
-      icon: '🚀',
-      color: 'from-green-500 to-green-600',
-    },
-    {
-      title: 'Étudiant en Informatique',
-      period: 'Depuis 2023 (en cours)',
-      location: 'UVCI, Cocody, Abidjan',
-      description: 'Licence en Informatique - Spécialité Développement d\'Application et e-Service (DAS)',
-      achievements: [
-        'Formation en développement web et programmation orientée objet',
-        'Apprentissage des bases de données et architectures logicielles',
-        'Projets académiques en équipe',
-      ],
-      icon: '🎓',
-      color: 'from-purple-500 to-purple-600',
-    },
-  ];
-
-  return (
-    <section ref={targetRef} className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Mon{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                Parcours
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Aperçu de mon parcours académique et professionnel
-            </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto rounded-full mt-6" />
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 to-purple-500 transform md:-translate-x-1/2" />
-              
-              {experiences.map((exp, index) => (
-                <div
-                  key={index}
-                  className={`relative mb-12 md:mb-16 transform transition-all duration-1000 ${
-                    hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  <div className={`flex flex-col md:flex-row items-start md:items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                    {/* Content */}
-                    <div className={`flex-1 ml-16 md:ml-0 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
-                      <div className="bg-white dark:bg-gray-900 rounded-xl shadow-soft p-6 hover:shadow-medium transition-all duration-300">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                            {exp.title}
-                          </h3>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
-                            {exp.period}
-                          </span>
-                        </div>
-                        
-                        <p className="text-gray-600 dark:text-gray-400 mb-2 flex items-center">
-                          <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          {exp.location}
-                        </p>
-                        
-                        <p className="text-gray-700 dark:text-gray-300 mb-4">
-                          {exp.description}
-                        </p>
-                        
-                        <ul className="space-y-2">
-                          {exp.achievements.map((achievement, i) => (
-                            <li key={i} className="flex items-start text-gray-600 dark:text-gray-400">
-                              <svg className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                              {achievement}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Timeline dot */}
-                    <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${exp.color} text-white flex items-center justify-center text-xl shadow-medium`}>
-                        {exp.icon}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Certifications Section Component
-const CertificationsSection = () => {
-  const { targetRef, hasIntersected } = useIntersectionObserver();
-
-  return (
-    <section ref={targetRef} className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Mes{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-                Certifications
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Formations et certifications qui enrichissent mon expertise
-            </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto rounded-full mt-6" />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {CERTIFICATIONS.map((cert, index) => (
-              <div
-                key={index}
-                className={`bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-soft p-6 hover:shadow-medium transition-all duration-500 border border-gray-100 dark:border-gray-700 transform ${
-                  hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        <div className="max-w-6xl mx-auto">
+          {/* Navigation des catégories */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {Object.entries(categories).map(([key, category]) => (
+              <button
+                key={key}
+                onClick={() => setActiveCategory(key)}
+                className={`group px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                  activeCategory === key
+                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-2xl scale-105`
+                    : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white backdrop-blur-sm'
                 }`}
-                style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <div className="flex items-start space-x-4">
-                  <div className="text-4xl flex-shrink-0">
-                    {cert.badge}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      {cert.title}
-                    </h3>
-                    <div className="flex items-center space-x-4 mb-3 text-sm text-gray-600 dark:text-gray-400">
-                      <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        {cert.issuer}
-                      </span>
-                      <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 10h6m-9 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                        </svg>
-                        {cert.date}
-                      </span>
+                <span className="flex items-center space-x-2">
+                  <span className="text-xl">{category.icon}</span>
+                  <span>{category.title}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Affichage des compétences */}
+          <div className="relative min-h-[400px]">
+            {Object.entries(categories).map(([key, category]) => (
+              <div
+                key={key}
+                className={`absolute inset-0 transition-all duration-500 ${
+                  activeCategory === key 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-10 pointer-events-none'
+                }`}
+              >
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  {/* Graphique circulaire des compétences */}
+                  <div className="relative">
+                    <div className="grid grid-cols-2 gap-6">
+                      {category.skills.map((skill, index) => (
+                        <div key={skill.name} className="text-center">
+                          <div className="relative w-24 h-24 mx-auto mb-4">
+                            <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="40"
+                                stroke="rgba(255,255,255,0.1)"
+                                strokeWidth="8"
+                                fill="none"
+                              />
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="40"
+                                stroke={skill.color}
+                                strokeWidth="8"
+                                fill="none"
+                                strokeDasharray={`${2.51 * skill.level} 251.2`}
+                                strokeLinecap="round"
+                                className="animate-pulse"
+                                style={{
+                                  animation: `drawCircle 2s ease-in-out ${index * 0.2}s both`
+                                }}
+                              />
+                            </svg>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-sm font-bold">{skill.level}%</span>
+                            </div>
+                          </div>
+                          <h3 className="font-semibold text-white">{skill.name}</h3>
+                        </div>
+                      ))}
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                      {cert.description}
-                    </p>
-                    {cert.certificateUrl && (
-                      <a
-                        href={cert.certificateUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
-                      >
-                        <span>Voir le certificat</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    )}
+                  </div>
+
+                  {/* Description et détails */}
+                  <div className="space-y-6">
+                    <div className={`text-6xl bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent`}>
+                      {category.icon}
+                    </div>
+                    <div>
+                      <h3 className={`text-3xl font-bold mb-4 bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent`}>
+                        {category.title}
+                      </h3>
+                      <div className="space-y-4">
+                        {getSkillDescription(key).map((desc, index) => (
+                          <div key={index} className="flex items-start space-x-3">
+                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                            <p className="text-gray-300">{desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -724,111 +523,562 @@ const CertificationsSection = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes drawCircle {
+          from {
+            stroke-dasharray: 0 251.2;
+          }
+        }
+      `}</style>
     </section>
   );
 };
 
-// Contact CTA Section Component
-const ContactCTASection = () => {
+// Showcase des Projets Phares avec Animations 3D
+const FeaturedProjectsShowcase = () => {
   const { targetRef, hasIntersected } = useIntersectionObserver();
+  const [hoveredProject, setHoveredProject] = useState(null);
+
+  const featuredProjects = FEATURED_PROJECTS.filter(p => p.featured);
 
   return (
-    <section ref={targetRef} id="contact" className="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-purple-700 text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-hero-pattern opacity-10" />
-      
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full animate-pulse-slow" />
-        <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/5 rounded-full animate-bounce-slow" />
-        <div className="absolute top-1/2 left-1/2 w-16 h-16 bg-white/10 rounded-full animate-spin-slow" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className={`text-center max-w-4xl mx-auto transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Prêt à collaborer ?
+    <section ref={targetRef} className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Mes Créations
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Phares</span>
           </h2>
-          <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed">
-            💬 Une collaboration ? Une question ? Une idée ? Ou juste un coucou ?
-            <br />
-            <strong>N'hésitez pas à me laisser un petit message sympa !</strong>
-            <br />
-            Je réponds toujours avec enthousiasme... ✨
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
+            Découvrez mes projets les plus significatifs, de la conception à la réalisation
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+        </div>
 
-          {/* Contact Info */}
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="flex flex-col items-center space-y-3">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Localisation</h3>
-              <p className="text-white/80">📍 {PERSONAL_INFO.location}</p>
-            </div>
-
-            <div className="flex flex-col items-center space-y-3">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Email</h3>
-              <a 
-                href={`mailto:${PERSONAL_INFO.email}`}
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                📧 {PERSONAL_INFO.email}
-              </a>
-            </div>
-
-            <div className="flex flex-col items-center space-y-3">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Téléphone</h3>
-              <a 
-                href={`tel:${PERSONAL_INFO.phone}`}
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                📞 {PERSONAL_INFO.phone}
-              </a>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href={`mailto:${PERSONAL_INFO.email}`}
-              className="bg-white text-primary-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 font-semibold shadow-large transform hover:scale-105 inline-flex items-center space-x-2"
+        {/* Grille de projets avec effets 3D */}
+        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          {featuredProjects.map((project, index) => (
+            <div
+              key={project.id}
+              className={`group relative transform transition-all duration-700 hover:scale-105 ${
+                hasIntersected 
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-20 opacity-0'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span>📨 Envoyer un email</span>
-            </a>
-            
-            <a
-              href={PERSONAL_INFO.social.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-primary-600 transition-all duration-300 font-semibold inline-flex items-center space-x-2"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-              </svg>
-              <span>WhatsApp</span>
-            </a>
-          </div>
+              <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
+                {/* Image avec effet parallax */}
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => {
+                      e.target.src = `https://via.placeholder.com/600x400/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`;
+                    }}
+                  />
+                  
+                  {/* Badge de statut flottant */}
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold shadow-lg ${
+                      project.status === 'En développement' 
+                        ? 'bg-yellow-500 text-yellow-900'
+                        : project.status === 'En ligne'
+                        ? 'bg-green-500 text-green-900'
+                        : 'bg-blue-500 text-blue-900'
+                    }`}>
+                      {project.status}
+                    </span>
+                  </div>
+
+                  {/* Overlay avec boutons d'action */}
+                  <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center space-x-4 z-20 transition-all duration-300 ${
+                    hoveredProject === project.id ? 'opacity-100' : 'opacity-0'
+                  }`}>
+                    {project.demoUrl && project.demoUrl !== '#' && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        <span>Voir en live</span>
+                      </a>
+                    )}
+                    <Link
+                      to={`/projects/${project.id}`}
+                      className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span>Détails</span>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Contenu du projet */}
+                <div className="p-8">
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Technologies avec animations */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.techStack.slice(0, 4).map((tech, techIndex) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium border border-blue-200/50 dark:border-blue-800/50 transform transition-all duration-300 hover:scale-110"
+                        style={{
+                          animationDelay: `${techIndex * 100}ms`
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 4 && (
+                      <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full text-sm">
+                        +{project.techStack.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Statistiques du projet */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center space-x-1">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span>{project.view_count || 0} vues</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 10h6m-9 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        </svg>
+                        <span>{project.category}</span>
+                      </div>
+                    </div>
+                    
+                    <Link
+                      to={`/projects/${project.id}`}
+                      className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center space-x-1 group"
+                    >
+                      <span>Explorer</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA vers tous les projets */}
+        <div className="text-center mt-16">
+          <Link
+            to="/projects"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-2xl"
+          >
+            <span>Découvrir tous mes projets</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
   );
+};
+
+// Timeline Section Interactive
+const TimelineSection = () => {
+  const { targetRef, hasIntersected } = useIntersectionObserver();
+
+  const timelineData = [
+    {
+      year: '2025',
+      title: 'Lancement d\'OpportuCI',
+      description: 'Création de la plateforme révolutionnaire pour les étudiants ivoiriens',
+      icon: '🚀',
+      color: 'from-green-500 to-emerald-600',
+      achievements: ['Architecture IA intégrée', 'Plus de 1000 opportunités centralisées', 'Interface utilisateur moderne']
+    },
+    {
+      year: '2024',
+      title: 'Spécialisation Full-Stack',
+      description: 'Maîtrise complète de React et modernisation de mes compétences frontend',
+      icon: '⚛️',
+      color: 'from-blue-500 to-cyan-600',
+      achievements: ['React avancé maîtrisé', '5 projets e-commerce développés', 'Architecture microservices']
+    },
+    {
+      year: '2023',
+      title: 'Expert Django & FastAPI',
+      description: 'Consolidation expertise backend et premiers projets clients',
+      icon: '🐍',
+      color: 'from-purple-500 to-indigo-600',
+      achievements: ['Django REST Framework expert', 'FastAPI haute performance', 'Premiers clients freelance']
+    },
+    {
+      year: '2023',
+      title: 'Début Université UVCI',
+      description: 'Entrée en Licence Informatique spécialité DAS',
+      icon: '🎓',
+      color: 'from-orange-500 to-red-600',
+      achievements: ['Formation informatique structurée', 'Projets académiques en équipe', 'Bases théoriques solides']
+    }
+  ];
+
+  return (
+    <section ref={targetRef} className="py-20 bg-gradient-to-br from-gray-900 to-indigo-900 text-white relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 4}s infinite ${Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Mon
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Parcours</span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            L'évolution de ma passion pour le développement web et l'innovation
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto relative">
+          {/* Ligne de timeline */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 transform md:-translate-x-1/2"></div>
+
+          {timelineData.map((item, index) => (
+            <div
+              key={index}
+              className={`relative mb-16 transform transition-all duration-1000 ${
+                hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+              }`}
+              style={{ transitionDelay: `${index * 300}ms` }}
+            >
+              <div className={`flex flex-col md:flex-row items-start md:items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                {/* Contenu */}
+                <div className={`flex-1 ml-16 md:ml-0 ${index % 2 === 0 ? 'md:mr-8 md:text-right' : 'md:ml-8'}`}>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <span className={`text-2xl p-3 rounded-full bg-gradient-to-r ${item.color}`}>
+                        {item.icon}
+                      </span>
+                      <div>
+                        <span className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                          {item.year}
+                        </span>
+                        <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-300 mb-6 leading-relaxed">{item.description}</p>
+                    
+                    <div className="space-y-2">
+                      {item.achievements.map((achievement, i) => (
+                        <div key={i} className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></div>
+                          <span className="text-gray-400 text-sm">{achievement}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Icône centrale */}
+                <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center">
+                  <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-2xl shadow-2xl border-4 border-white/20`}>
+                    {item.icon}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+// Section Impact & Statistiques
+const ImpactSection = () => {
+  const { targetRef, hasIntersected } = useIntersectionObserver();
+  
+  const stats = [
+    { 
+      number: '15+', 
+      label: 'Projets Réalisés', 
+      description: 'Applications web complètes développées',
+      icon: '💼',
+      color: 'from-blue-500 to-blue-600'
+    },
+    { 
+      number: '50k+', 
+      label: 'Lignes de Code', 
+      description: 'Code Python, JavaScript et plus',
+      icon: '💻',
+      color: 'from-green-500 to-green-600'
+    },
+    { 
+      number: '2000+', 
+      label: 'Heures de Code', 
+      description: 'Temps dédié au développement',
+      icon: '⏰',
+      color: 'from-purple-500 to-purple-600'
+    },
+    { 
+      number: '100%', 
+      label: 'Satisfaction Client', 
+      description: 'Projets livrés avec succès',
+      icon: '🎯',
+      color: 'from-orange-500 to-orange-600'
+    }
+  ];
+
+  return (
+    <section ref={targetRef} className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Impact &
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Réalisations</span>
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Quelques chiffres qui illustrent mon engagement et ma passion pour le développement
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className={`group text-center transform transition-all duration-1000 hover:scale-110 ${
+                hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <div className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200/50 dark:border-gray-600/50">
+                {/* Icône avec effet de flottement */}
+                <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r ${stat.color} text-white text-3xl mb-6 group-hover:rotate-12 transition-transform duration-300`}>
+                  {stat.icon}
+                </div>
+                
+                {/* Nombre avec animation compteur */}
+                <div className={`text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                  {stat.number}
+                </div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {stat.label}
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {stat.description}
+                </p>
+
+                {/* Effet de brillance au survol */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Citation personnelle */}
+        <div className={`text-center mt-20 transform transition-all duration-1000 delay-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <blockquote className="relative max-w-4xl mx-auto">
+            <div className="text-6xl text-blue-200 dark:text-blue-800 mb-4">"</div>
+            <p className="text-2xl md:text-3xl font-light text-gray-700 dark:text-gray-300 italic leading-relaxed mb-6">
+              Chaque ligne de code que j'écris est une step vers la création de solutions qui ont un impact réel sur la vie des gens.
+            </p>
+            <div className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+              - Souleymane Yeo, Créateur d'OpportuCI
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Call to Action Final Spectaculaire
+const FinalCTASection = () => {
+  const { targetRef, hasIntersected } = useIntersectionObserver();
+
+  return (
+    <section ref={targetRef} className="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+      {/* Background animé */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+        {[...Array(40)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-white rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${3 + Math.random() * 4}s infinite ${Math.random() * 2}s ease-in-out`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className={`text-center max-w-4xl mx-auto transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-20 opacity-0 scale-95'}`}>
+          {/* Titre accrocheur */}
+          <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+            Prêt à créer
+            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              du magie ensemble ?
+            </span>
+          </h2>
+
+          <p className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto">
+            Que vous ayez une idée révolutionnaire, un projet complexe ou simplement l'envie de discuter tech, 
+            je suis là pour transformer vos rêves en réalité digitale.
+          </p>
+
+          {/* Boutons CTA spectaculaires */}
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-16">
+            <Link
+              to="/contact"
+              className="group relative px-10 py-5 bg-white text-gray-900 font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 shadow-2xl overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+              <span className="relative flex items-center space-x-3">
+                <span>Démarrons votre projet</span>
+                <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+            </Link>
+            
+            <a
+              href={`mailto:${PERSONAL_INFO.email}`}
+              className="group px-10 py-5 border-2 border-white/50 text-white font-bold text-lg rounded-full hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm"
+            >
+              <span className="flex items-center space-x-3">
+                <svg className="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.83 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>Écrivez-moi directement</span>
+              </span>
+            </a>
+          </div>
+
+          {/* Informations de contact rapide */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div className="flex flex-col items-center space-y-2 text-white/80">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+              </div>
+              <span className="font-medium">Abidjan, Côte d'Ivoire</span>
+              <span className="text-sm text-gray-300">Disponible à distance</span>
+            </div>
+            
+            <div className="flex flex-col items-center space-y-2 text-white/80">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="font-medium">Réponse sous 24h</span>
+              <span className="text-sm text-gray-300">Toujours disponible</span>
+            </div>
+            
+            <div className="flex flex-col items-center space-y-2 text-white/80">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="font-medium">Consultation gratuite</span>
+              <span className="text-sm text-gray-300">Discutons de votre idée</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+// Fonction helper pour les descriptions de compétences
+const getSkillDescription = (category) => {
+  const descriptions = {
+    backend: [
+      "Architecture robuste avec Python et Django pour des applications scalables",
+      "APIs haute performance avec FastAPI et documentation automatique",
+      "Gestion avancée des bases de données PostgreSQL et optimisation des requêtes",
+      "Authentification sécurisée et gestion des permissions"
+    ],
+    frontend: [
+      "Interfaces utilisateur modernes et responsives avec React",
+      "Styling avancé avec Tailwind CSS et animations fluides",
+      "État global optimisé et composants réutilisables",
+      "Intégration parfaite avec les APIs REST"
+    ],
+    tools: [
+      "Workflow de développement optimisé avec Git et GitHub",
+      "Containerisation et déploiement avec Docker",
+      "Environnement de développement Linux/WSL maîtrisé",
+      "Tests et debugging avec les meilleurs outils"
+    ],
+    data: [
+      "Analyse de données avancée avec NumPy et Pandas",
+      "Machine Learning pratique avec Scikit-learn",
+      "Visualisation de données avec Matplotlib",
+      "Applications IA intégrées dans les projets web"
+    ]
+  };
+  
+  return descriptions[category] || [];
 };
 
 export default Home;

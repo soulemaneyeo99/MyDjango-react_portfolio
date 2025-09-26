@@ -2,7 +2,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PERSONAL_INFO, NAV_ITEMS } from '../../utils/constants';
-import { scrollToSection } from '../../utils/helpers';
+
+const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

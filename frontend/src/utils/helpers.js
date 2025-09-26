@@ -1,7 +1,8 @@
+// ========== src/utils/helpers.js (Complet et Corrigé) ==========
 
-// ========== frontend/src/utils/helpers.js ==========
 // Utilitaires pour le formatage des dates
 export const formatDate = (dateString, locale = 'fr-FR') => {
+  if (!dateString) return '';
   const date = new Date(dateString);
   return date.toLocaleDateString(locale, {
     year: 'numeric',
@@ -11,6 +12,7 @@ export const formatDate = (dateString, locale = 'fr-FR') => {
 };
 
 export const formatRelativeDate = (dateString) => {
+  if (!dateString) return '';
   const date = new Date(dateString);
   const now = new Date();
   const diffInSeconds = Math.floor((now - date) / 1000);
@@ -34,10 +36,34 @@ export const formatRelativeDate = (dateString) => {
 };
 
 // Utilitaires pour les images
-export const getImageUrl = (imagePath) => {
-  if (!imagePath) return '/images/placeholder.jpg';
+export const getMediaUrl = (imagePath) => {
+  if (!imagePath) return '/static/img/placeholder.jpg';
   if (imagePath.startsWith('http')) return imagePath;
-  return `${import.meta.env.VITE_MEDIA_BASE_URL}/${imagePath}`;
+  if (imagePath.startsWith('/static')) return imagePath;
+  if (imagePath.startsWith('/')) return imagePath;
+  
+  const mediaBaseUrl = import.meta.env.VITE_MEDIA_BASE_URL || 'http://localhost:8000/media';
+  return `${mediaBaseUrl}/${imagePath}`;
+};
+
+export const getImageUrl = (imagePath) => {
+  return getMediaUrl(imagePath);
+};
+
+// Mapping des images locales
+export const getLocalImage = (imageName) => {
+  const imageMap = {
+    'profile': '/static/img/moi2.jpg',
+    'hero-bg': '/static/img/hero-bg.jpg',
+    'opportuci': '/static/img/OpotuCI.png',
+    'ecommerce-django': '/static/img/portfolio/e-comerceclienDjango.jpg',
+    'ecommerce-fastapi': '/static/img/Fastapiecommerce.jpeg',
+    'react-todo': '/static/img/react_todo.jpeg',
+    'fashion-store': '/static/img/fashionStoreashborard.jpeg',
+    'django-logo': '/static/img/portfolio/Djagologo.jpg',
+  };
+  
+  return imageMap[imageName] || '/static/img/placeholder.jpg';
 };
 
 // Utilitaires pour le SEO
@@ -63,15 +89,30 @@ export const generateMetaTags = (title, description, image, url) => {
 
 // Utilitaires pour la validation
 export const validateEmail = (email) => {
+  if (!email) return false;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
 export const validateRequired = (value) => {
-  return value && value.trim().length > 0;
+  return value && value.toString().trim().length > 0;
 };
 
-// Utilitaires pour l'animation
+export const validateMinLength = (value, minLength) => {
+  return value && value.toString().length >= minLength;
+};
+
+export const validateMaxLength = (value, maxLength) => {
+  return !value || value.toString().length <= maxLength;
+};
+
+export const validatePhone = (phone) => {
+  if (!phone) return false;
+  const phoneRegex = /^(\+225|00225|225)?\s?[0-9]{8,10}$/;
+  return phoneRegex.test(phone.replace(/\s/g, ''));
+};
+
+// Utilitaires pour l'animation et le scroll
 export const scrollToSection = (sectionId, offset = 80) => {
   const element = document.getElementById(sectionId);
   if (element) {
@@ -83,6 +124,13 @@ export const scrollToSection = (sectionId, offset = 80) => {
       behavior: 'smooth'
     });
   }
+};
+
+export const scrollToTop = (behavior = 'smooth') => {
+  window.scrollTo({
+    top: 0,
+    behavior
+  });
 };
 
 // Utilitaires pour le localStorage
@@ -139,6 +187,7 @@ export const truncateText = (text, maxLength = 150) => {
 };
 
 export const slugify = (text) => {
+  if (!text) return '';
   return text
     .toLowerCase()
     .normalize('NFD')
@@ -148,6 +197,16 @@ export const slugify = (text) => {
     .replace(/-+/g, '-') // Replace multiple - with single -
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, ''); // Trim - from end of text
+};
+
+export const capitalize = (text) => {
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};
+
+export const formatNumber = (number) => {
+  if (!number) return '0';
+  return new Intl.NumberFormat('fr-FR').format(number);
 };
 
 // Utilitaire pour le debounce
@@ -163,12 +222,138 @@ export const debounce = (func, wait) => {
   };
 };
 
-// frontend/src/utils/helpers.js
-export function formatDate(dateString, locale = 'fr-FR') {
-  const date = new Date(dateString);
-  return date.toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+// Utilitaire pour le throttle
+export const throttle = (func, limit) => {
+  let inThrottle;
+  return function() {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
+
+// Utilitaires pour les objets et arrays
+export const groupBy = (array, key) => {
+  return array.reduce((result, currentValue) => {
+    (result[currentValue[key]] = result[currentValue[key]] || []).push(currentValue);
+    return result;
+  }, {});
+};
+
+export const sortBy = (array, key, direction = 'asc') => {
+  return [...array].sort((a, b) => {
+    const aVal = a[key];
+    const bVal = b[key];
+    
+    if (direction === 'desc') {
+      return bVal > aVal ? 1 : bVal < aVal ? -1 : 0;
+    }
+    return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
   });
-}
+};
+
+export const filterBy = (array, filters) => {
+  return array.filter(item => {
+    return Object.entries(filters).every(([key, value]) => {
+      if (!value) return true; // Skip empty filters
+      return item[key] === value || item[key]?.toString().toLowerCase().includes(value.toString().toLowerCase());
+    });
+  });
+};
+
+// Utilitaires pour les URL et paramètres
+export const getUrlParams = () => {
+  const params = new URLSearchParams(window.location.search);
+  const result = {};
+  for (const [key, value] of params) {
+    result[key] = value;
+  }
+  return result;
+};
+
+export const updateUrlParams = (params) => {
+  const url = new URL(window.location);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === null || value === undefined || value === '') {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+  });
+  window.history.replaceState({}, '', url);
+};
+
+// Utilitaires pour la détection de l'appareil
+export const isMobile = () => {
+  return window.innerWidth <= 768;
+};
+
+export const isTablet = () => {
+  return window.innerWidth > 768 && window.innerWidth <= 1024;
+};
+
+export const isDesktop = () => {
+  return window.innerWidth > 1024;
+};
+
+// Utilitaire pour la copie dans le presse-papiers
+export const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (err) {
+    // Fallback pour les navigateurs plus anciens
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return successful;
+    } catch (err) {
+      document.body.removeChild(textArea);
+      return false;
+    }
+  }
+};
+
+// Export default pour la compatibilité
+export default {
+  formatDate,
+  formatRelativeDate,
+  getMediaUrl,
+  getImageUrl,
+  getLocalImage,
+  generateMetaTags,
+  validateEmail,
+  validateRequired,
+  validateMinLength,
+  validateMaxLength,
+  validatePhone,
+  scrollToSection,
+  scrollToTop,
+  storage,
+  hexToRgb,
+  getContrastColor,
+  truncateText,
+  slugify,
+  capitalize,
+  formatNumber,
+  debounce,
+  throttle,
+  groupBy,
+  sortBy,
+  filterBy,
+  getUrlParams,
+  updateUrlParams,
+  isMobile,
+  isTablet,
+  isDesktop,
+  copyToClipboard
+};
