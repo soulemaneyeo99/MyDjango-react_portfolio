@@ -124,6 +124,13 @@ USE_TZ = True
 # Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Créer le dossier staticfiles s'il n'existe pas
+import os
+staticfiles_dir = os.path.join(BASE_DIR, 'staticfiles')
+if not os.path.exists(staticfiles_dir):
+    os.makedirs(staticfiles_dir, exist_ok=True)
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
