@@ -253,4 +253,16 @@ const App = () => {
   );
 };
 
+// Après vos imports
+console.log('Environment variables:', {
+  API_URL: import.meta.env.VITE_API_BASE_URL,
+  MEDIA_URL: import.meta.env.VITE_MEDIA_BASE_URL
+});
+
+// Dans le JSX, ajoutez temporairement
+<div style={{position: 'fixed', top: 10, right: 10, background: 'white', padding: 10, zIndex: 9999}}>
+  <img src="/images/moi2.jpg" alt="test" style={{width: 50, height: 50}} />
+  <p>Image test</p>
+</div>
+
 export default App;

@@ -37,9 +37,9 @@ export const formatRelativeDate = (dateString) => {
 
 // frontend/src/utils/helpers.js (LIGNE À CHANGER)
 export const getMediaUrl = (imagePath) => {
-  if (!imagePath) return '/images/placeholder.jpg'; // Changé de /images/
+  if (!imagePath) return '/images/placeholder.jpg'; 
   if (imagePath.startsWith('http')) return imagePath;
-  if (imagePath.startsWith('/images')) return imagePath; // Changé de /static
+  if (imagePath.startsWith('/images')) return imagePath; 
   if (imagePath.startsWith('/')) return imagePath;
   
   const mediaBaseUrl = import.meta.env.VITE_MEDIA_BASE_URL || 'http://localhost:8000/media';
