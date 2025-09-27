@@ -3,6 +3,9 @@
 /**
  * Configuration centralisée pour les médias
  */
+
+import React from 'react';
+
 const MEDIA_CONFIG = {
   // Base URLs selon l'environnement
   production: {

@@ -1,5 +1,4 @@
-
-// ========== frontend/postcss.config.js ==========
+// ========== frontend/postcss.config.js (VERSION SIMPLIFIÉE) ==========
 export default {
   plugins: {
     tailwindcss: {},
