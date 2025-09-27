@@ -261,3 +261,11 @@ export const NAV_ITEMS = [
   { id: 'blog', label: 'Blog', href: '/blog', icon: '📝' },
   { id: 'contact', label: 'Contact', href: '/contact', icon: '📧' },
 ];
+
+export const PROJECT_CATEGORIES = [
+  { id: 'web', name: 'Applications Web', color: '#3b82f6' },
+  { id: 'api', name: 'APIs & Microservices', color: '#10b981' },
+  { id: 'ai', name: 'IA & Machine Learning', color: '#8b5cf6' },
+  { id: 'mobile', name: 'Applications Mobile', color: '#f59e0b' },
+  { id: 'data', name: 'Data Science', color: '#ef4444' },
+];
