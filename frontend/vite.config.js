@@ -5,11 +5,14 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+
+  // ⚡ Serveur de dev (local)
   server: {
     port: 5173,
     proxy: {
@@ -25,8 +28,14 @@ export default defineConfig({
       }
     }
   },
+
+  // ⚡ Build pour production (Vercel)
   build: {
     outDir: 'dist',
     sourcemap: true,
-  }
+  },
+
+  // ⚡ Base URL → important pour Vercel !
+  // Si tu mets '', tes assets seront servis depuis /images/... correctement
+  base: '',
 })
