@@ -1,14 +1,15 @@
-# ========== backend/apps/portfolio/urls.py (Corrigé) ==========
+# ========== backend/apps/blog/urls.py (CORRIGÉ) ==========
 from django.urls import path
 from . import views
 
-# Dans votre backend/apps/blog/urls.py
+app_name = 'blog'
+
 urlpatterns = [
-    # Liste des articles avec filtrage
-    path('posts/', views.BlogPostListCreateView.as_view(), name='post-list'),
-    
-    # Articles en vedette (IMPORTANT: avant le slug)
+    # IMPORTANT: Featured AVANT le slug générique
     path('posts/featured/', views.featured_posts, name='featured-posts'),
+    
+    # Liste des articles
+    path('posts/', views.BlogPostListCreateView.as_view(), name='post-list'),
     
     # Détail d'un article
     path('posts/<slug:slug>/', views.BlogPostDetailView.as_view(), name='post-detail'),
