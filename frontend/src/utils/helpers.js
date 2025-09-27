@@ -35,16 +35,38 @@ export const formatRelativeDate = (dateString) => {
   return 'À l\'instant';
 };
 
-// frontend/src/utils/helpers.js (LIGNE À CHANGER)
+// frontend/src/utils/helpers.js
+
 export const getMediaUrl = (imagePath) => {
-  if (!imagePath) return '/images/placeholder.jpg'; 
-  if (imagePath.startsWith('http')) return imagePath;
-  if (imagePath.startsWith('/images')) return imagePath; 
-  if (imagePath.startsWith('/')) return imagePath;
+  // Debug en console pour voir ce qui est passé
+  console.log('getMediaUrl called with:', imagePath);
   
-  const mediaBaseUrl = import.meta.env.VITE_MEDIA_BASE_URL || 'http://localhost:8000/media';
-  return `${mediaBaseUrl}/${imagePath}`;
+  if (!imagePath) {
+    console.log('No image path, using placeholder');
+    return '/images/placeholder.jpg';
+  }
+  
+  if (imagePath.startsWith('http')) {
+    console.log('Full URL, returning as is');
+    return imagePath;
+  }
+  
+  if (imagePath.startsWith('/images/')) {
+    console.log('Local image path, returning as is');
+    return imagePath;
+  }
+  
+  if (imagePath.startsWith('/')) {
+    console.log('Root path, returning as is');
+    return imagePath;
+  }
+
+  // Si rien ne correspond → retourne quand même un placeholder
+  console.log('Unknown path, fallback to placeholder');
+  return '/images/placeholder.jpg';
 };
+
+// ✅ Wrapper pour compatibilité avec l’ancien code
 export const getImageUrl = (imagePath) => {
   return getMediaUrl(imagePath);
 };
