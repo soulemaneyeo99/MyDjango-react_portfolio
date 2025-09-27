@@ -87,13 +87,13 @@ const About = () => {
       title: "Introduction à la Data Science",
       date: "04 Mars 2025",
       description: "Certificat obtenu après une formation complète couvrant les bases de la data science : IA, Data, Visualisation, statistiques et premières notions de machine learning.",
-      file: "/static/CertificatIntrotoDataScienceUpdate20250403-28-1khjm7.pdf"
+      file: "/documents/CertificatIntrotoDataScienceUpdate20250403-28-1khjm7.pdf"
     },
     {
       title: "Entrepreneuriat Numérique & Leadership",
       date: "DigiFemme Program",
       description: "Formation axée sur la création de projet numérique, l'innovation, la gestion d'équipe et les bases de l'entrepreneuriat dans la tech.",
-      file: "/static/digifemmeCertificate_of_Entreprenariat.pdf"
+      file: "/documents/digifemmeCertificate_of_Entreprenariat.pdf"
     }
   ];
 
@@ -405,7 +405,7 @@ const About = () => {
             
             <div className="mt-12">
               <a
-                href="/static/MoncvYEO.pdf"
+                href="/documents/MoncvYEO.pdf"
                 download
                 className="btn btn-primary btn-lg mr-4"
               >
