@@ -1,3 +1,8 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { PERSONAL_INFO } from '../../utils/constants';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+
 const HeroSection = ({ displayedText, isTyping, mousePosition }) => {
     const { targetRef, hasIntersected } = useIntersectionObserver();
 
