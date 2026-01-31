@@ -60,6 +60,36 @@ class Project(models.Model):
     demo_url = models.URLField(blank=True, help_text='Lien vers la démo')
     source_url = models.URLField(blank=True, help_text='Lien vers le code source')
     
+    # Video Demo
+    VIDEO_TYPE_CHOICES = [
+        ('none', 'Aucune vidéo'),
+        ('youtube', 'YouTube'),
+        ('vimeo', 'Vimeo'),
+        ('local', 'Vidéo locale'),
+    ]
+    demo_video_url = models.URLField(
+        blank=True, 
+        help_text='Lien YouTube ou Vimeo de la démo vidéo'
+    )
+    demo_video_file = models.FileField(
+        upload_to='projects/videos/', 
+        blank=True, 
+        null=True,
+        help_text='Fichier vidéo local (MP4 recommandé)'
+    )
+    video_thumbnail = models.ImageField(
+        upload_to='projects/video_thumbnails/', 
+        blank=True, 
+        null=True,
+        help_text='Miniature personnalisée pour la vidéo'
+    )
+    video_type = models.CharField(
+        max_length=20, 
+        choices=VIDEO_TYPE_CHOICES, 
+        default='none',
+        help_text='Type de vidéo de démo'
+    )
+    
     # Relationships
     category = models.ForeignKey(ProjectCategory, on_delete=models.SET_NULL, null=True)
     technologies = models.ManyToManyField(Technology, blank=True)

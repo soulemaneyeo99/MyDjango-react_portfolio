@@ -36,12 +36,11 @@ const HeroSection = ({ displayedText, isTyping, mousePosition }) => {
                             <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-indigo-400">Disponible pour de nouveaux défis</span>
                         </div>
 
-                        <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[0.9] mb-8">
-                            <span className="text-white/40 block overflow-hidden">
-                                <span className="inline-block animate-reveal">DESIGNING</span>
-                            </span>
-                            <span className="text-white block">FUTURE PROOF</span>
-                            <span className="inline-block text-indigo-500 italic">SOLUTIONS</span>
+                        <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[1.1] mb-8">
+                            <span className="text-white block">ENGINEERING</span>
+                            <span className="text-indigo-500 italic block">MEANINGFUL</span>
+                            <span className="text-white block">DIGITAL</span>
+                            <span className="text-white block">EXPERIENCES</span>
                         </h1>
 
                         <div className="max-w-xl">

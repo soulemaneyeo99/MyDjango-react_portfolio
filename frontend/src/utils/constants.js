@@ -55,6 +55,10 @@ export const FEATURED_PROJECTS = [
     ],
     demoUrl: '#', // Remplacez par votre URL de démo quand disponible
     sourceUrl: 'https://github.com/soulemaneyeo99/OpportuCI',
+    // Video Demo (example - you can add your actual video URLs)
+    demo_video_url: '', // Add YouTube/Vimeo URL here when available
+    video_type: 'none', // 'youtube', 'vimeo', 'local', or 'none'
+    video_thumbnail: '', // Custom thumbnail if needed
     featured: true,
     view_count: 0,
     created_at: '2025-01-01',
