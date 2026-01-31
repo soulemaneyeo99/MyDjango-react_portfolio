@@ -49,8 +49,8 @@ const VideoPlayer = ({
                             className="w-full h-full object-cover"
                         />
                     ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                            <svg className="w-24 h-24 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-full h-full bg-bg-card flex items-center justify-center">
+                            <svg className="w-24 h-24 text-text-muted" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M10 20H14V4H10V20ZM4 20H8V12H4V20ZM16 9V20H20V9H16Z" />
                             </svg>
                         </div>
@@ -58,7 +58,7 @@ const VideoPlayer = ({
 
                     {/* Play button overlay */}
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
-                        <div className="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-2xl">
+                        <div className="w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-glow">
                             <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
@@ -79,7 +79,7 @@ const VideoPlayer = ({
                 <div className="w-full h-full">
                     {isLoading && (
                         <div className="absolute inset-0 bg-black flex items-center justify-center">
-                            <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                         </div>
                     )}
 

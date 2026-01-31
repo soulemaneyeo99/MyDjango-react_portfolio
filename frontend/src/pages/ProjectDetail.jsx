@@ -1,75 +1,61 @@
 // ========== frontend/src/pages/ProjectDetail.jsx ==========
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import SEOHead from '../components/common/SEOHead';
 import Loading from '../components/common/Loading';
-import { portfolioService } from '../services/portfolio';
-import { formatDate, getImageUrl } from '../utils/helpers';
+import { useProject } from '../hooks/useProjects';
 import VideoPlayer from '../components/projects/VideoPlayer';
+import { formatDate } from '../utils/helpers';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Using React Query hook
+  const { data: project, isLoading, error } = useProject(slug);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const data = await portfolioService.getProject(slug);
-        setProject(data);
-      } catch (err) {
-        console.error('Error fetching project:', err);
-        setError(err.response?.status === 404 ? 'Projet non trouvé' : 'Erreur de chargement');
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Helper for image URL
+  const getImageUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    return path;
+  };
 
-    if (slug) {
-      fetchProject();
-    }
-  }, [slug]);
-
-  if (loading) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-bg-dark">
         <Loading size="large" text="Chargement du projet..." />
       </div>
     );
   }
 
-  if (error) {
+  if (error || !project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center bg-bg-dark">
+        <div className="text-center p-8 bg-bg-card rounded-xl border border-border-default">
           <div className="text-6xl mb-4">😕</div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{error}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
+          <h1 className="text-2xl font-bold text-text-primary mb-4">
+            {error?.message || 'Projet non trouvé'}
+          </h1>
+          <p className="text-text-secondary mb-8">
             Ce projet n'existe pas ou a été supprimé.
           </p>
           <div className="space-x-4">
-            <button
-              onClick={() => navigate(-1)}
-              className="bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition-colors"
-            >
+            <Button onClick={() => navigate(-1)} variant="ghost">
               ← Retour
-            </button>
-            <Link
-              to="/projects"
-              className="bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors"
-            >
-              Voir tous les projets
+            </Button>
+            <Link to="/projects">
+              <Button variant="primary">
+                Voir tous les projets
+              </Button>
             </Link>
           </div>
         </div>
       </div>
     );
   }
-
-  if (!project) return null;
 
   const allImages = [
     { image: project.featured_image, caption: 'Image principale' },
@@ -79,52 +65,56 @@ const ProjectDetail = () => {
   return (
     <>
       <SEOHead
-        title={project.title}
+        title={`${project.title} | Portfolio`}
         description={project.description}
         image={getImageUrl(project.featured_image)}
         keywords={[project.title, ...(project.technologies?.map(t => t.name) || [])]}
       />
 
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen bg-bg-dark">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-900 dark:to-blue-900">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-500/5 blur-[100px]" />
+
+          <div className="container-custom relative z-10">
             <div className="max-w-4xl mx-auto">
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-sm mb-8">
-                <Link to="/" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Accueil
+              <nav className="flex items-center space-x-2 text-sm mb-8 font-mono">
+                <Link to="/" className="text-text-secondary hover:text-primary-500 transition-colors">
+                  HOME
                 </Link>
-                <span className="text-gray-400">/</span>
-                <Link to="/projects" className="text-gray-600 dark:text-gray-400 hover:text-primary-600">
-                  Projets
+                <span className="text-text-muted">/</span>
+                <Link to="/projects" className="text-text-secondary hover:text-primary-500 transition-colors">
+                  PROJECTS
                 </Link>
-                <span className="text-gray-400">/</span>
-                <span className="text-gray-900 dark:text-white font-medium">{project.title}</span>
+                <span className="text-text-muted">/</span>
+                <span className="text-primary-500 truncate max-w-[200px]">{project.title.toUpperCase()}</span>
               </nav>
 
               <div className="text-center">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-text-primary mb-6 tracking-tight">
                   {project.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+                <p className="text-xl md:text-2xl text-text-secondary leading-relaxed mb-8 font-light">
                   {project.description}
                 </p>
 
                 {/* Meta Info */}
-                <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+                <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
                   {project.category && (
-                    <span className="bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-4 py-2 rounded-full">
-                      {project.category.name}
-                    </span>
+                    <Badge variant="primary" className="text-sm px-4 py-1.5">
+                      {project.category.name || project.category}
+                    </Badge>
                   )}
-                  <span className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-full">
+                  <Badge variant="default" className="text-sm px-4 py-1.5">
                     {formatDate(project.created_at)}
-                  </span>
+                  </Badge>
                   {project.view_count > 0 && (
-                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-full">
-                      {project.view_count} vues
-                    </span>
+                    <Badge variant="purple" className="text-sm px-4 py-1.5">
+                      {project.view_count} Vues
+                    </Badge>
                   )}
                 </div>
 
@@ -135,12 +125,12 @@ const ProjectDetail = () => {
                       href={project.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-full hover:from-primary-600 hover:to-primary-800 transition-all duration-300 font-semibold shadow-colored transform hover:scale-105 inline-flex items-center justify-center space-x-2"
+                      className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all transform rounded-full bg-primary-500 hover:bg-primary-600 hover:scale-105 shadow-glow"
                     >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                      <span>Voir la démo</span>
+                      LIVE DEMO
                     </a>
                   )}
                   {project.source_url && project.source_url !== '#' && (
@@ -148,12 +138,12 @@ const ProjectDetail = () => {
                       href={project.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border-2 border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-full hover:bg-gray-600 hover:text-white dark:hover:bg-gray-600 transition-all duration-300 font-semibold inline-flex items-center justify-center space-x-2"
+                      className="inline-flex items-center justify-center px-8 py-4 text-base font-bold transition-all border rounded-full text-text-secondary border-white/10 hover:bg-white/5 hover:text-white"
                     >
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                       </svg>
-                      <span>Voir le code</span>
+                      VIEW CODE
                     </a>
                   )}
                 </div>
@@ -163,8 +153,8 @@ const ProjectDetail = () => {
         </section>
 
         {/* Content Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-12 md:py-20 lg:py-24">
+          <div className="container-custom">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-3 gap-12">
                 {/* Main Content */}
@@ -172,10 +162,8 @@ const ProjectDetail = () => {
                   {/* Video Demo Section */}
                   {(project.demo_video_url || project.demo_video_file) && project.video_type !== 'none' && (
                     <div className="mb-12">
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center space-x-3">
-                        <svg className="w-7 h-7 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+                      <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center space-x-3">
+                        <span className="text-primary-500">▶</span>
                         <span>Démonstration Vidéo</span>
                       </h2>
                       <VideoPlayer
@@ -189,45 +177,41 @@ const ProjectDetail = () => {
                   )}
 
                   {/* Image Gallery */}
-                  {allImages.length > 0 && (
-                    <div className="mb-12">
-                      <div className="relative mb-6">
+                  {allImages.length > 0 && allImages[0].image && (
+                    <div className="mb-16">
+                      <div className="relative mb-6 group">
                         <img
                           src={getImageUrl(allImages[currentImageIndex]?.image)}
                           alt={allImages[currentImageIndex]?.caption || project.title}
-                          className="w-full h-96 object-cover rounded-xl shadow-large"
+                          className="w-full h-auto max-h-[500px] object-cover rounded-xl border border-white/5 shadow-2xl"
                         />
                         {allImages.length > 1 && (
                           <>
                             <button
                               onClick={() => setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)}
-                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-primary-500 transition-colors opacity-0 group-hover:opacity-100 backdrop-blur-sm"
                             >
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                              </svg>
+                              ←
                             </button>
                             <button
                               onClick={() => setCurrentImageIndex((prev) => (prev + 1) % allImages.length)}
-                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-primary-500 transition-colors opacity-0 group-hover:opacity-100 backdrop-blur-sm"
                             >
-                              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
+                              →
                             </button>
                           </>
                         )}
                       </div>
 
                       {allImages.length > 1 && (
-                        <div className="flex space-x-2 overflow-x-auto">
+                        <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-hide">
                           {allImages.map((img, index) => (
                             <button
                               key={index}
                               onClick={() => setCurrentImageIndex(index)}
-                              className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex
-                                ? 'border-primary-500'
-                                : 'border-gray-200 dark:border-gray-700 hover:border-primary-300'
+                              className={`flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex
+                                ? 'border-primary-500 ring-2 ring-primary-500/20'
+                                : 'border-white/5 hover:border-white/20 opacity-60 hover:opacity-100'
                                 }`}
                             >
                               <img
@@ -244,11 +228,11 @@ const ProjectDetail = () => {
 
                   {/* Description détaillée */}
                   {project.detailed_description && (
-                    <div className="mb-12">
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                        Description détaillée
+                    <div className="mb-16">
+                      <h2 className="text-2xl font-bold text-text-primary mb-6 border-l-4 border-primary-500 pl-4">
+                        À propos du projet
                       </h2>
-                      <div className="prose prose-lg dark:prose-invert max-w-none">
+                      <div className="prose prose-lg prose-invert max-w-none text-text-secondary">
                         <div dangerouslySetInnerHTML={{ __html: project.detailed_description.replace(/\n/g, '<br>') }} />
                       </div>
                     </div>
@@ -256,25 +240,23 @@ const ProjectDetail = () => {
 
                   {/* Features/Fonctionnalités */}
                   <div className="mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                      Fonctionnalités principales
+                    <h2 className="text-2xl font-bold text-text-primary mb-6 border-l-4 border-primary-500 pl-4">
+                      Fonctionnalités clés
                     </h2>
                     <div className="grid md:grid-cols-2 gap-4">
-                      {[
+                      {/* Placeholder features if logic is missing from backend response for now, assuming array */}
+                      {(project.features || [
                         'Interface utilisateur moderne et responsive',
                         'Architecture backend robuste et scalable',
-                        'Authentification et sécurité',
-                        'Gestion des données optimisée',
-                        'API REST complète',
-                        'Tests automatisés',
-                        'Documentation technique',
-                        'Déploiement automatisé'
-                      ].map((feature, index) => (
-                        <div key={index} className="flex items-center space-x-3">
-                          <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        'Authentification et sécurité optimisées',
+                        'Gestion des données performante',
+                        'API RESTful complète'
+                      ]).map((feature, index) => (
+                        <div key={index} className="flex items-start space-x-3 p-4 bg-bg-card rounded-lg border border-border-default hover:border-primary-500/30 transition-colors">
+                          <svg className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
-                          <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                          <span className="text-text-secondary">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -283,109 +265,69 @@ const ProjectDetail = () => {
 
                 {/* Sidebar */}
                 <div className="lg:col-span-1">
-                  <div className="sticky top-24 space-y-8">
+                  <div className="sticky top-28 space-y-8">
                     {/* Technologies utilisées */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft p-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Technologies utilisées
+                    <div className="bg-bg-card border border-border-default rounded-xl p-6 shadow-soft">
+                      <h3 className="text-lg font-bold text-white mb-4 uppercase tracking-wider text-sm flex items-center">
+                        <span className="w-1 h-4 bg-primary-500 mr-2 rounded-full"></span>
+                        Tech Stack
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {project.technologies?.map((tech, index) => (
-                          <span
-                            key={index}
-                            className="px-3 py-2 rounded-full text-sm font-medium flex items-center space-x-2"
-                            style={{
-                              backgroundColor: `${tech.color}20`,
-                              color: tech.color,
-                              border: `1px solid ${tech.color}40`
-                            }}
-                          >
-                            {tech.icon && (
-                              <img src={getImageUrl(tech.icon)} alt={tech.name} className="w-4 h-4" />
-                            )}
-                            <span>{tech.name}</span>
-                          </span>
-                        ))}
+                        {project.techStack ? (
+                          project.techStack.map((tech, index) => (
+                            <Badge key={index} variant="tech">
+                              {tech}
+                            </Badge>
+                          ))
+                        ) : (
+                          // Fallback if data structure differs
+                          project.technologies?.map((tech, index) => (
+                            <Badge key={index} variant="tech">
+                              {tech.name || tech}
+                            </Badge>
+                          ))
+                        )}
                       </div>
                     </div>
 
                     {/* Informations du projet */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft p-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Informations du projet
+                    <div className="bg-bg-card border border-border-default rounded-xl p-6 shadow-soft">
+                      <h3 className="text-lg font-bold text-white mb-4 uppercase tracking-wider text-sm flex items-center">
+                        <span className="w-1 h-4 bg-primary-500 mr-2 rounded-full"></span>
+                        Infos Projet
                       </h3>
-                      <div className="space-y-4">
-                        <div>
-                          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Date de création</dt>
-                          <dd className="text-gray-900 dark:text-white">{formatDate(project.created_at)}</dd>
+                      <div className="space-y-4 text-sm">
+                        <div className="flex justify-between border-b border-white/5 pb-3">
+                          <span className="text-text-muted">Date</span>
+                          <span className="text-text-primary text-right">{formatDate(project.created_at)}</span>
                         </div>
                         {project.category && (
-                          <div>
-                            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Catégorie</dt>
-                            <dd className="text-gray-900 dark:text-white">{project.category.name}</dd>
+                          <div className="flex justify-between border-b border-white/5 pb-3">
+                            <span className="text-text-muted">Catégorie</span>
+                            <span className="text-text-primary text-right">{project.category.name || project.category}</span>
                           </div>
                         )}
-                        <div>
-                          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Statut</dt>
-                          <dd className="text-gray-900 dark:text-white capitalize">{project.status === 'published' ? 'Publié' : project.status}</dd>
+                        <div className="flex justify-between border-b border-white/5 pb-3">
+                          <span className="text-text-muted">Statut</span>
+                          <span className="text-primary-400 text-right font-medium capitalize">
+                            {project.status === 'published' ? 'Publié' : project.status}
+                          </span>
                         </div>
-                        {project.view_count > 0 && (
-                          <div>
-                            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Vues</dt>
-                            <dd className="text-gray-900 dark:text-white">{project.view_count}</dd>
-                          </div>
-                        )}
                       </div>
                     </div>
 
-                    {/* Liens utiles */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-soft p-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Liens du projet
+                    {/* CTA Sidebar */}
+                    <div className="bg-primary-500/10 border border-primary-500/20 rounded-xl p-6 text-center">
+                      <h3 className="text-lg font-semibold text-white mb-2">
+                        Intéressé par ce projet ?
                       </h3>
-                      <div className="space-y-3">
-                        {project.demo_url && project.demo_url !== '#' && (
-                          <a
-                            href={project.demo_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                          >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                            <span>Voir la démo en direct</span>
-                          </a>
-                        )}
-                        {project.source_url && project.source_url !== '#' && (
-                          <a
-                            href={project.source_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                          >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                            <span>Code source sur GitHub</span>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Contact CTA */}
-                    <div className="bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-800 dark:to-purple-900 rounded-xl p-6 text-center">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Projet similaire en tête ?
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 mb-6">
-                        Discutons ensemble de vos besoins et créons quelque chose d'exceptionnel !
+                      <p className="text-text-secondary text-sm mb-4">
+                        Je peux réaliser une solution similaire pour vos besoins.
                       </p>
-                      <Link
-                        to="/contact"
-                        className="bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors inline-block"
-                      >
-                        💬 Me contacter
+                      <Link to="/contact">
+                        <Button variant="primary" className="w-full">
+                          Me contacter
+                        </Button>
                       </Link>
                     </div>
                   </div>
@@ -396,26 +338,22 @@ const ProjectDetail = () => {
         </section>
 
         {/* Navigation vers autres projets */}
-        <section className="py-12 bg-gray-50 dark:bg-gray-800">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-                Découvrir d'autres projets
-              </h2>
-              <div className="flex justify-center space-x-4">
-                <Link
-                  to="/projects"
-                  className="bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors"
-                >
+        <section className="py-20 border-t border-white/5">
+          <div className="container-custom text-center">
+            <h2 className="text-2xl font-bold text-text-primary mb-8">
+              Continuer l'exploration
+            </h2>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/projects">
+                <Button variant="ghost" className="border border-white/10">
                   ← Tous les projets
-                </Link>
-                <Link
-                  to="/contact"
-                  className="border-2 border-primary-600 text-primary-600 px-6 py-3 rounded-full hover:bg-primary-600 hover:text-white transition-colors"
-                >
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="primary">
                   Démarrer un projet →
-                </Link>
-              </div>
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

@@ -7,7 +7,7 @@ const FinalCTASection = () => {
     const { targetRef, hasIntersected } = useIntersectionObserver();
 
     return (
-        <section ref={targetRef} className="py-32 bg-[#050505] relative overflow-hidden">
+        <section ref={targetRef} className="py-32 bg-bg-dark relative overflow-hidden">
             {/* Arrière-plan Tech Minimaliste */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.03]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1)_0%,transparent_70%)]" />
@@ -19,17 +19,17 @@ const FinalCTASection = () => {
 
             <div className="container-custom relative z-10 text-center">
                 <div className={`max-w-5xl mx-auto transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-                    <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-indigo-500/10 border border-indigo-500/20 mb-12">
-                        <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-indigo-400">READY_FOR_ENGAGEMENT</span>
+                    <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-primary-500/10 border border-primary-500/20 mb-12">
+                        <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
+                        <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-primary-400">READY_FOR_ENGAGEMENT</span>
                     </div>
 
-                    <h2 className="text-5xl md:text-9xl font-bold text-white mb-12 tracking-tighter leading-[0.85]">
+                    <h2 className="text-5xl md:text-9xl font-bold text-text-primary mb-12 tracking-tighter leading-[0.85]">
                         LET'S BUILD <span className="text-white/20 block">THE FUTURE</span>
-                        <span className="text-indigo-500 italic block">OF YOUR TECH</span>
+                        <span className="text-primary-500 italic block">OF YOUR TECH</span>
                     </h2>
 
-                    <p className="text-xl md:text-2xl text-slate-400 mb-16 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto font-light leading-relaxed">
                         Que vous ayez une vision complexe ou un besoin précis, je traduis vos objectifs en
                         <span className="text-white font-medium"> code haute fidélité</span>.
                     </p>
@@ -37,18 +37,18 @@ const FinalCTASection = () => {
                     <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
                         <Link
                             to="/contact"
-                            className="px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-sm hover:bg-indigo-500 hover:text-white transition-all duration-500 shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(99,102,241,0.3)]"
+                            className="px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-sm hover:bg-primary-500 hover:text-white transition-all duration-500 shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)]"
                         >
                             INIT_CONVERSATION
                         </Link>
 
                         <a
                             href={`mailto:${PERSONAL_INFO.email}`}
-                            className="px-12 py-6 border border-white/10 text-white font-medium uppercase tracking-[0.2em] text-sm hover:border-indigo-500 transition-all duration-500 group"
+                            className="px-12 py-6 border border-white/10 text-text-primary font-medium uppercase tracking-[0.2em] text-sm hover:border-primary-500 transition-all duration-500 group"
                         >
                             <span className="flex items-center space-x-4">
                                 <span>DIRECT_EMAIL</span>
-                                <span className="text-indigo-500 group-hover:translate-x-2 transition-transform">→</span>
+                                <span className="text-primary-500 group-hover:translate-x-2 transition-transform">→</span>
                             </span>
                         </a>
                     </div>
@@ -62,8 +62,8 @@ const FinalCTASection = () => {
                             { label: 'VER', val: '2025.01' },
                         ].map((item, i) => (
                             <div key={i} className="font-mono text-center">
-                                <p className="text-[10px] text-white uppercase tracking-widest mb-1">{item.label}</p>
-                                <p className="text-lg font-bold text-white tracking-tighter">{item.val}</p>
+                                <p className="text-[10px] text-text-primary uppercase tracking-widest mb-1">{item.label}</p>
+                                <p className="text-lg font-bold text-text-primary tracking-tighter">{item.val}</p>
                             </div>
                         ))}
                     </div>

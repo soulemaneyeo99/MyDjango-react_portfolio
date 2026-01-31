@@ -1,9 +1,11 @@
-
 // ========== frontend/src/pages/About.jsx ==========
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, GraduationCap, Code, Brain, Rocket, Award, Download } from 'lucide-react';
+import { Calendar, MapPin, GraduationCap, Code, Brain, Rocket, Award, Download, Briefcase } from 'lucide-react';
 import SEOHead from '../components/common/SEOHead';
+import Timeline from '../components/features/about/Timeline';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
 
 const About = () => {
   const education = [
@@ -36,8 +38,8 @@ const About = () => {
     },
     {
       title: "Fondateur du projet OpportuCI",
-      period: "Depuis 2025 (en cours)",
-      location: "Projet personnel",
+      organization: "Projet personnel (En développement)",
+      period: "Depuis 2025",
       tasks: [
         "Conception et développement d'une plateforme éducative pour centraliser les opportunités académiques en Côte d'Ivoire",
         "Stack : Django, FastAPI, React, IA. En cours de réalisation",
@@ -99,323 +101,261 @@ const About = () => {
 
   return (
     <>
-      <SEOHead 
-        title="À propos - Souleymane Yeo"
+      <SEOHead
+        title="À propos | Souleymane Yeo"
         description="Développeur backend passionné basé en Côte d'Ivoire. Découvrez mon parcours, mes compétences et mon expérience en développement Python/Django."
+        keywords={['développeur', 'backend', 'python', 'django', 'côte d\'ivoire', 'éducation']}
       />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                À propos de moi
-              </h1>
-              <div className="text-lg text-gray-600 space-y-4">
-                <p>
-                  Salut, moi c'est <strong>Souleymane Yeo</strong>, développeur backend passionné, 
-                  basé en <strong>Côte d'Ivoire</strong> 🇨🇮. Je travaille principalement avec 
-                  <strong> Python</strong> 🐍, <strong>Django</strong> et <strong>FastAPI</strong>.
-                </p>
-                <p>
-                  Je m'intéresse particulièrement à l'<strong>intelligence artificielle</strong> 🤖, 
-                  au <strong>machine learning</strong> et aux <strong>LLMs</strong> (modèles de langage), 
-                  avec un fort intérêt pour les <strong>LMS</strong> (systèmes intelligents de gestion d'apprentissage).
-                </p>
-                <p>
-                  Mon objectif : créer des solutions tech à fort impact éducatif 🌍.
-                </p>
-              </div>
-              
-              <div className="flex items-center space-x-6 mt-8">
-                <div className="flex items-center text-gray-600">
-                  <MapPin className="mr-2" size={20} />
-                  Abidjan, Côte d'Ivoire
-                </div>
-                <div className="flex items-center text-gray-600">
-                  <GraduationCap className="mr-2" size={20} />
-                  Étudiant L3 Informatique
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center"
-            >
-              <div className="relative">
-                <img
-                  src="/images/me2.jpg"
-                  alt="Souleymane Yeo"
-                  className="w-80 h-80 rounded-2xl shadow-2xl object-cover"
-                  onError={(e) => {
-                    e.target.src = `https://ui-avatars.com/api/?name=Souleymane+Yeo&size=320&background=3b82f6&color=white&bold=true`;
-                  }}
-                />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                  <Code className="text-white" size={32} />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <div className="min-h-screen bg-bg-dark text-text-primary overflow-x-hidden">
+        {/* Hero Section */}
+        <section className="pt-24 pb-16 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-500/5 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-accent-purple/5 blur-[100px] pointer-events-none" />
 
-      {/* Formation Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Formation</h2>
-            <p className="text-xl text-gray-600">
-              Mon parcours académique et d'apprentissage autodidacte
-            </p>
-          </motion.div>
-
-          <div className="space-y-8">
-            {education.map((edu, index) => (
+          <div className="container-custom relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
-                key={index}
                 initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-8"
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-2xl font-semibold text-gray-900">{edu.title}</h3>
-                  <div className="flex items-center text-blue-600 mt-2 md:mt-0">
-                    <Calendar className="mr-2" size={16} />
-                    <span className="font-medium">{edu.period}</span>
+                <Badge variant="primary" className="mb-4">
+                  HELLO WORLD 👋
+                </Badge>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6 leading-tight">
+                  Je suis <span className="text-primary-500">Souleymane Yeo</span>
+                </h1>
+                <div className="text-lg text-text-secondary space-y-4 leading-relaxed font-light">
+                  <p>
+                    Développeur backend passionné basé à <strong>Abidjan, Côte d'Ivoire</strong> 🇨🇮.
+                    Je conçois des architectures robustes avec <strong>Python</strong> 🐍, <strong>Django</strong> et <strong>FastAPI</strong>.
+                  </p>
+                  <p>
+                    Fasciné par l'intersection entre le code et l'éducation, je m'intéresse
+                    particulièrement à l'<strong>intelligence artificielle</strong> 🤖 et aux
+                    systèmes éducatifs de demain.
+                  </p>
+                  <p className="font-medium text-text-primary border-l-4 border-primary-500 pl-4 italic">
+                    "Mon objectif : créer des solutions tech à fort impact éducatif 🌍."
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-6 mt-8">
+                  <div className="flex items-center text-text-muted">
+                    <MapPin className="mr-2 text-primary-500" size={20} />
+                    Abidjan, Côte d'Ivoire
+                  </div>
+                  <div className="flex items-center text-text-muted">
+                    <GraduationCap className="mr-2 text-primary-500" size={20} />
+                    Étudiant L3 Informatique
                   </div>
                 </div>
-                <p className="text-lg font-medium text-gray-700 mb-2">{edu.institution}</p>
-                {edu.location && (
-                  <div className="flex items-center text-gray-600 mb-2">
-                    <MapPin className="mr-2" size={16} />
-                    <span>{edu.location}</span>
-                  </div>
-                )}
-                {edu.specialty && (
-                  <p className="text-blue-600 font-medium mb-3">Spécialité: {edu.specialty}</p>
-                )}
-                <p className="text-gray-600">{edu.description}</p>
+
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <a
+                    href="/documents/MoncvYEO.pdf"
+                    download
+                    className="no-underline"
+                  >
+                    <Button variant="primary" size="lg" className="shadow-glow">
+                      <Download className="mr-2" size={20} />
+                      Télécharger CV
+                    </Button>
+                  </a>
+                  <a href="mailto:soulemaneyeo99@gmail.com">
+                    <Button variant="outline" size="lg">
+                      Me contacter
+                    </Button>
+                  </a>
+                </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Expérience Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Expérience</h2>
-            <p className="text-xl text-gray-600">
-              Mon parcours professionnel et mes projets
-            </p>
-          </motion.div>
-
-          <div className="space-y-8">
-            {experience.map((exp, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg p-8 shadow-sm"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex justify-center relative"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-2xl font-semibold text-gray-900">{exp.title}</h3>
-                  <div className="flex items-center text-blue-600 mt-2 md:mt-0">
-                    <Calendar className="mr-2" size={16} />
-                    <span className="font-medium">{exp.period}</span>
-                  </div>
-                </div>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <MapPin className="mr-2" size={16} />
-                  <span>{exp.location}</span>
-                </div>
-                <ul className="list-disc list-inside space-y-2 text-gray-600">
-                  {exp.tasks.map((task, taskIndex) => (
-                    <li key={taskIndex}>{task}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div className="relative">
+                  {/* Image glow effect */}
+                  <div className="absolute inset-0 bg-primary-500 blur-[60px] opacity-20 transform scale-90 rounded-full animate-pulse-slow"></div>
 
-      {/* Compétences Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Compétences</h2>
-            <p className="text-xl text-gray-600">
-              Technologies et outils que j'utilise régulièrement
-            </p>
-          </motion.div>
+                  <img
+                    src="/images/me2.jpg"
+                    alt="Souleymane Yeo"
+                    className="relative z-10 w-80 h-80 rounded-2xl shadow-2xl object-cover border-2 border-white/10 ring-1 ring-white/20"
+                    onError={(e) => {
+                      e.target.src = `https://ui-avatars.com/api/?name=Souleymane+Yeo&size=320&background=0a0a0a&color=3b82f6&bold=true`;
+                    }}
+                  />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {skills.map((skillGroup, index) => {
-              const Icon = skillGroup.icon;
-              return (
-                <motion.div
-                  key={skillGroup.category}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="bg-gray-50 rounded-lg p-8"
-                >
-                  <div className="flex items-center mb-6">
-                    <div className={`w-12 h-12 ${skillGroup.color} rounded-full flex items-center justify-center mr-4`}>
-                      <Icon className="text-white" size={24} />
+                  {/* Floating badges */}
+                  <div className="absolute -bottom-6 -right-6 z-20 bg-bg-card border border-border-default rounded-xl p-4 shadow-xl flex items-center space-x-3 animate-float">
+                    <div className="bg-primary-500/20 p-2 rounded-lg">
+                      <Code className="text-primary-500" size={24} />
                     </div>
-                    <h3 className="text-2xl font-semibold text-gray-900">{skillGroup.category}</h3>
+                    <div>
+                      <div className="text-xs text-text-muted uppercase font-bold">Stack</div>
+                      <div className="font-bold text-text-primary">Python / React</div>
+                    </div>
                   </div>
-                  
-                  <div className="space-y-4">
-                    {skillGroup.skills.map((skill, skillIndex) => (
-                      <div key={skill.name}>
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-gray-700 font-medium">{skill.name}</span>
-                          <span className="text-gray-600 font-medium">{skill.level}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <motion.div
-                            className={`h-2 rounded-full ${skillGroup.color}`}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                            viewport={{ once: true }}
-                          />
-                        </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section className="py-20 bg-bg-elevated relative">
+          <div className="container-custom">
+            <Timeline
+              items={experience}
+              title="Expérience Professionnelle"
+              icon={Briefcase}
+            />
+          </div>
+        </section>
+
+        {/* Formation Section */}
+        <section className="py-20 bg-bg-dark">
+          <div className="container-custom">
+            <Timeline
+              items={education}
+              title="Formation & Éducation"
+              icon={GraduationCap}
+            />
+          </div>
+        </section>
+
+        {/* Compétences Section */}
+        <section className="py-20 bg-bg-elevated">
+          <div className="container-custom">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl font-bold text-text-primary mb-4">Compétences Techniques</h2>
+              <p className="text-text-secondary max-w-2xl mx-auto">
+                Ma stack technique et les outils que je maîtrise pour construire des solutions modernes.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {skills.map((skillGroup, index) => {
+                const Icon = skillGroup.icon;
+                return (
+                  <motion.div
+                    key={skillGroup.category}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-bg-card border border-border-default rounded-xl p-8 hover:border-primary-500/30 transition-colors duration-300"
+                  >
+                    <div className="flex items-center mb-8">
+                      <div className={`w-12 h-12 ${skillGroup.color}/10 rounded-xl flex items-center justify-center mr-4 border border-${skillGroup.color}/20`}>
+                        <Icon className={skillGroup.color.replace('bg-', 'text-')} size={24} />
                       </div>
-                    ))}
+                      <h3 className="text-xl font-bold text-text-primary">{skillGroup.category}</h3>
+                    </div>
+
+                    <div className="space-y-6">
+                      {skillGroup.skills.map((skill, skillIndex) => (
+                        <div key={skill.name}>
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-text-secondary font-medium text-sm">{skill.name}</span>
+                            <span className="text-text-muted text-xs font-mono">{skill.level}%</span>
+                          </div>
+                          <div className="w-full bg-bg-dark border border-white/5 rounded-full h-2 overflow-hidden">
+                            <motion.div
+                              className={`h-full ${skillGroup.color}`}
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${skill.level}%` }}
+                              transition={{ duration: 1, delay: 0.2 + (skillIndex * 0.1) }}
+                              viewport={{ once: true }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Certificats Section */}
+        <section className="py-20 bg-bg-dark border-t border-white/5">
+          <div className="container-custom">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-text-primary mb-4">Certifications</h2>
+              <p className="text-text-secondary">
+                Reconnaissance de mes acquis et de mon engagement professionnel
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {certificates.map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-bg-card border border-border-default rounded-xl p-8 hover:shadow-glow/20 transition-all duration-300 group"
+                >
+                  <div className="flex items-start">
+                    <div className="w-14 h-14 bg-primary-500/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0 group-hover:bg-primary-500/20 transition-colors">
+                      <Award className="text-primary-500" size={28} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary-500 transition-colors">{cert.title}</h3>
+                      <div className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-text-muted mb-4 border border-white/10">
+                        {cert.date}
+                      </div>
+                      <p className="text-text-secondary mb-6 text-sm leading-relaxed">{cert.description}</p>
+                      <a
+                        href={cert.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-500 font-medium text-sm hover:text-primary-400 flex items-center transition-colors"
+                      >
+                        <Download size={16} className="mr-2" />
+                        Voir le certificat
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Certificats Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Certificats</h2>
-            <p className="text-xl text-gray-600">
-              Certificats obtenus à travers mes formations et projets
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {certificates.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg p-8 shadow-sm text-center"
-              >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Award className="text-blue-600" size={32} />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{cert.title}</h3>
-                <p className="text-blue-600 font-medium mb-4">{cert.date}</p>
-                <p className="text-gray-600 mb-6">{cert.description}</p>
-                <a
-                  href={cert.file}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline btn-sm"
-                >
-                  Voir le certificat
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">Ma Vision</h2>
-            <div className="text-lg text-gray-600 space-y-6">
-              <p>
-                En ce moment, je développe <em className="font-semibold text-blue-600">OpportuCI</em>, 
-                une plateforme professionnelle dédiée aux étudiants ivoiriens. Elle centralise les 
-                meilleures opportunités : bourses, concours, stages, formations et plus encore.
-              </p>
-              <p>
-                Côté frontend, je suis en pleine montée en compétences avec <strong>React</strong>. 
-                L'idée ? Devenir un véritable <strong>développeur full-stack</strong>, capable de 
-                passer sans transition du backend robuste à une interface utilisateur moderne et réactive.
-              </p>
-              <p>
-                Bref, j'écris du code, je résous des problèmes, je construis avec passion… et je vise l'excellence.
-              </p>
-              <p className="text-xl font-semibold text-gray-900">
-                Envie de collaborer, d'échanger sur un projet ou de discuter tech ? 
-                N'hésitez pas à me contacter, je suis toujours partant pour partager, apprendre et créer ensemble.
-              </p>
+              ))}
             </div>
-            
-            <div className="mt-12">
-              <a
-                href="/documents/MoncvYEO.pdf"
-                download
-                className="btn btn-primary btn-lg mr-4"
-              >
-                <Download className="mr-2" size={20} />
-                Télécharger mon CV
+          </div>
+        </section>
+
+        {/* Vision CTA */}
+        <section className="py-24 bg-gradient-to-br from-bg-elevated to-bg-dark relative overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 blur-[120px] rounded-full pointer-events-none" />
+
+          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 className="text-4xl font-bold text-text-primary mb-8">Ma Vision</h2>
+            <p className="text-xl text-text-secondary mb-10 leading-relaxed font-light">
+              Je co-construis l'avenir de l'éducation numérique en Afrique. <br className="hidden md:block" />
+              Toujours ouvert aux opportunités, aux collaborations et aux défis techniques ambitieux.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <a href="mailto:soulemaneyeo99@gmail.com">
+                <Button variant="primary" size="lg" className="shadow-lg shadow-primary-500/20">
+                  Démarrer une collaboration
+                </Button>
               </a>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
     </>
   );
 };

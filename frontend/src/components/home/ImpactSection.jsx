@@ -1,44 +1,25 @@
 import React from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
+// ... (imports remain)
 const ImpactSection = () => {
     const { targetRef, hasIntersected } = useIntersectionObserver();
 
     const stats = [
-        {
-            number: '15+',
-            label: 'PRODUCTION_READY',
-            description: 'Systems architecture & deployment',
-            tag: 'LIVE_REPOS'
-        },
-        {
-            number: '50K+',
-            label: 'SOURCE_LINES',
-            description: 'Optimized Python & JS performance',
-            tag: 'CODE_BASE'
-        },
-        {
-            number: '2000+',
-            label: 'DEV_HOURS',
-            description: 'Deep technical research & build',
-            tag: 'UPTIME'
-        },
-        {
-            number: '100%',
-            label: 'CLIENT_TRUST',
-            description: 'Success rate in delivered solutions',
-            tag: 'KPI_GOAL'
-        }
+        { number: '2+', label: 'Years Experience', description: 'Learning and building', tag: 'EXP' },
+        { number: '10+', label: 'Projects Built', description: 'Full-stack applications', tag: 'PRJ' },
+        { number: '100%', label: 'Commitment', description: 'To code quality', tag: 'QUAL' },
+        { number: '24/7', label: 'Availability', description: 'For global teams', tag: 'TIME' }
     ];
 
     return (
-        <section ref={targetRef} className="py-24 bg-[#050505] relative overflow-hidden border-t border-white/5">
+        <section ref={targetRef} className="py-24 bg-bg-dark relative overflow-hidden border-t border-border-default">
             <div className="container-custom relative z-10">
                 <div className={`mb-20 grid lg:grid-cols-[1.5fr_1fr] gap-8 items-end transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                     <div>
-                        <div className="font-mono text-[10px] text-indigo-400 uppercase tracking-[0.4em] mb-4">Metrics_&_Data</div>
-                        <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">
-                            MEASURABLE <span className="text-indigo-500 italic">IMPACT</span>
+                        <div className="font-mono text-[10px] text-primary-400 uppercase tracking-[0.4em] mb-4">Metrics_&_Data</div>
+                        <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-text-primary">
+                            MEASURABLE <span className="text-primary-500 italic">IMPACT</span>
                         </h2>
                     </div>
                 </div>
@@ -51,7 +32,7 @@ const ImpactSection = () => {
                             style={{ transitionDelay: `${index * 150}ms` }}
                         >
                             <div className="flex justify-between items-start mb-12">
-                                <span className="font-mono text-[9px] text-indigo-500/50 tracking-widest uppercase">{stat.tag}</span>
+                                <span className="font-mono text-[9px] text-primary-500/50 tracking-widest uppercase">{stat.tag}</span>
                                 <div className="w-1 h-1 bg-white/20 rounded-full" />
                             </div>
 
@@ -60,28 +41,28 @@ const ImpactSection = () => {
                                     {stat.number}
                                 </div>
                                 <h3 className="text-xs font-bold text-white uppercase tracking-widest">{stat.label}</h3>
-                                <p className="text-slate-500 text-[11px] leading-relaxed font-light">{stat.description}</p>
+                                <p className="text-text-secondary text-[11px] leading-relaxed font-light">{stat.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* Industrial Quote Section */}
-                <div className={`relative p-12 md:p-24 border border-white/5 bg-white/[0.01] overflow-hidden transform transition-all duration-1000 delay-500 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+                <div className={`relative p-12 md:p-24 border border-border-default bg-white/[0.01] overflow-hidden transform transition-all duration-1000 delay-500 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
                     <div className="absolute top-0 right-0 p-8 font-mono text-[8px] text-white/5 tracking-[0.8em] pointer-events-none select-none">
                         AUTH_VERIFIED // SECURE_ACCESS // AUTH_VERIFIED // SECURE_ACCESS
                     </div>
 
                     <div className="max-w-4xl mx-auto space-y-12">
-                        <div className="font-mono text-indigo-400 text-4xl leading-none select-none">"</div>
-                        <p className="text-2xl md:text-4xl font-light text-white leading-tight tracking-tight">
-                            Chaque ligne de code que j'écris est une <span className="text-indigo-500 italic font-medium">brique</span> vers la création de systèmes qui transcendent le simple besoin pour devenir des <span className="text-indigo-500 font-medium">solutions durables</span>.
+                        <div className="font-mono text-primary-400 text-4xl leading-none select-none">"</div>
+                        <p className="text-2xl md:text-4xl font-light text-text-primary leading-tight tracking-tight">
+                            Chaque ligne de code que j'écris est une <span className="text-primary-500 italic font-medium">brique</span> vers la création de systèmes qui transcendent le simple besoin pour devenir des <span className="text-primary-500 font-medium">solutions durables</span>.
                         </p>
                         <div className="flex items-center space-x-6">
-                            <div className="h-[1px] w-12 bg-indigo-500" />
+                            <div className="h-[1px] w-12 bg-primary-500" />
                             <div className="space-y-1">
-                                <div className="text-sm font-bold text-white tracking-widest uppercase">Souleymane Yeo</div>
-                                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Lead Architect @ OpportuCI</div>
+                                <div className="text-sm font-bold text-text-primary tracking-widest uppercase">Souleymane Yeo</div>
+                                <div className="text-[10px] font-mono text-text-secondary uppercase tracking-widest">Lead Architect @ OpportuCI</div>
                             </div>
                         </div>
                     </div>

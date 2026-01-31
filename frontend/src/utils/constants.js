@@ -1,24 +1,67 @@
-// ========== src/utils/constants.js (Mis à jour avec vos images) ==========
-export const PERSONAL_INFO = {
-  name: 'Souleymane Yeo',
+import { DESIGN_TOKENS } from '../styles/design-tokens';
+
+// ... (PERSONAL_INFO, FEATURED_PROJECTS remain unchanged)
+
+// Technologies avec couleurs cohérentes
+export const SKILLS = {
+  backend: [
+    { name: 'Python', level: 90, color: '#3776ab' }, // Brand color preserved
+    { name: 'Django/DRF', level: 85, color: '#092e20' }, // Brand color preserved
+    { name: 'FastAPI', level: 75, color: '#009688' }, // Brand color preserved
+    { name: 'PostgreSQL', level: 70, color: '#336791' },
+    { name: 'API Integration', level: 85, color: DESIGN_TOKENS.colors.accent.orange },
+  ],
+  frontend: [
+    { name: 'Next.js (SSR)', level: 80, color: DESIGN_TOKENS.colors.text.inverse },
+    { name: 'React', level: 85, color: '#61dafb' },
+    { name: 'JavaScript', level: 80, color: '#f7df1e' },
+    { name: 'Tailwind CSS', level: 85, color: '#06b6d4' },
+    { name: 'HTML5/CSS3', level: 85, color: '#e34f26' },
+  ],
+  automation: [
+    { name: 'n8n', level: 85, color: DESIGN_TOKENS.colors.accent.red },
+    { name: 'AI Agents', level: 75, color: DESIGN_TOKENS.colors.accent.purple },
+    { name: 'AI Workflows', level: 70, color: DESIGN_TOKENS.colors.accent.green },
+    { name: 'Git/GitHub', level: 85, color: '#f05032' },
+    { name: 'Docker', level: 75, color: '#2496ed' },
+  ],
+  data: [
+    { name: 'Machine Learning', level: 75, color: DESIGN_TOKENS.colors.accent.orange },
+    { name: 'Deep Learning', level: 60, color: DESIGN_TOKENS.colors.accent.red },
+    { name: 'TensorFlow/PyTorch', level: 65, color: '#ff6f00' },
+    { name: 'NumPy/Pandas', level: 80, color: '#013243' },
+    { name: 'Linux/WSL', level: 75, color: '#fcc624' },
+  ],
+};
+
+// ... (TYPING_MESSAGES, NAV_ITEMS remain unchanged)
+
+export const PROJECT_CATEGORIES = [
+  { id: 'web', name: 'Applications Web', color: DESIGN_TOKENS.colors.primary[500], variant: 'primary' },
+  { id: 'api', name: 'APIs & Microservices', color: DESIGN_TOKENS.colors.accent.green, variant: 'success' },
+  { id: 'ai', name: 'IA & Machine Learning', color: DESIGN_TOKENS.colors.accent.purple, variant: 'purple' },
+  { id: 'mobile', name: 'Applications Mobile', color: DESIGN_TOKENS.colors.accent.orange, variant: 'warning' },
+  { id: 'data', name: 'Data Science', color: DESIGN_TOKENS.colors.accent.red, variant: 'danger' },
+];
+name: 'Souleymane Yeo',
   title: 'Développeur Full-Stack',
-  subtitle: 'Python • Django • FastAPI • React • IA',
-  bio: `Salut, moi c'est Souleymane Yeo, développeur backend passionné, basé en Côte d'Ivoire 🇨🇮. 
+    subtitle: 'Python • Django • FastAPI • React • IA',
+      bio: `Salut, moi c'est Souleymane Yeo, développeur backend passionné, basé en Côte d'Ivoire 🇨🇮. 
         Je travaille principalement avec Python 🐍, Django et FastAPI, des outils puissants avec lesquels 
         je construis des architectures solides, maintenables et orientées performance.`,
-  location: 'Abidjan, Côte d\'Ivoire',
-  email: 'soulemaneyeo99@gmail.com',
-  phone: '+225 0595344814',
-  phone2: '+225 0700896230',
-  university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
-  degree: 'Licence en Informatique - Spécialité DAS',
-  profileImage: '/images/moi2.jpg', // Votre vraie photo
-  heroBackground: '/images/hero-bg.jpg',
-  social: {
-    github: 'https://github.com/soulemaneyeo99/',
+        location: 'Abidjan, Côte d\'Ivoire',
+          email: 'soulemaneyeo99@gmail.com',
+            phone: '+225 0595344814',
+              phone2: '+225 0700896230',
+                university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
+                  degree: 'Licence en Informatique - Spécialité DAS',
+                    profileImage: '/images/moi2.jpg', // Votre vraie photo
+                      heroBackground: '/images/hero-bg.jpg',
+                        social: {
+  github: 'https://github.com/soulemaneyeo99/',
     linkedin: 'https://www.linkedin.com/in/souleymane-yeo-422ba42b0/',
-    whatsapp: 'https://wa.me/message/CBUAR25YW54XL1',
-    facebook: '#',
+      whatsapp: 'https://wa.me/message/CBUAR25YW54XL1',
+        facebook: '#',
   },
 };
 

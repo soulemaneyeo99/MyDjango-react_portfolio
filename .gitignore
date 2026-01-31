@@ -13,3 +13,8 @@ staticfiles/
 
 # Environnements
 .env
+
+# Intermediate files (3-layer architecture)
+.tmp/
+credentials.json
+token.json

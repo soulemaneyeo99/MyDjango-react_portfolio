@@ -47,68 +47,8 @@ const PageTracker = ({ children }) => {
   return children;
 };
 
-// Composant NotFound professionnel
-const NotFound = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
-    <div className="text-center px-4 max-w-lg mx-auto">
-      <div className="relative mb-8">
-        <div className="text-9xl font-bold text-gray-200 dark:text-gray-700">404</div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center animate-bounce">
-            <span className="text-white text-3xl">🚀</span>
-          </div>
-        </div>
-      </div>
-
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Page non trouvée
-      </h1>
-
-      <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-        Cette page semble s'être envolée dans l'espace numérique.
-        Ne vous inquiétez pas, explorons ensemble d'autres horizons !
-      </p>
-
-      <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-        <a
-          href="/"
-          className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 font-semibold transform hover:scale-105 shadow-lg"
-        >
-          Retour à l'accueil
-        </a>
-        <a
-          href="/projects"
-          className="inline-block border-2 border-blue-500 text-blue-600 dark:text-blue-400 px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold"
-        >
-          Voir mes projets
-        </a>
-      </div>
-
-      {/* Suggestions de navigation */}
-      <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Peut-être cherchiez-vous :
-        </p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {[
-            { label: 'Mes projets', href: '/projects' },
-            { label: 'À propos', href: '/about' },
-            { label: 'Blog', href: '/blog' },
-            { label: 'Contact', href: '/contact' }
-          ].map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm underline"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-);
+// NotFound is now imported
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Composant Suspense simplifié (remplace SuspenseWrapper)
 const SuspenseFallback = ({ children }) => (
@@ -163,7 +103,7 @@ const AppContent = () => {
   useAppInitialization();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-bg-dark text-text-primary transition-colors duration-300">
       <Header />
       <NotificationSystem />
 
@@ -226,7 +166,7 @@ const AppContent = () => {
                 </SuspenseFallback>
               }
             />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<SuspenseFallback><NotFound /></SuspenseFallback>} />
           </Routes>
         </PageTracker>
       </main>
@@ -236,18 +176,34 @@ const AppContent = () => {
   );
 };
 
+// ... imports
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 // Composant App principal avec tous les providers
 const App = () => {
   return (
     <ErrorBoundary>
       <HelmetProvider>
-        <AppProvider>
-          <AuthProvider>
-            <Router>
-              <AppContent />
-            </Router>
-          </AuthProvider>
-        </AppProvider>
+        <QueryClientProvider client={queryClient}>
+          <AppProvider>
+            <AuthProvider>
+              <Router>
+                <AppContent />
+              </Router>
+            </AuthProvider>
+          </AppProvider>
+        </QueryClientProvider>
       </HelmetProvider>
     </ErrorBoundary>
   );

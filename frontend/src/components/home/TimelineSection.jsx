@@ -36,7 +36,7 @@ const TimelineSection = () => {
     ];
 
     return (
-        <section ref={targetRef} className="py-24 bg-[#050505] relative overflow-hidden">
+        <section ref={targetRef} className="py-24 bg-bg-dark relative overflow-hidden">
             {/* Arrière-plan Tech */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
                 <div className="absolute left-[10%] h-full w-[1px] bg-white" />
@@ -45,9 +45,9 @@ const TimelineSection = () => {
 
             <div className="container-custom relative z-10">
                 <div className={`mb-20 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <div className="font-mono text-[10px] text-indigo-400 uppercase tracking-[0.4em] mb-4">Chronology</div>
-                    <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">
-                        EXPERIENCE <span className="text-indigo-500 italic">LOG</span>
+                    <div className="font-mono text-[10px] text-primary-400 uppercase tracking-[0.4em] mb-4">Chronology</div>
+                    <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-text-primary">
+                        EXPERIENCE <span className="text-primary-500 italic">LOG</span>
                     </h2>
                 </div>
 
@@ -63,30 +63,30 @@ const TimelineSection = () => {
                                 style={{ transitionDelay: `${index * 200}ms` }}
                             >
                                 {/* Node */}
-                                <div className="absolute left-4 md:left-[44px] top-1 w-3 h-3 bg-[#050505] border border-white/20 group-hover:border-indigo-500 transition-colors z-20">
-                                    <div className="absolute inset-1 bg-white/10 group-hover:bg-indigo-500 transition-colors" />
+                                <div className="absolute left-4 md:left-[44px] top-1 w-3 h-3 bg-bg-dark border border-white/20 group-hover:border-primary-500 transition-colors z-20">
+                                    <div className="absolute inset-1 bg-white/10 group-hover:bg-primary-500 transition-colors" />
                                 </div>
 
                                 <div className="grid md:grid-cols-[100px_1fr] gap-8 items-start">
-                                    <div className="font-mono text-xl font-bold text-slate-500 group-hover:text-indigo-400 transition-colors">
+                                    <div className="font-mono text-xl font-bold text-text-muted group-hover:text-primary-400 transition-colors">
                                         {item.year}
                                     </div>
 
-                                    <div className="p-8 border border-white/5 bg-white/[0.02] group-hover:border-white/10 transition-all duration-500">
+                                    <div className="p-8 border border-white/5 bg-bg-card/[0.02] group-hover:border-white/10 transition-all duration-500">
                                         <div className="flex justify-between items-start mb-4">
-                                            <h3 className="text-xl font-bold text-white tracking-widest">{item.title}</h3>
-                                            <span className="text-[10px] font-mono text-indigo-400/50 uppercase tracking-widest px-2 py-1 border border-indigo-500/10">
+                                            <h3 className="text-xl font-bold text-text-primary tracking-widest">{item.title}</h3>
+                                            <span className="text-[10px] font-mono text-primary-400/50 uppercase tracking-widest px-2 py-1 border border-primary-500/10">
                                                 {item.tag}
                                             </span>
                                         </div>
-                                        <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light max-w-2xl">
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-6 font-light max-w-2xl">
                                             {item.description}
                                         </p>
                                         <div className="flex flex-wrap gap-4">
                                             {item.achievements.map((ach, i) => (
                                                 <div key={i} className="flex items-center space-x-2">
-                                                    <span className="w-1 h-1 bg-indigo-500/50 rounded-full" />
-                                                    <span className="text-[10px] uppercase font-mono text-slate-500 tracking-wider font-medium">{ach}</span>
+                                                    <span className="w-1 h-1 bg-primary-500/50 rounded-full" />
+                                                    <span className="text-[10px] uppercase font-mono text-text-secondary tracking-wider font-medium">{ach}</span>
                                                 </div>
                                             ))}
                                         </div>

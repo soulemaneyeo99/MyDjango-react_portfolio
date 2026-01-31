@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled
-        ? 'bg-[#050505]/80 backdrop-blur-xl border-b border-white/5 py-4'
+        ? 'bg-bg-dark/80 backdrop-blur-xl border-b border-border-subtle py-4'
         : 'bg-transparent py-8'
         }`}
     >
@@ -58,12 +58,12 @@ const Header = () => {
             to="/"
             className="group flex items-center space-x-4 z-[101]"
           >
-            <div className="relative w-10 h-10 border border-indigo-500/30 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-indigo-500">
-              <div className="absolute inset-0 bg-indigo-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            <div className="relative w-10 h-10 border border-primary-500/30 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-primary-500">
+              <div className="absolute inset-0 bg-primary-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               <span className="relative text-white font-black text-xl tracking-tighter">SY</span>
             </div>
             <div className="hidden lg:block overflow-hidden">
-              <span className="block text-xs font-mono text-indigo-400/50 tracking-[0.3em] uppercase mb-0.5">Architect</span>
+              <span className="block text-xs font-mono text-primary-400/50 tracking-[0.3em] uppercase mb-0.5">Architect</span>
               <span className="block text-sm font-bold text-white tracking-widest leading-none">SOULEYMANE.YEO</span>
             </div>
           </Link>
@@ -75,12 +75,12 @@ const Header = () => {
                 key={item.id}
                 onClick={() => handleNavClick(item.href)}
                 className={`px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-all duration-300 relative group ${location.pathname === item.href || (item.href.startsWith('#') && location.hash === item.href)
-                  ? 'text-indigo-400'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'text-primary-400'
+                  : 'text-text-secondary hover:text-white'
                   }`}
               >
                 <span className="relative z-10">{item.label}</span>
-                <span className="absolute bottom-1 left-4 right-4 h-[1px] bg-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <span className="absolute bottom-1 left-4 right-4 h-[1px] bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
               </button>
             ))}
 
@@ -88,7 +88,7 @@ const Header = () => {
 
             <button
               onClick={() => handleNavClick('#contact')}
-              className="px-6 py-2 border border-indigo-500/50 text-indigo-400 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-indigo-500 hover:text-white transition-all duration-500"
+              className="px-6 py-2 border border-primary-500/50 text-primary-400 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-primary-500 hover:text-white transition-all duration-500"
             >
               INITIALIZE_CONTACT
             </button>
@@ -106,7 +106,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Nav Overlay */}
-        <div className={`fixed inset-0 bg-[#050505] z-[100] transition-all duration-700 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-[100%]'
+        <div className={`fixed inset-0 bg-bg-dark z-[100] transition-all duration-700 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-[100%]'
           }`}>
           <div className="h-full flex flex-col justify-center px-12 space-y-12">
             <div className="space-y-8">
@@ -114,10 +114,10 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.href)}
-                  className="block text-4xl font-bold text-white tracking-tighter hover:text-indigo-500 transition-colors text-left group"
+                  className="block text-4xl font-bold text-white tracking-tighter hover:text-primary-500 transition-colors text-left group"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <span className="text-xs font-mono text-indigo-500 mr-4">0{i + 1} //</span>
+                  <span className="text-xs font-mono text-primary-500 mr-4">0{i + 1} //</span>
                   {item.label}
                 </button>
               ))}
@@ -125,7 +125,7 @@ const Header = () => {
 
             <button
               onClick={() => handleNavClick('#contact')}
-              className="w-full py-6 border border-indigo-500 text-indigo-400 font-mono tracking-widest uppercase text-sm hover:bg-indigo-500 hover:text-white transition-all"
+              className="w-full py-6 border border-primary-500 text-primary-400 font-mono tracking-widest uppercase text-sm hover:bg-primary-500 hover:text-white transition-all"
             >
               START_PROJECT
             </button>
