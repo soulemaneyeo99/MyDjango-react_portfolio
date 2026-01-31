@@ -43,25 +43,26 @@ export const PROJECT_CATEGORIES = [
   { id: 'mobile', name: 'Applications Mobile', color: DESIGN_TOKENS.colors.accent.orange, variant: 'warning' },
   { id: 'data', name: 'Data Science', color: DESIGN_TOKENS.colors.accent.red, variant: 'danger' },
 ];
-name: 'Souleymane Yeo',
+export const PERSONAL_INFO = {
+  name: 'Souleymane Yeo',
   title: 'Développeur Full-Stack',
-    subtitle: 'Python • Django • FastAPI • React • IA',
-      bio: `Salut, moi c'est Souleymane Yeo, développeur backend passionné, basé en Côte d'Ivoire 🇨🇮. 
+  subtitle: 'Python • Django • FastAPI • React • IA',
+  bio: `Salut, moi c'est Souleymane Yeo, développeur backend passionné, basé en Côte d'Ivoire 🇨🇮. 
         Je travaille principalement avec Python 🐍, Django et FastAPI, des outils puissants avec lesquels 
         je construis des architectures solides, maintenables et orientées performance.`,
-        location: 'Abidjan, Côte d\'Ivoire',
-          email: 'soulemaneyeo99@gmail.com',
-            phone: '+225 0595344814',
-              phone2: '+225 0700896230',
-                university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
-                  degree: 'Licence en Informatique - Spécialité DAS',
-                    profileImage: '/images/moi2.jpg', // Votre vraie photo
-                      heroBackground: '/images/hero-bg.jpg',
-                        social: {
-  github: 'https://github.com/soulemaneyeo99/',
+  location: 'Abidjan, Côte d\'Ivoire',
+  email: 'soulemaneyeo99@gmail.com',
+  phone: '+225 0595344814',
+  phone2: '+225 0700896230',
+  university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
+  degree: 'Licence en Informatique - Spécialité DAS',
+  profileImage: '/images/moi2.jpg',
+  heroBackground: '/images/hero-bg.jpg',
+  social: {
+    github: 'https://github.com/soulemaneyeo99/',
     linkedin: 'https://www.linkedin.com/in/souleymane-yeo-422ba42b0/',
-      whatsapp: 'https://wa.me/message/CBUAR25YW54XL1',
-        facebook: '#',
+    whatsapp: 'https://wa.me/message/CBUAR25YW54XL1',
+    facebook: '#',
   },
 };
 
@@ -96,12 +97,11 @@ export const FEATURED_PROJECTS = [
       { image: '/images/OpotuCI.png', caption: 'Interface principale' },
       { image: '/images/OpotuCI (2).png', caption: 'Dashboard utilisateur' }
     ],
-    demoUrl: '#', // Remplacez par votre URL de démo quand disponible
+    demoUrl: '#',
     sourceUrl: 'https://github.com/soulemaneyeo99/OpportuCI',
-    // Video Demo (example - you can add your actual video URLs)
-    demo_video_url: '', // Add YouTube/Vimeo URL here when available
-    video_type: 'none', // 'youtube', 'vimeo', 'local', or 'none'
-    video_thumbnail: '', // Custom thumbnail if needed
+    demo_video_url: '',
+    video_type: 'none',
+    video_thumbnail: '',
     featured: true,
     view_count: 0,
     created_at: '2025-01-01',
@@ -176,7 +176,7 @@ export const FEATURED_PROJECTS = [
     images: [
       { image: '/images/Fastapiecommerce.jpeg', caption: 'Interface principale' }
     ],
-    demoUrl: '#', // Ajoutez votre URL de démo
+    demoUrl: '#',
     sourceUrl: 'https://github.com/soulemaneyeo99/fastapi-ecommerce',
     featured: true,
     view_count: 156,
@@ -212,7 +212,7 @@ export const FEATURED_PROJECTS = [
     images: [
       { image: '/images/react_todo.jpeg', caption: 'Interface principale' }
     ],
-    demoUrl: '#', // Ajoutez votre URL de démo
+    demoUrl: '#',
     sourceUrl: 'https://github.com/soulemaneyeo99/react-todo',
     featured: false,
     view_count: 89,
@@ -249,45 +249,13 @@ export const FEATURED_PROJECTS = [
       { image: '/images/fashionStoreashborard.jpeg', caption: 'Dashboard admin' },
       { image: '/images/fashionStorelogin.jpeg', caption: 'Page de connexion' }
     ],
-    demoUrl: '#', // Ajoutez votre URL de démo
+    demoUrl: '#',
     sourceUrl: 'https://github.com/soulemaneyeo99/fashion-store',
     featured: false,
     view_count: 67,
     created_at: '2024-01-15',
   }
 ];
-
-// Technologies avec couleurs cohérentes
-export const SKILLS = {
-  backend: [
-    { name: 'Python', level: 90, color: '#3776ab' },
-    { name: 'Django/DRF', level: 85, color: '#092e20' },
-    { name: 'FastAPI', level: 75, color: '#009688' },
-    { name: 'PostgreSQL', level: 70, color: '#336791' },
-    { name: 'API Integration', level: 85, color: '#ff6c37' },
-  ],
-  frontend: [
-    { name: 'Next.js (SSR)', level: 80, color: '#000000' },
-    { name: 'React', level: 85, color: '#61dafb' },
-    { name: 'JavaScript', level: 80, color: '#f7df1e' },
-    { name: 'Tailwind CSS', level: 85, color: '#06b6d4' },
-    { name: 'HTML5/CSS3', level: 85, color: '#e34f26' },
-  ],
-  automation: [
-    { name: 'n8n', level: 85, color: '#ff6d5a' },
-    { name: 'AI Agents', level: 75, color: '#8b5cf6' },
-    { name: 'AI Workflows', level: 70, color: '#10b981' },
-    { name: 'Git/GitHub', level: 85, color: '#f05032' },
-    { name: 'Docker', level: 75, color: '#2496ed' },
-  ],
-  data: [
-    { name: 'Machine Learning', level: 75, color: '#f7931e' },
-    { name: 'Deep Learning', level: 60, color: '#ff6b6b' },
-    { name: 'TensorFlow/PyTorch', level: 65, color: '#ff6f00' },
-    { name: 'NumPy/Pandas', level: 80, color: '#013243' },
-    { name: 'Linux/WSL', level: 75, color: '#fcc624' },
-  ],
-};
 
 // Messages d'animation typing plus spécifiques
 export const TYPING_MESSAGES = [
@@ -307,12 +275,4 @@ export const NAV_ITEMS = [
   { id: 'projects', label: 'Projets', href: '/projects', icon: '💼' },
   { id: 'blog', label: 'Blog', href: '/blog', icon: '📝' },
   { id: 'contact', label: 'Contact', href: '/contact', icon: '📧' },
-];
-
-export const PROJECT_CATEGORIES = [
-  { id: 'web', name: 'Applications Web', color: '#3b82f6' },
-  { id: 'api', name: 'APIs & Microservices', color: '#10b981' },
-  { id: 'ai', name: 'IA & Machine Learning', color: '#8b5cf6' },
-  { id: 'mobile', name: 'Applications Mobile', color: '#f59e0b' },
-  { id: 'data', name: 'Data Science', color: '#ef4444' },
 ];
