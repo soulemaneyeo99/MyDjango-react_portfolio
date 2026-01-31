@@ -7,92 +7,84 @@ const ImpactSection = () => {
     const stats = [
         {
             number: '15+',
-            label: 'Projets Réalisés',
-            description: 'Applications web complètes développées',
-            icon: '💼',
-            color: 'from-blue-500 to-blue-600'
+            label: 'PRODUCTION_READY',
+            description: 'Systems architecture & deployment',
+            tag: 'LIVE_REPOS'
         },
         {
-            number: '50k+',
-            label: 'Lignes de Code',
-            description: 'Code Python, JavaScript et plus',
-            icon: '💻',
-            color: 'from-green-500 to-green-600'
+            number: '50K+',
+            label: 'SOURCE_LINES',
+            description: 'Optimized Python & JS performance',
+            tag: 'CODE_BASE'
         },
         {
             number: '2000+',
-            label: 'Heures de Code',
-            description: 'Temps dédié au développement',
-            icon: '⏰',
-            color: 'from-purple-500 to-purple-600'
+            label: 'DEV_HOURS',
+            description: 'Deep technical research & build',
+            tag: 'UPTIME'
         },
         {
             number: '100%',
-            label: 'Satisfaction Client',
-            description: 'Projets livrés avec succès',
-            icon: '🎯',
-            color: 'from-orange-500 to-orange-600'
+            label: 'CLIENT_TRUST',
+            description: 'Success rate in delivered solutions',
+            tag: 'KPI_GOAL'
         }
     ];
 
     return (
-        <section ref={targetRef} className="py-20 bg-white dark:bg-gray-900">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                        Impact &
-                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Réalisations</span>
-                    </h2>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                        Quelques chiffres qui illustrent mon engagement et ma passion pour le développement
-                    </p>
+        <section ref={targetRef} className="py-24 bg-[#050505] relative overflow-hidden border-t border-white/5">
+            <div className="container-custom relative z-10">
+                <div className={`mb-20 grid lg:grid-cols-[1.5fr_1fr] gap-8 items-end transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                    <div>
+                        <div className="font-mono text-[10px] text-indigo-400 uppercase tracking-[0.4em] mb-4">Metrics_&_Data</div>
+                        <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">
+                            MEASURABLE <span className="text-indigo-500 italic">IMPACT</span>
+                        </h2>
+                    </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1px bg-white/5 border border-white/5 mb-24">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className={`group text-center transform transition-all duration-1000 hover:scale-110 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-                                }`}
-                            style={{ transitionDelay: `${index * 200}ms` }}
+                            className={`p-10 bg-black/40 group hover:bg-white/[0.03] transition-all duration-500 transform ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
+                            style={{ transitionDelay: `${index * 150}ms` }}
                         >
-                            <div className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200/50 dark:border-gray-600/50">
-                                {/* Icône avec effet de flottement */}
-                                <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r ${stat.color} text-white text-3xl mb-6 group-hover:rotate-12 transition-transform duration-300`}>
-                                    {stat.icon}
-                                </div>
+                            <div className="flex justify-between items-start mb-12">
+                                <span className="font-mono text-[9px] text-indigo-500/50 tracking-widest uppercase">{stat.tag}</span>
+                                <div className="w-1 h-1 bg-white/20 rounded-full" />
+                            </div>
 
-                                {/* Nombre avec animation compteur */}
-                                <div className={`text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                            <div className="space-y-4">
+                                <div className="text-5xl md:text-6xl font-black text-white tracking-tighter font-outfit">
                                     {stat.number}
                                 </div>
-
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                    {stat.label}
-                                </h3>
-
-                                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                                    {stat.description}
-                                </p>
-
-                                {/* Effet de brillance au survol */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                                <h3 className="text-xs font-bold text-white uppercase tracking-widest">{stat.label}</h3>
+                                <p className="text-slate-500 text-[11px] leading-relaxed font-light">{stat.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Citation personnelle */}
-                <div className={`text-center mt-20 transform transition-all duration-1000 delay-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <blockquote className="relative max-w-4xl mx-auto">
-                        <div className="text-6xl text-blue-200 dark:text-blue-800 mb-4">"</div>
-                        <p className="text-2xl md:text-3xl font-light text-gray-700 dark:text-gray-300 italic leading-relaxed mb-6">
-                            Chaque ligne de code que j'écris est une step vers la création de solutions qui ont un impact réel sur la vie des gens.
+                {/* Industrial Quote Section */}
+                <div className={`relative p-12 md:p-24 border border-white/5 bg-white/[0.01] overflow-hidden transform transition-all duration-1000 delay-500 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+                    <div className="absolute top-0 right-0 p-8 font-mono text-[8px] text-white/5 tracking-[0.8em] pointer-events-none select-none">
+                        AUTH_VERIFIED // SECURE_ACCESS // AUTH_VERIFIED // SECURE_ACCESS
+                    </div>
+
+                    <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="font-mono text-indigo-400 text-4xl leading-none select-none">"</div>
+                        <p className="text-2xl md:text-4xl font-light text-white leading-tight tracking-tight">
+                            Chaque ligne de code que j'écris est une <span className="text-indigo-500 italic font-medium">brique</span> vers la création de systèmes qui transcendent le simple besoin pour devenir des <span className="text-indigo-500 font-medium">solutions durables</span>.
                         </p>
-                        <div className="text-lg font-semibold text-blue-600 dark:text-blue-400">
-                            - Souleymane Yeo, Créateur d'OpportuCI
+                        <div className="flex items-center space-x-6">
+                            <div className="h-[1px] w-12 bg-indigo-500" />
+                            <div className="space-y-1">
+                                <div className="text-sm font-bold text-white tracking-widest uppercase">Souleymane Yeo</div>
+                                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Lead Architect @ OpportuCI</div>
+                            </div>
                         </div>
-                    </blockquote>
+                    </div>
                 </div>
             </div>
         </section>

@@ -4,7 +4,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
+senior-fullstack/
+frontend-design/
 # Django
 db.sqlite3
 /media/

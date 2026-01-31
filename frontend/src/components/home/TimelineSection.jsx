@@ -7,125 +7,96 @@ const TimelineSection = () => {
     const timelineData = [
         {
             year: '2025',
-            title: 'Lancement d\'OpportuCI',
-            description: 'Création de la plateforme révolutionnaire pour les étudiants ivoiriens',
-            icon: '🚀',
-            color: 'from-green-500 to-emerald-600',
-            achievements: ['Architecture IA intégrée', 'Plus de 1000 opportunités centralisées', 'Interface utilisateur moderne']
+            title: 'OPPORTUCI_LAUNCH',
+            description: "Pivot stratégique vers l'IA appliquée à l'éducation ivoirienne.",
+            tag: 'PLATFORM_CORE',
+            achievements: ['Integrated Neural Engine', 'Scalable Architecture', '1000+ Opportunities']
         },
         {
             year: '2024',
-            title: 'Spécialisation Full-Stack',
-            description: 'Maîtrise complète de React et modernisation de mes compétences frontend',
-            icon: '⚛️',
-            color: 'from-blue-500 to-cyan-600',
-            achievements: ['React avancé maîtrisé', '5 projets e-commerce développés', 'Architecture microservices']
+            title: 'FULLSTACK_EVOLUTION',
+            description: 'Intégration des frameworks modernes pour des UI ultra-performantes.',
+            tag: 'MODERN_STACK',
+            achievements: ['React & Next.js Mastery', 'Performance Optimization', 'UX Engineering']
         },
         {
             year: '2023',
-            title: 'Expert Django & FastAPI',
-            description: 'Consolidation expertise backend et premiers projets clients',
-            icon: '🐍',
-            color: 'from-purple-500 to-indigo-600',
-            achievements: ['Django REST Framework expert', 'FastAPI haute performance', 'Premiers clients freelance']
+            title: 'BACKEND_SPECIALIZATION',
+            description: "Consolidation de l'expertise en microservices et APIs.",
+            tag: 'CORE_ENGINE',
+            achievements: ['Django DRF Authority', 'FastAPI High-Speed', 'Relational DB Design']
         },
         {
-            year: '2023',
-            title: 'Début Université UVCI',
-            description: 'Entrée en Licence Informatique spécialité DAS',
-            icon: '🎓',
-            color: 'from-orange-500 to-red-600',
-            achievements: ['Formation informatique structurée', 'Projets académiques en équipe', 'Bases théoriques solides']
+            year: '2022',
+            title: 'ACADEMIC_FOUNDATION',
+            description: "Début du cursus académique en Développement d'Applications et Services.",
+            tag: 'DAS_DEGREE',
+            achievements: ['Computer Science Fundamentals', 'Algorithmic Rigor', 'Team Collaboration']
         }
     ];
 
     return (
-        <section ref={targetRef} className="py-20 bg-gradient-to-br from-gray-900 to-indigo-900 text-white relative overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
-                {[...Array(30)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full opacity-30"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animation: `twinkle ${2 + Math.random() * 4}s infinite ${Math.random() * 2}s`,
-                        }}
-                    />
-                ))}
+        <section ref={targetRef} className="py-24 bg-[#050505] relative overflow-hidden">
+            {/* Arrière-plan Tech */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+                <div className="absolute left-[10%] h-full w-[1px] bg-white" />
+                <div className="absolute left-[30%] h-full w-[1px] bg-white" />
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        Mon
-                        <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Parcours</span>
+            <div className="container-custom relative z-10">
+                <div className={`mb-20 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                    <div className="font-mono text-[10px] text-indigo-400 uppercase tracking-[0.4em] mb-4">Chronology</div>
+                    <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">
+                        EXPERIENCE <span className="text-indigo-500 italic">LOG</span>
                     </h2>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        L'évolution de ma passion pour le développement web et l'innovation
-                    </p>
                 </div>
 
-                <div className="max-w-4xl mx-auto relative">
-                    {/* Ligne de timeline */}
-                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 transform md:-translate-x-1/2"></div>
+                <div className="relative max-w-5xl">
+                    {/* Ligne Centrale Tech */}
+                    <div className="absolute left-[20px] md:left-[50px] top-0 bottom-0 w-[1px] bg-white/5" />
 
-                    {timelineData.map((item, index) => (
-                        <div
-                            key={index}
-                            className={`relative mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-                                }`}
-                            style={{ transitionDelay: `${index * 300}ms` }}
-                        >
-                            <div className={`flex flex-col md:flex-row items-start md:items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                                {/* Contenu */}
-                                <div className={`flex-1 ml-16 md:ml-0 ${index % 2 === 0 ? 'md:mr-8 md:text-right' : 'md:ml-8'}`}>
-                                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
-                                        <div className="flex items-center space-x-4 mb-4">
-                                            <span className={`text-2xl p-3 rounded-full bg-gradient-to-r ${item.color}`}>
-                                                {item.icon}
+                    <div className="space-y-16">
+                        {timelineData.map((item, index) => (
+                            <div
+                                key={index}
+                                className={`relative pl-12 md:pl-24 group transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
+                                style={{ transitionDelay: `${index * 200}ms` }}
+                            >
+                                {/* Node */}
+                                <div className="absolute left-4 md:left-[44px] top-1 w-3 h-3 bg-[#050505] border border-white/20 group-hover:border-indigo-500 transition-colors z-20">
+                                    <div className="absolute inset-1 bg-white/10 group-hover:bg-indigo-500 transition-colors" />
+                                </div>
+
+                                <div className="grid md:grid-cols-[100px_1fr] gap-8 items-start">
+                                    <div className="font-mono text-xl font-bold text-slate-500 group-hover:text-indigo-400 transition-colors">
+                                        {item.year}
+                                    </div>
+
+                                    <div className="p-8 border border-white/5 bg-white/[0.02] group-hover:border-white/10 transition-all duration-500">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <h3 className="text-xl font-bold text-white tracking-widest">{item.title}</h3>
+                                            <span className="text-[10px] font-mono text-indigo-400/50 uppercase tracking-widest px-2 py-1 border border-indigo-500/10">
+                                                {item.tag}
                                             </span>
-                                            <div>
-                                                <span className={`text-lg font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
-                                                    {item.year}
-                                                </span>
-                                                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                                            </div>
                                         </div>
-
-                                        <p className="text-gray-300 mb-6 leading-relaxed">{item.description}</p>
-
-                                        <div className="space-y-2">
-                                            {item.achievements.map((achievement, i) => (
+                                        <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light max-w-2xl">
+                                            {item.description}
+                                        </p>
+                                        <div className="flex flex-wrap gap-4">
+                                            {item.achievements.map((ach, i) => (
                                                 <div key={i} className="flex items-center space-x-2">
-                                                    <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></div>
-                                                    <span className="text-gray-400 text-sm">{achievement}</span>
+                                                    <span className="w-1 h-1 bg-indigo-500/50 rounded-full" />
+                                                    <span className="text-[10px] uppercase font-mono text-slate-500 tracking-wider font-medium">{ach}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Icône centrale */}
-                                <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center">
-                                    <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-2xl shadow-2xl border-4 border-white/20`}>
-                                        {item.icon}
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
-
-            <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
-        }
-      `}</style>
         </section>
     );
 };

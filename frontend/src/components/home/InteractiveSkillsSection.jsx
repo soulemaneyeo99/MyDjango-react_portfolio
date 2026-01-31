@@ -40,147 +40,119 @@ const InteractiveSkillsSection = () => {
 
     const categories = {
         backend: {
-            title: 'Backend Expert',
+            title: 'CORE BACKEND',
             icon: '🔧',
-            gradient: 'from-blue-500 to-indigo-600',
+            gradient: 'from-indigo-500 to-blue-600',
             skills: SKILLS.backend
         },
         frontend: {
-            title: 'Frontend Next.js',
+            title: 'MODERN FRONTEND',
             icon: '⚛️',
-            gradient: 'from-purple-500 to-pink-600',
+            gradient: 'from-blue-400 to-indigo-500',
             skills: SKILLS.frontend
         },
         automation: {
-            title: 'Automatisation & IA',
+            title: 'AI & AUTOMATION',
             icon: '🤖',
-            gradient: 'from-green-500 to-teal-600',
+            gradient: 'from-indigo-600 to-purple-600',
             skills: SKILLS.automation
         },
         data: {
-            title: 'ML & Deep Learning',
+            title: 'DATA INTELLIGENCE',
             icon: '🧠',
-            gradient: 'from-orange-500 to-red-600',
+            gradient: 'from-purple-500 to-indigo-500',
             skills: SKILLS.data
         }
     };
 
     return (
-        <section ref={targetRef} className="py-20 bg-gray-900 text-white relative overflow-hidden">
-            {/* Background patterns */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-purple-900/30"></div>
-                {[...Array(20)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 3}s`,
-                        }}
-                    />
-                ))}
+        <section ref={targetRef} className="py-24 bg-[#050505] relative overflow-hidden">
+            {/* Arrière-plan Tech */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className={`text-center mb-16 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        Ma Stack
-                        <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Technique</span>
+            <div className="container-custom relative z-10">
+                <div className={`mb-20 transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tighter">
+                        TECHNICAL <span className="text-indigo-500 italic">STACK</span>
                     </h2>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Technologies que je maîtrise pour créer des solutions robustes et modernes
-                    </p>
+                    <div className="w-20 h-1 bg-indigo-500" />
                 </div>
 
-                <div className="max-w-6xl mx-auto">
-                    {/* Navigation des catégories */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-12">
+                <div className="grid lg:grid-cols-[1fr_2fr] gap-12">
+                    {/* Navigation Verticale / Latérale */}
+                    <div className="flex flex-col space-y-2">
                         {Object.entries(categories).map(([key, category]) => (
                             <button
                                 key={key}
                                 onClick={() => setActiveCategory(key)}
-                                className={`group px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeCategory === key
-                                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-2xl scale-105`
-                                    : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white backdrop-blur-sm'
+                                className={`relative px-6 py-6 text-left group transition-all duration-300 border-l-2 ${activeCategory === key
+                                    ? 'border-indigo-500 bg-indigo-500/5'
+                                    : 'border-white/5 hover:border-white/20 hover:bg-white/5'
                                     }`}
                             >
-                                <span className="flex items-center space-x-2">
-                                    <span className="text-xl">{category.icon}</span>
-                                    <span>{category.title}</span>
+                                <span className={`block font-mono text-[10px] tracking-[0.2em] mb-1 ${activeCategory === key ? 'text-indigo-400' : 'text-slate-500'}`}>0{Object.keys(categories).indexOf(key) + 1}</span>
+                                <span className={`text-sm font-bold tracking-wider uppercase ${activeCategory === key ? 'text-white' : 'text-slate-400 group-hover:text-white'}`}>
+                                    {category.title}
                                 </span>
+                                {activeCategory === key && (
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-indigo-500 font-bold">→</div>
+                                )}
                             </button>
                         ))}
                     </div>
 
-                    {/* Affichage des compétences */}
-                    <div className="relative min-h-[400px]">
+                    {/* Zone d'Affichage des Compétences */}
+                    <div className="relative min-h-[500px] border border-white/5 bg-white/[0.02] p-8 md:p-12">
                         {Object.entries(categories).map(([key, category]) => (
                             <div
                                 key={key}
-                                className={`absolute inset-0 transition-all duration-500 ${activeCategory === key
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-10 pointer-events-none'
+                                className={`transition-all duration-500 ${activeCategory === key
+                                    ? 'opacity-100 translate-y-0 relative z-10'
+                                    : 'opacity-0 translate-y-4 absolute inset-0 pointer-events-none'
                                     }`}
                             >
-                                <div className="grid md:grid-cols-2 gap-8 items-center">
-                                    {/* Graphique circulaire des compétences */}
-                                    <div className="relative">
-                                        <div className="grid grid-cols-2 gap-6">
+                                <div className="grid md:grid-cols-2 gap-12 items-start">
+                                    <div className="space-y-8">
+                                        <div className="space-y-2">
+                                            <h3 className="text-3xl font-bold text-white">{category.title}</h3>
+                                            <p className="text-slate-500 max-w-md">Solutions robustes conçues avec précision technique et vision produit.</p>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 gap-6">
                                             {category.skills.map((skill, index) => (
-                                                <div key={skill.name} className="text-center">
-                                                    <div className="relative w-24 h-24 mx-auto mb-4">
-                                                        <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                                                            <circle
-                                                                cx="50"
-                                                                cy="50"
-                                                                r="40"
-                                                                stroke="rgba(255,255,255,0.1)"
-                                                                strokeWidth="8"
-                                                                fill="none"
-                                                            />
-                                                            <circle
-                                                                cx="50"
-                                                                cy="50"
-                                                                r="40"
-                                                                stroke={skill.color}
-                                                                strokeWidth="8"
-                                                                fill="none"
-                                                                strokeDasharray={`${2.51 * skill.level} 251.2`}
-                                                                strokeLinecap="round"
-                                                                className="animate-pulse"
-                                                                style={{
-                                                                    animation: `drawCircle 2s ease-in-out ${index * 0.2}s both`
-                                                                }}
-                                                            />
-                                                        </svg>
-                                                        <div className="absolute inset-0 flex items-center justify-center">
-                                                            <span className="text-sm font-bold">{skill.level}%</span>
-                                                        </div>
+                                                <div key={skill.name} className="space-y-2 group">
+                                                    <div className="flex justify-between items-end">
+                                                        <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors uppercase tracking-widest">{skill.name}</span>
+                                                        <span className="text-xs font-mono text-indigo-400">{skill.level}%</span>
                                                     </div>
-                                                    <h3 className="font-semibold text-white">{skill.name}</h3>
+                                                    <div className="h-[2px] w-full bg-white/5 relative overflow-hidden">
+                                                        <div
+                                                            className="absolute top-0 left-0 h-full bg-indigo-500 transition-all duration-1000 ease-out"
+                                                            style={{ width: hasIntersected ? `${skill.level}%` : '0%' }}
+                                                        />
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
-                                    {/* Description et détails */}
-                                    <div className="space-y-6">
-                                        <div className={`text-6xl bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent`}>
-                                            {category.icon}
+                                    <div className="space-y-8 bg-black/40 p-8 border border-white/5">
+                                        <div className="font-mono text-[10px] text-indigo-400/50 uppercase tracking-[0.3em]">Spécialisations</div>
+                                        <div className="space-y-4">
+                                            {getSkillDescription(key).map((desc, index) => (
+                                                <div key={index} className="flex items-start space-x-4">
+                                                    <span className="text-indigo-500 font-mono mt-1">/</span>
+                                                    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+                                                </div>
+                                            ))}
                                         </div>
-                                        <div>
-                                            <h3 className={`text-3xl font-bold mb-4 bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent`}>
-                                                {category.title}
-                                            </h3>
-                                            <div className="space-y-4">
-                                                {getSkillDescription(key).map((desc, index) => (
-                                                    <div key={index} className="flex items-start space-x-3">
-                                                        <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                                                        <p className="text-gray-300">{desc}</p>
-                                                    </div>
-                                                ))}
+
+                                        <div className="pt-8 border-t border-white/5">
+                                            <div className="flex items-center space-x-4 opacity-30">
+                                                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-xs">🚀</div>
+                                                <div className="text-[10px] font-mono tracking-tighter italic text-white">READY_FOR_DEPLOYMENT_PROD</div>
                                             </div>
                                         </div>
                                     </div>
@@ -190,14 +162,6 @@ const InteractiveSkillsSection = () => {
                     </div>
                 </div>
             </div>
-
-            <style jsx>{`
-        @keyframes drawCircle {
-          from {
-            stroke-dasharray: 0 251.2;
-          }
-        }
-      `}</style>
         </section>
     );
 };
