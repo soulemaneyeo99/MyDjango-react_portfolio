@@ -28,10 +28,10 @@ const PageTracker = ({ children }) => {
   useEffect(() => {
     // Track page view
     actions.trackPageView(location.pathname);
-    
+
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
+
     // Update document title dynamically
     const pathToTitle = {
       '/': 'Accueil - Portfolio Souleymane Yeo',
@@ -40,7 +40,7 @@ const PageTracker = ({ children }) => {
       '/blog': 'Blog - Souleymane Yeo',
       '/contact': 'Contact - Souleymane Yeo'
     };
-    
+
     document.title = pathToTitle[location.pathname] || 'Portfolio Souleymane Yeo';
   }, [location, actions]);
 
@@ -59,16 +59,16 @@ const NotFound = () => (
           </div>
         </div>
       </div>
-      
+
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
         Page non trouvée
       </h1>
-      
+
       <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-        Cette page semble s'être envolée dans l'espace numérique. 
+        Cette page semble s'être envolée dans l'espace numérique.
         Ne vous inquiétez pas, explorons ensemble d'autres horizons !
       </p>
-      
+
       <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
         <a
           href="/"
@@ -83,7 +83,7 @@ const NotFound = () => (
           Voir mes projets
         </a>
       </div>
-      
+
       {/* Suggestions de navigation */}
       <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -126,7 +126,7 @@ const useAppInitialization = () => {
     const savedTheme = localStorage.getItem('theme');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
-    
+
     actions.setTheme(initialTheme);
 
     // Écouter les changements de thème système
@@ -161,76 +161,76 @@ const useAppInitialization = () => {
 // Composant principal de l'application
 const AppContent = () => {
   useAppInitialization();
-  
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <NotificationSystem />
-      
+
       <main className="flex-grow pt-16 lg:pt-20">
         <PageTracker>
           <Routes>
-            <Route 
-              path="/" 
+            <Route
+              path="/"
               element={
                 <SuspenseFallback>
                   <Home />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/about" 
+            <Route
+              path="/about"
               element={
                 <SuspenseFallback>
                   <About />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/projects" 
+            <Route
+              path="/projects"
               element={
                 <SuspenseFallback>
                   <Projects />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/projects/:slug" 
+            <Route
+              path="/projects/:slug"
               element={
                 <SuspenseFallback>
                   <ProjectDetail />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/blog" 
+            <Route
+              path="/blog"
               element={
                 <SuspenseFallback>
                   <Blog />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/blog/:slug" 
+            <Route
+              path="/blog/:slug"
               element={
                 <SuspenseFallback>
                   <BlogPost />
                 </SuspenseFallback>
-              } 
+              }
             />
-            <Route 
-              path="/contact" 
+            <Route
+              path="/contact"
               element={
                 <SuspenseFallback>
                   <Contact />
                 </SuspenseFallback>
-              } 
+              }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTracker>
       </main>
-      
+
       <Footer />
     </div>
   );
@@ -252,17 +252,5 @@ const App = () => {
     </ErrorBoundary>
   );
 };
-
-// Après vos imports
-console.log('Environment variables:', {
-  API_URL: import.meta.env.VITE_API_BASE_URL,
-  MEDIA_URL: import.meta.env.VITE_MEDIA_BASE_URL
-});
-
-// Dans le JSX, ajoutez temporairement
-<div style={{position: 'fixed', top: 10, right: 10, background: 'white', padding: 10, zIndex: 9999}}>
-  <img src="/images/moi2.jpg" alt="test" style={{width: 50, height: 50}} />
-  <p>Image test</p>
-</div>
 
 export default App;
