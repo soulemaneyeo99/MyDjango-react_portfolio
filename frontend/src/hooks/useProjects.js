@@ -52,7 +52,7 @@ export const useProject = (id) => {
                 return await projectService.getById(id);
             } catch (error) {
                 console.warn(`API fetch failed for project ${id}, using fallback`, error);
-                const project = FEATURED_PROJECTS.find(p => p.id === parseInt(id) || p.slug === id);
+                const project = FEATURED_PROJECTS.find(p => p.id === id || p.slug === id || (typeof p.id === 'number' && p.id === parseInt(id)));
                 if (project) return project;
                 throw error;
             }

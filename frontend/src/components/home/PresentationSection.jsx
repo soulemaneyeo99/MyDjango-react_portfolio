@@ -47,7 +47,7 @@ const PresentationSection = () => {
 
                     {/* Visualisation Architecturale */}
                     <div className={`relative transform transition-all duration-1000 delay-300 ${hasIntersected ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}>
-                        <div className="aspect-square relative p-4 md:p-8 border border-border-default bg-bg-card/[0.01] max-w-[450px] mx-auto">
+                        <div className="aspect-square relative p-4 md:p-8 border border-border-default bg-bg-card/[0.01] max-w-[450px] md:max-w-none mx-auto md:mx-0">
                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                                 {/* Outer main ring - Solid & Branded */}
                                 <div className="absolute w-[85%] h-[85%] border border-primary-500/30 rounded-full animate-spin-slow shadow-[0_0_30px_rgba(59,130,246,0.1)]" />
@@ -57,14 +57,14 @@ const PresentationSection = () => {
                                 <div className="absolute w-[50%] h-[50%] border border-dashed border-primary-400/20 rounded-full animate-spin-slow" />
                             </div>
 
-                            <div className="relative h-full w-full grid grid-cols-2 gap-2 md:gap-4">
+                            <div className="relative h-full w-full grid grid-cols-2 gap-4">
                                 {[
                                     { label: 'ARCHITECTURE', val: 'ROBUST', color: 'primary-500' },
                                     { label: 'INTERFACE', val: 'PRECISE', color: 'blue-500' },
                                     { label: 'AUTOMATION', val: 'FLUID', color: 'accent-purple' },
                                     { label: 'INTELLIGENCE', val: 'NEURAL', color: 'text-secondary' },
                                 ].map((node, i) => (
-                                    <div key={i} className="border border-border-default p-4 md:p-6 flex flex-col justify-between group hover:bg-white/[0.03] transition-colors bg-bg-dark/40 backdrop-blur-sm">
+                                    <div key={i} className="border border-border-default p-4 md:p-6 flex flex-col justify-between group hover:bg-white/[0.02] transition-colors">
                                         <div className={`w-8 h-1 bg-${node.color} mb-4`} />
                                         <div>
                                             <div className="text-[9px] font-mono text-text-muted mb-1 tracking-widest">{node.label}</div>
