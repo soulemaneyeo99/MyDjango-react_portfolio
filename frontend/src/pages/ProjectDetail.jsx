@@ -73,7 +73,7 @@ const ProjectDetail = () => {
 
       <div className="min-h-screen bg-bg-dark">
         {/* Hero Section */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
           <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-500/5 blur-[100px]" />
