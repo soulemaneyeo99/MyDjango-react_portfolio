@@ -45,8 +45,8 @@ export const PROJECT_CATEGORIES = [
 ];
 export const PERSONAL_INFO = {
   name: 'Souleymane Yeo',
-  title: 'Développeur Full-Stack',
-  subtitle: 'Python • Django • FastAPI • React • IA',
+  title: 'Fullstack Web & AI Expert',
+  subtitle: 'Web • AI • Mobile • Backend Architect',
   bio: `Salut, moi c'est Souleymane Yeo, développeur backend passionné, basé en Côte d'Ivoire 🇨🇮. 
         Je travaille principalement avec Python 🐍, Django et FastAPI, des outils puissants avec lesquels 
         je construis des architectures solides, maintenables et orientées performance.`,
@@ -295,11 +295,11 @@ export const FEATURED_PROJECTS = [
 
 // Messages d'animation typing plus spécifiques
 export const TYPING_MESSAGES = [
-  'Développeur Full-Stack Python/React',
-  'Expert Django & FastAPI',
-  'Spécialiste Next.js & SSR',
-  'Expert en Automatisation & IA (n8n)',
+  'Fullstack Web & AI Expert',
+  'Architecte Solutions Web & Mobiles',
+  'Expert Django, FastAPI & React',
   'Créateur d\'Agents IA Intelligents',
+  'Développeur Mobile sur mesure',
   'Passionné par le Machine Learning',
   'Créateur d\'OpportuCI',
 ];

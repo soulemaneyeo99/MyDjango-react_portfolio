@@ -28,13 +28,14 @@ const About = () => {
 
   const experience = [
     {
-      title: "Développeur Python / Django Freelance",
+      title: "Fullstack Web & AI Expert (Web, AI, Mobile)",
       period: "2023 - Présent",
       location: "Abidjan, Côte d'Ivoire (à distance)",
       tasks: [
         "Développement d'applications web avec Django, FastAPI et PostgreSQL",
         "Intégration d'APIs, systèmes d'authentification, et gestion de base de données",
-        "Création de solutions automatisées pour des besoins métiers (facturation, notifications, scrapping)"
+        "Création de solutions automatisées pour des besoins métiers (facturation, notifications, scrapping)",
+        "Développement d'applications mobiles sur mesure selon les besoins clients"
       ]
     },
     {
@@ -130,8 +131,9 @@ const About = () => {
                 </h1>
                 <div className="text-lg text-text-secondary space-y-4 leading-relaxed font-light">
                   <p>
-                    Développeur backend passionné basé à <strong>Abidjan, Côte d'Ivoire</strong> 🇨🇮.
-                    Je conçois des architectures robustes avec <strong>Python</strong> 🐍, <strong>Django</strong> et <strong>FastAPI</strong>.
+                    Expert <strong>Fullstack Web & IA</strong> basé à <strong>Abidjan, Côte d'Ivoire</strong> 🇨🇮.
+                    Je conçois des solutions innovantes alliant architecture web (Python, Django, React),
+                    <strong>Intelligence Artificielle</strong> et développement <strong>Mobile</strong>.
                   </p>
                   <p>
                     Fasciné par l'intersection entre le code et l'éducation, je m'intéresse
