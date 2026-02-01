@@ -28,7 +28,20 @@ const About = () => {
 
   const experience = [
     {
-      title: "Fullstack Web & AI Expert (Web, AI, Mobile)",
+      title: "Full-Stack Developer (AI & Automation)",
+      organization: "Pront-ix",
+      period: "2024 - Présent",
+      location: "Full Remote",
+      description: "Conception et développement de solutions basées sur l'intelligence artificielle et le web moderne au sein d'une entreprise tech innovante.",
+      tasks: [
+        "Conception et développement de chatbots intelligents basés sur des LLMs",
+        "Implémentation de workflows IA avec LangChain (RAG, agents, automatisation)",
+        "Développement de backends API robustes et intégration de modèles IA",
+        "Optimisation et structuration de projets orientés scalabilité et maintenabilité"
+      ]
+    },
+    {
+      title: "Fullstack Web & AI Expert (Freelance)",
       period: "2023 - Présent",
       location: "Abidjan, Côte d'Ivoire (à distance)",
       tasks: [
