@@ -56,7 +56,7 @@ export const PERSONAL_INFO = {
   phone2: '+225 0700896230',
   university: 'Université Virtuelle de Côte d\'Ivoire (UVCI)',
   degree: 'Licence en Informatique - Spécialité DAS',
-  profileImage: '/images/moi2.jpg',
+  profileImage: '/images/profile_pro.png',
   heroBackground: '/images/hero-bg.jpg',
   social: {
     github: 'https://github.com/soulemaneyeo99/',
