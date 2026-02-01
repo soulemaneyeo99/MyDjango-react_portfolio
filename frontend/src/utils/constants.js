@@ -69,6 +69,42 @@ export const PERSONAL_INFO = {
 // Projets phares avec vos vraies images
 export const FEATURED_PROJECTS = [
   {
+    id: 'vision-360',
+    title: 'Vision 360 - Assistant Académique',
+    description: 'Centralisation proactive des activités Moodle pour l\'excellence académique à l\'UVCI. Un assistant intelligent automatisant le suivi des échéances.',
+    detailed_description: `Vision 360 est une plateforme EdTech innovante conçue pour optimiser la réussite des étudiants de l'Université Virtuelle de Côte d'Ivoire (UVCI). 
+
+    🎯 **Problème résolu** : La fragmentation de l'information académique et le manque de suivi des échéances Moodle.
+    
+    🚀 **Ma solution** : Un "Cockpit" centralisé qui automatise l'extraction des données, calcule les performances en temps réel et propose un accompagnement proactif via un algorithme de notification intelligent.
+    
+    ⚙️ **Réalisations Techniques** :
+    - **Moteur de Scraping Intelligent** : Système d'extraction haute-fidélité sur Moodle (BeautifulSoup4/FastAPI).
+    - **Algorithme "Coach"** : Logique métier de priorité pour alertes ciblées (Push Web & Email).
+    - **Sécurité de Niveau Bancaire** : Chiffrement AES-256 (GCM) pour la protection des données.
+    - **Architecture Scalable** : Backend FastAPI (Python) et frontend Next.js (TypeScript).
+    
+    📊 **Expérience Utilisateur** :
+    - Dashboard "Cockpit" centralisé
+    - Notifications Push & Email (Resend/Brevo)
+    - Système d'entraide communautaire Agora`,
+    techStack: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'PostgreSQL', 'Tailwind', 'AES-256', 'Docker'],
+    status: 'Beta / Prêt pour pilote',
+    category: 'EdTech / IA',
+    image: '/images/vision360_hero.png',
+    images: [
+      { image: '/images/vision360_hero.png', caption: 'Dashboard principal (Cockpit)' }
+    ],
+    demoUrl: '#',
+    sourceUrl: '#',
+    demo_video_url: '/videos/vision360.mp4',
+    video_type: 'local',
+    video_thumbnail: '/images/vision360_hero.png',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-01-26',
+  },
+  {
     id: 'opportunci',
     title: 'OpportuCI',
     description: 'Plateforme intelligente centralisant les opportunités académiques pour les étudiants ivoiriens. Une solution complète avec IA pour recommandations personnalisées.',
