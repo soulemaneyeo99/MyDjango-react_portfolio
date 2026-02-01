@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, GraduationCap, Code, Brain, Rocket, Award, Download, Briefcase } from 'lucide-react';
+import { PERSONAL_INFO } from '../utils/constants';
 import SEOHead from '../components/common/SEOHead';
 import Timeline from '../components/features/about/Timeline';
 import Button from '../components/ui/Button';
@@ -183,11 +184,11 @@ const About = () => {
                   <div className="absolute inset-0 bg-primary-500 blur-[60px] opacity-20 transform scale-90 rounded-full animate-pulse-slow"></div>
 
                   <img
-                    src="/images/me2.jpg"
-                    alt="Souleymane Yeo"
+                    src={PERSONAL_INFO.profileImage}
+                    alt={PERSONAL_INFO.name}
                     className="relative z-10 w-80 h-80 rounded-2xl shadow-2xl object-cover border-2 border-white/10 ring-1 ring-white/20"
                     onError={(e) => {
-                      e.target.src = `https://ui-avatars.com/api/?name=Souleymane+Yeo&size=320&background=0a0a0a&color=3b82f6&bold=true`;
+                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(PERSONAL_INFO.name)}&size=320&background=0a0a0a&color=3b82f6&bold=true`;
                     }}
                   />
 
