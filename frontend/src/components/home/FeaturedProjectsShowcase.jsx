@@ -44,14 +44,14 @@ const FeaturedProjectsShowcase = () => {
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
                                 onError={(e) => {
                                     e.target.src = `https://via.placeholder.com/1200x800/050505/ffffff?text=${encodeURIComponent(project.title)}`;
                                 }}
                             />
 
                             {/* Overlay de contenu asymétrique */}
-                            <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-t from-black via-black/20 to-transparent">
+                            <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-t from-black via-black/40 to-black/20 group-hover:from-black group-hover:via-black/60 group-hover:to-black/20 transition-all duration-500">
                                 <div className="flex justify-between items-start">
                                     <span className="px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 text-[10px] font-mono text-primary-400">
                                         {project.category.toUpperCase()}
@@ -67,7 +67,7 @@ const FeaturedProjectsShowcase = () => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-primary-400 transition-colors">
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight group-hover:text-primary-400 transition-colors drop-shadow-lg">
                                         {project.title}
                                     </h3>
                                     <p className="text-text-muted text-sm max-w-md line-clamp-2 font-light opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">

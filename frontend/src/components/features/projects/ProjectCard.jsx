@@ -35,13 +35,13 @@ const ProjectCard = ({ project, hasIntersected = true, delay = 0 }) => {
                         {project.status}
                     </Badge>
                 </div>
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                {/* Overlay - Strengthens on hover to maintain contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
             </div>
 
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col flex-grow relative z-10">
                 <div className="mb-4 flex-grow">
-                    <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary-500 transition-colors">
+                    <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary-500 transition-colors drop-shadow-md">
                         {project.title}
                     </h3>
                     <p className="text-text-secondary text-sm mb-4 line-clamp-3">
