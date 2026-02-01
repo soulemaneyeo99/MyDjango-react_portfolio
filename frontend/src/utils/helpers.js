@@ -40,22 +40,22 @@ export const formatRelativeDate = (dateString) => {
 export const getMediaUrl = (imagePath) => {
   // Debug en console pour voir ce qui est passé
   console.log('getMediaUrl called with:', imagePath);
-  
+
   if (!imagePath) {
     console.log('No image path, using placeholder');
     return '/images/placeholder.jpg';
   }
-  
+
   if (imagePath.startsWith('http')) {
     console.log('Full URL, returning as is');
     return imagePath;
   }
-  
+
   if (imagePath.startsWith('/images/')) {
     console.log('Local image path, returning as is');
     return imagePath;
   }
-  
+
   if (imagePath.startsWith('/')) {
     console.log('Root path, returning as is');
     return imagePath;
@@ -83,7 +83,7 @@ export const getLocalImage = (imageName) => {
     'fashion-store': '/images/fashionStoreashborard.jpeg',
     'django-logo': '/images/portfolio/Djagologo.jpg',
   };
-  
+
   return imageMap[imageName] || '/images/placeholder.jpg';
 };
 
@@ -91,7 +91,7 @@ export const getLocalImage = (imageName) => {
 export const generateMetaTags = (title, description, image, url) => {
   const siteName = import.meta.env.VITE_SITE_NAME || 'Souleymane Yeo';
   const baseUrl = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
-  
+
   return {
     title: `${title} | ${siteName}`,
     description,
@@ -163,7 +163,7 @@ export const storage = {
       console.error('Error saving to localStorage:', error);
     }
   },
-  
+
   get: (key, defaultValue = null) => {
     try {
       const item = localStorage.getItem(key);
@@ -173,7 +173,7 @@ export const storage = {
       return defaultValue;
     }
   },
-  
+
   remove: (key) => {
     try {
       localStorage.removeItem(key);
@@ -196,7 +196,7 @@ export const hexToRgb = (hex) => {
 export const getContrastColor = (hexColor) => {
   const rgb = hexToRgb(hexColor);
   if (!rgb) return '#000000';
-  
+
   const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
   return brightness > 128 ? '#000000' : '#ffffff';
 };
@@ -230,6 +230,44 @@ export const formatNumber = (number) => {
   return new Intl.NumberFormat('fr-FR').format(number);
 };
 
+// Utilitaire pour transformer du Markdown simple en HTML
+export const renderMarkdown = (text) => {
+  if (!text) return '';
+
+  let html = text
+    // Bolding **text**
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // Italics *text* or _text_
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/_(.*?)_/g, '<em>$1</em>');
+
+  // Handle lists first to avoid interference with line breaks
+  const lines = html.split('\n');
+  let inList = false;
+  let result = [];
+
+  lines.forEach(line => {
+    const listMatch = line.match(/^\s*-\s+(.*)$/);
+    if (listMatch) {
+      if (!inList) {
+        result.push('<ul class="list-disc pl-5 space-y-2 my-4 text-text-secondary">');
+        inList = true;
+      }
+      result.push(`<li>${listMatch[1]}</li>`);
+    } else {
+      if (inList) {
+        result.push('</ul>');
+        inList = false;
+      }
+      result.push(line + '<br>');
+    }
+  });
+
+  if (inList) result.push('</ul>');
+
+  return result.join('\n');
+};
+
 // Utilitaire pour le debounce
 export const debounce = (func, wait) => {
   let timeout;
@@ -246,7 +284,7 @@ export const debounce = (func, wait) => {
 // Utilitaire pour le throttle
 export const throttle = (func, limit) => {
   let inThrottle;
-  return function() {
+  return function () {
     const args = arguments;
     const context = this;
     if (!inThrottle) {
@@ -269,7 +307,7 @@ export const sortBy = (array, key, direction = 'asc') => {
   return [...array].sort((a, b) => {
     const aVal = a[key];
     const bVal = b[key];
-    
+
     if (direction === 'desc') {
       return bVal > aVal ? 1 : bVal < aVal ? -1 : 0;
     }
@@ -368,6 +406,7 @@ export default {
   slugify,
   capitalize,
   formatNumber,
+  renderMarkdown,
   debounce,
   throttle,
   groupBy,

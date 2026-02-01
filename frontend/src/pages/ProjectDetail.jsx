@@ -5,7 +5,7 @@ import SEOHead from '../components/common/SEOHead';
 import Loading from '../components/common/Loading';
 import { useProject } from '../hooks/useProjects';
 import VideoPlayer from '../components/projects/VideoPlayer';
-import { formatDate } from '../utils/helpers';
+import { formatDate, renderMarkdown } from '../utils/helpers';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 
@@ -57,17 +57,21 @@ const ProjectDetail = () => {
     );
   }
 
+  // Resilient data access
+  const projectImage = project.image || project.featured_image || project.thumbnail;
+  const projectVideo = project.demo_video_url || project.featured_video || project.video_url;
+
   const allImages = [
-    { image: project.featured_image, caption: 'Image principale' },
+    { image: projectImage, caption: 'Image principale' },
     ...(project.images || [])
-  ];
+  ].filter(img => img.image);
 
   return (
     <>
       <SEOHead
         title={`${project.title} | Portfolio`}
         description={project.description}
-        image={getImageUrl(project.featured_image)}
+        image={getImageUrl(projectImage)}
         keywords={[project.title, ...(project.technologies?.map(t => t.name) || [])]}
       />
 
@@ -160,19 +164,20 @@ const ProjectDetail = () => {
                 {/* Main Content */}
                 <div className="lg:col-span-2">
                   {/* Video Demo Section */}
-                  {(project.demo_video_url || project.demo_video_file) && project.video_type !== 'none' && (
+                  {projectVideo && project.video_type !== 'none' && (
                     <div className="mb-12">
                       <h2 className="text-2xl font-bold text-text-primary mb-6 flex items-center space-x-3">
-                        <span className="text-primary-500">▶</span>
+                        <span className="w-1 h-6 bg-primary-500 rounded-full" />
                         <span>Démonstration Vidéo</span>
                       </h2>
-                      <VideoPlayer
-                        videoUrl={project.demo_video_url}
-                        videoFile={project.demo_video_file}
-                        videoType={project.video_type}
-                        customThumbnail={project.video_thumbnail}
-                        title={project.title}
-                      />
+                      <div className="rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                        <VideoPlayer
+                          videoUrl={projectVideo}
+                          videoType={project.video_type || 'local'}
+                          customThumbnail={project.video_thumbnail || projectImage}
+                          title={project.title}
+                        />
+                      </div>
                     </div>
                   )}
 
@@ -233,7 +238,7 @@ const ProjectDetail = () => {
                         À propos du projet
                       </h2>
                       <div className="prose prose-lg prose-invert max-w-none text-text-secondary">
-                        <div dangerouslySetInnerHTML={{ __html: project.detailed_description.replace(/\n/g, '<br>') }} />
+                        <div dangerouslySetInnerHTML={{ __html: renderMarkdown(project.detailed_description) }} />
                       </div>
                     </div>
                   )}
