@@ -182,9 +182,5 @@ const SkillContent = ({ categoryKey, category, hasIntersected }) => (
         </div>
     </div>
 );
-            </div >
-        </section >
-    );
-};
 
 export default InteractiveSkillsSection;
