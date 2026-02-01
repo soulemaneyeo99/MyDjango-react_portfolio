@@ -109,29 +109,48 @@ const Header = () => {
         </div>
 
         {/* Mobile Nav Overlay */}
-        <div className={`fixed inset-0 bg-bg-dark z-[100] transition-all duration-700 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-[100%]'
+        <div className={`fixed inset-0 bg-bg-dark/98 backdrop-blur-2xl z-[200] transition-all duration-500 ease-in-out md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none translate-x-full'
           }`}>
-          <div className="h-full flex flex-col justify-center px-12 space-y-12">
-            <div className="space-y-8">
+          {/* Close Button Inside Menu */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-8 right-8 w-12 h-12 border border-white/10 flex items-center justify-center group hover:border-primary-500 transition-all active:scale-95"
+          >
+            <div className="relative w-6 h-6">
+              <span className="absolute top-1/2 left-0 w-full h-[1px] bg-white rotate-45 group-hover:bg-primary-500 transition-colors" />
+              <span className="absolute top-1/2 left-0 w-full h-[1px] bg-white -rotate-45 group-hover:bg-primary-500 transition-colors" />
+            </div>
+          </button>
+
+          <div className="h-full flex flex-col justify-center px-10">
+            <div className="space-y-6">
+              <span className="block font-mono text-[10px] text-primary-500 tracking-[0.4em] mb-4">SYSTEM_NAVIGATION</span>
               {NAV_ITEMS.map((item, i) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.href)}
-                  className="block text-4xl font-bold text-white tracking-tighter hover:text-primary-500 transition-colors text-left group"
-                  style={{ transitionDelay: `${i * 100}ms` }}
+                  className="block text-4xl font-bold text-white tracking-tighter hover:text-primary-500 transition-all text-left relative group w-full active:translate-x-2"
                 >
-                  <span className="text-xs font-mono text-primary-500 mr-4">0{i + 1} //</span>
+                  <span className="text-[10px] font-mono text-primary-500/50 mr-4">0{i + 1}_</span>
                   {item.label}
+                  <span className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary-500 group-hover:h-8 transition-all" />
                 </button>
               ))}
             </div>
 
-            <button
-              onClick={() => handleNavClick('#contact')}
-              className="w-full py-6 border border-primary-500 text-primary-400 font-mono tracking-widest uppercase text-sm hover:bg-primary-500 hover:text-white transition-all"
-            >
-              START_PROJECT
-            </button>
+            <div className="mt-16 pt-8 border-t border-white/5 space-y-8">
+              <button
+                onClick={() => handleNavClick('#contact')}
+                className="w-full py-5 bg-primary-500/10 border border-primary-500 text-primary-400 font-mono tracking-widest uppercase text-xs hover:bg-primary-500 hover:text-white transition-all active:scale-[0.98]"
+              >
+                INITIALIZE_PROTOCOL_01
+              </button>
+
+              <div className="flex justify-between items-center opacity-20 font-mono text-[8px] tracking-widest uppercase">
+                <span>VER: 3.0.4_STABLE</span>
+                <span>ENC: AES_256_RSA</span>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
