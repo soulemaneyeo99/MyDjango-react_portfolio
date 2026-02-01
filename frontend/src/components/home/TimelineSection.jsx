@@ -72,7 +72,7 @@ const TimelineSection = () => {
                                         {item.year}
                                     </div>
 
-                                    <div className="p-8 border border-white/5 bg-bg-card/[0.02] group-hover:border-white/10 transition-all duration-500">
+                                    <div className="p-6 md:p-8 border border-white/5 bg-bg-card/[0.02] group-hover:border-white/10 transition-all duration-500">
                                         <div className="flex justify-between items-start mb-4">
                                             <h3 className="text-xl font-bold text-text-primary tracking-widest">{item.title}</h3>
                                             <span className="text-[10px] font-mono text-primary-400/50 uppercase tracking-widest px-2 py-1 border border-primary-500/10">

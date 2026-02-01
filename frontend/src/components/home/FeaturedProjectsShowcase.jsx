@@ -51,7 +51,7 @@ const FeaturedProjectsShowcase = () => {
                             />
 
                             {/* Overlay de contenu asymétrique */}
-                            <div className="absolute inset-0 p-8 flex flex-col justify-between bg-gradient-to-t from-black via-black/20 to-transparent">
+                            <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between bg-gradient-to-t from-black via-black/20 to-transparent">
                                 <div className="flex justify-between items-start">
                                     <span className="px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 text-[10px] font-mono text-primary-400">
                                         {project.category.toUpperCase()}

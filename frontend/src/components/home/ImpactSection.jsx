@@ -28,7 +28,7 @@ const ImpactSection = () => {
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className={`p-10 bg-black/40 group hover:bg-white/[0.03] transition-all duration-500 transform ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
+                            className={`p-6 md:p-10 bg-black/40 group hover:bg-white/[0.03] transition-all duration-500 transform ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
                             style={{ transitionDelay: `${index * 150}ms` }}
                         >
                             <div className="flex justify-between items-start mb-12">
@@ -48,7 +48,7 @@ const ImpactSection = () => {
                 </div>
 
                 {/* Industrial Quote Section */}
-                <div className={`relative p-12 md:p-24 border border-border-default bg-white/[0.01] overflow-hidden transform transition-all duration-1000 delay-500 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+                <div className={`relative p-8 md:p-24 border border-border-default bg-white/[0.01] overflow-hidden transform transition-all duration-1000 delay-500 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
                     <div className="absolute top-0 right-0 p-8 font-mono text-[8px] text-white/5 tracking-[0.8em] pointer-events-none select-none">
                         AUTH_VERIFIED // SECURE_ACCESS // AUTH_VERIFIED // SECURE_ACCESS
                     </div>

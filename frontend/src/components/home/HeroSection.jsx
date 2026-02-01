@@ -61,7 +61,7 @@ const HeroSection = ({ displayedText, isTyping }) => {
                     <div className={`relative transform transition-all duration-1000 delay-200 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                         <div className="relative group">
                             {/* Decorative Background */}
-                            <div className="absolute -inset-4 bg-gradient-to-r from-primary-500 to-accent-purple rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
+                            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-primary-500 to-accent-purple rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
 
                             {/* Image Container */}
                             <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-2xl shadow-2xl border border-border-default">
