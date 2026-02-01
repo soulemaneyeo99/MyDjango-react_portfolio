@@ -91,7 +91,7 @@ export const FEATURED_PROJECTS = [
     techStack: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'PostgreSQL', 'Tailwind', 'AES-256', 'Docker'],
     status: 'Beta / Prêt pour pilote',
     category: 'EdTech / IA',
-    image: '/images/vision360_hero.png',
+    image: '/images/vision360_actual_ui.png',
     images: [
       { image: '/images/vision360_hero.png', caption: 'Dashboard principal (Cockpit)' }
     ],
