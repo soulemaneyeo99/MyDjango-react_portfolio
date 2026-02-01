@@ -1,28 +1,35 @@
 // ========== frontend/src/components/common/Footer.jsx ==========
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PERSONAL_INFO, NAV_ITEMS } from '../../utils/constants';
-
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }
-};
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   const handleNavClick = (href) => {
     if (href.startsWith('#')) {
       const sectionId = href.substring(1);
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => scrollToSection(sectionId), 100);
+      } else {
+        scrollToSection(sectionId);
       }
+    } else {
+      navigate(href);
+      window.scrollTo(0, 0);
     }
   };
 
