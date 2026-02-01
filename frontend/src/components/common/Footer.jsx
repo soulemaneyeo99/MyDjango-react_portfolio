@@ -33,8 +33,12 @@ const Footer = () => {
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-8">
             <Link to="/" className="inline-flex items-center space-x-4 group">
-              <div className="w-12 h-12 border border-primary-500/30 flex items-center justify-center group-hover:border-primary-500 transition-all duration-500">
-                <span className="text-white font-black text-xl tracking-tighter">SY</span>
+              <div className="w-12 h-12 border border-primary-500/20 flex items-center justify-center group-hover:border-primary-500 transition-all duration-500 bg-bg-dark/50 overflow-hidden">
+                <img
+                  src="/logo.jpeg"
+                  alt="Souleymane Yeo Logo"
+                  className="w-10 h-10 object-contain transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
               <span className="text-2xl font-bold text-white tracking-widest">{PERSONAL_INFO.name.toUpperCase()}</span>
             </Link>

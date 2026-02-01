@@ -58,9 +58,12 @@ const Header = () => {
             to="/"
             className="group flex items-center space-x-4 z-[101]"
           >
-            <div className="relative w-10 h-10 border border-primary-500/30 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-primary-500">
-              <div className="absolute inset-0 bg-primary-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <span className="relative text-white font-black text-xl tracking-tighter">SY</span>
+            <div className="relative w-10 h-10 border border-primary-500/20 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-primary-500 bg-bg-dark/50">
+              <img
+                src="/logo.jpeg"
+                alt="Souleymane Yeo Logo"
+                className="w-8 h-8 object-contain transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
             <div className="hidden lg:block overflow-hidden">
               <span className="block text-xs font-mono text-primary-400/50 tracking-[0.3em] uppercase mb-0.5">Architect</span>

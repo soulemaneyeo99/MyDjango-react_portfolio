@@ -6,7 +6,7 @@ const ImpactSection = () => {
     const { targetRef, hasIntersected } = useIntersectionObserver();
 
     const stats = [
-        { number: '2+', label: 'Years Experience', description: 'Learning and building', tag: 'EXP' },
+        { number: '3+', label: 'Years Experience', description: 'Learning and building', tag: 'EXP' },
         { number: '10+', label: 'Projects Built', description: 'Full-stack applications', tag: 'PRJ' },
         { number: '100%', label: 'Commitment', description: 'To code quality', tag: 'QUAL' },
         { number: '24/7', label: 'Availability', description: 'For global teams', tag: 'TIME' }
