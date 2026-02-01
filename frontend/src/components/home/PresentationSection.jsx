@@ -48,9 +48,13 @@ const PresentationSection = () => {
                     {/* Visualisation Architecturale */}
                     <div className={`relative transform transition-all duration-1000 delay-300 ${hasIntersected ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}>
                         <div className="aspect-square relative p-8 border border-border-default bg-bg-card/[0.01]">
-                            <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                                <div className="w-[80%] h-[80%] border border-dashed border-white rounded-full animate-spin-slow" />
-                                <div className="absolute w-[60%] h-[60%] border border-dashed border-white rounded-full animate-spin-reverse" />
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                {/* Outer main ring - Solid & Branded */}
+                                <div className="absolute w-[85%] h-[85%] border border-primary-500/30 rounded-full animate-spin-slow shadow-[0_0_30px_rgba(59,130,246,0.1)]" />
+
+                                {/* Inner decorative rings - Dashed */}
+                                <div className="absolute w-[70%] h-[70%] border border-dashed border-white/20 rounded-full animate-spin-reverse" />
+                                <div className="absolute w-[50%] h-[50%] border border-dashed border-primary-400/20 rounded-full animate-spin-slow" />
                             </div>
 
                             <div className="relative h-full w-full grid grid-cols-2 gap-4">
