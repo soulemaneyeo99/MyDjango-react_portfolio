@@ -101,6 +101,24 @@ const About = () => {
 
   const certificates = [
     {
+      title: "Creativité, Innovation et Transformation",
+      date: "Février 2025",
+      description: "Maîtrise des méthodes de Design Thinking et d'innovation pour transformer des idées complexes en solutions concrètes et impactantes.",
+      file: "/documents/Yeo_Yanougui_Souleymane_Creativity_Innovation_and_Transformation.pdf"
+    },
+    {
+      title: "Apprendre à Apprendre (Learning How to Learn)",
+      date: "Janvier 2025",
+      description: "Utilisation des neurosciences pour optimiser l'apprentissage, la mémorisation et la maîtrise de sujets techniques complexes.",
+      file: "/documents/Yeo_Yanougui_Souleymane_Learning_How_to_Learn.pdf"
+    },
+    {
+      title: "Art Oratoire et Présentation Professionnelle",
+      date: "Janvier 2025",
+      description: "Développement de compétences en communication d'impact pour présenter des solutions techniques avec clarté et conviction.",
+      file: "/documents/Yeo_Yanougui_Souleymane_Speaking_and_Presenting.pdf"
+    },
+    {
       title: "Introduction à la Data Science",
       date: "04 Mars 2025",
       description: "Certificat obtenu après une formation complète couvrant les bases de la data science : IA, Data, Visualisation, statistiques et premières notions de machine learning.",
