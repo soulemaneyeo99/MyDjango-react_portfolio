@@ -5,11 +5,11 @@ import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      hasError: false, 
-      error: null, 
+    this.state = {
+      hasError: false,
+      error: null,
       errorInfo: null,
-      retryCount: 0 
+      retryCount: 0
     };
   }
 
@@ -30,12 +30,7 @@ class ErrorBoundary extends React.Component {
   }
 
   handleRetry = () => {
-    this.setState({
-      hasError: false,
-      error: null,
-      errorInfo: null,
-      retryCount: this.state.retryCount + 1
-    });
+    window.location.reload();
   };
 
   handleHome = () => {
@@ -45,35 +40,35 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+        <div className="min-h-screen flex items-center justify-center bg-bg-dark px-4" translate="no">
           <div className="max-w-md w-full text-center">
-            <div className="mb-8">
-              <div className="w-20 h-20 mx-auto bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4">
-                <AlertTriangle className="w-10 h-10 text-red-600 dark:text-red-400" />
+            <div className="mb-12">
+              <div className="w-24 h-24 mx-auto bg-primary-500/10 rounded-full flex items-center justify-center mb-6 border border-primary-500/20 shadow-glow/10">
+                <AlertTriangle className="w-12 h-12 text-primary-500" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-white mb-4 tracking-tight">
                 Oups, une erreur s'est produite
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Quelque chose s'est mal passé. Ne vous inquiétez pas, nous allons résoudre cela.
+              <p className="text-text-secondary mb-8 text-lg font-light leading-relaxed">
+                Le système a rencontré une interruption inattendue. Ne vous inquiétez pas, nous sommes sur le coup.
               </p>
             </div>
 
             <div className="space-y-4">
               <button
                 onClick={this.handleRetry}
-                className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="w-full flex items-center justify-center space-x-3 bg-primary-500 text-white px-8 py-4 rounded-lg hover:bg-primary-600 transition-all duration-300 font-mono text-sm uppercase tracking-widest shadow-glow/20"
               >
-                <RefreshCw className="w-4 h-4" />
-                <span>Réessayer</span>
+                <RefreshCw className="w-5 h-5" />
+                <span>RÉESSAYER_LE_SYSTÈME</span>
               </button>
-              
+
               <button
                 onClick={this.handleHome}
-                className="w-full flex items-center justify-center space-x-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-medium"
+                className="w-full flex items-center justify-center space-x-3 border border-border-default text-text-secondary px-8 py-4 rounded-lg hover:bg-bg-elevated hover:text-white transition-all duration-300 font-mono text-sm uppercase tracking-widest"
               >
-                <Home className="w-4 h-4" />
-                <span>Retour à l'accueil</span>
+                <Home className="w-5 h-5" />
+                <span>RETOUR_À_L_ACCUEIL</span>
               </button>
             </div>
 
