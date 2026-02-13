@@ -102,8 +102,8 @@ const Contact = () => {
 
   const faqs = [
     {
-      question: "Quels sont vos tarifs pour un site web ?",
-      answer: "Mes tarifs varient selon la complexité du projet. Pour un site vitrine simple : 200-500€, pour une application web complexe : 1000-3000€. Je propose toujours un devis gratuit et personnalisé après discussion de vos besoins."
+      question: "Quels sont vos tarifs pour un projet ?",
+      answer: "Mes tarifs sont établis sur mesure selon l'envergure et la complexité technique. À titre indicatif, un site vitrine professionnel se situe généralement entre 200 000 et 500 000 FCFA, tandis qu'une application métier ou plateforme complexe débute à partir de 800 000 FCFA. Je fournis toujours un devis détaillé et transparent après notre premier échange."
     },
     {
       question: "Combien de temps pour développer un projet ?",
@@ -184,8 +184,8 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 rounded-lg bg-bg-elevated border transition-all focus:outline-none ${errors.name
-                            ? 'border-accent-red focus:border-accent-red'
-                            : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
+                          ? 'border-accent-red focus:border-accent-red'
+                          : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
                           } text-text-primary placeholder-text-muted`}
                         placeholder="John Doe"
                       />
@@ -203,8 +203,8 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 rounded-lg bg-bg-elevated border transition-all focus:outline-none ${errors.email
-                            ? 'border-accent-red focus:border-accent-red'
-                            : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
+                          ? 'border-accent-red focus:border-accent-red'
+                          : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
                           } text-text-primary placeholder-text-muted`}
                         placeholder="john@example.com"
                       />
@@ -223,8 +223,8 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       className={`w-full px-4 py-3 rounded-lg bg-bg-elevated border transition-all focus:outline-none ${errors.subject
-                          ? 'border-accent-red focus:border-accent-red'
-                          : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
+                        ? 'border-accent-red focus:border-accent-red'
+                        : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
                         } text-text-primary placeholder-text-muted`}
                       placeholder="Proposition de projet..."
                     />
@@ -242,8 +242,8 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       className={`w-full px-4 py-3 rounded-lg bg-bg-elevated border transition-all focus:outline-none ${errors.message
-                          ? 'border-accent-red focus:border-accent-red'
-                          : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
+                        ? 'border-accent-red focus:border-accent-red'
+                        : 'border-border-default focus:border-primary-500 focus:ring-1 focus:ring-primary-500'
                         } text-text-primary placeholder-text-muted resize-none`}
                       placeholder="Bonjour, je souhaiterais discuter d'un projet de..."
                     />
