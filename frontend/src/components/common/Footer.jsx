@@ -66,6 +66,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/10 flex items-center justify-center text-[10px] font-mono text-text-muted hover:border-primary-500 hover:text-primary-400 transition-all duration-300"
+                  aria-label={`Suivre sur ${social.name}`}
                 >
                   {social.icon}
                 </a>
