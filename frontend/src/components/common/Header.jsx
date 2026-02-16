@@ -100,7 +100,7 @@ const Header = () => {
           {/* Menu Mobile Trigger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative w-10 h-10 border border-white/10 flex flex-col items-center justify-center space-y-1 z-[101]"
+            className="md:hidden relative w-12 h-12 border border-white/10 flex flex-col items-center justify-center space-y-1.5 z-[101] active:scale-95 transition-transform"
             aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           >
             <span className={`w-5 h-[1px] bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[2px]' : ''}`} />

@@ -41,16 +41,16 @@ const HeroSection = ({ displayedText, isTyping }) => {
                         </p>
 
                         {/* CTAs */}
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                             <Link
                                 to="/projects"
-                                className="px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full sm:w-auto px-8 py-4 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-center min-h-[48px] flex items-center justify-center"
                             >
                                 Voir mes projets
                             </Link>
                             <Link
                                 to="/contact"
-                                className="px-8 py-4 border-2 border-border-default text-text-primary font-semibold rounded-lg hover:border-primary-500 hover:text-primary-500 transition-all duration-300"
+                                className="w-full sm:w-auto px-8 py-4 border-2 border-border-default text-text-primary font-semibold rounded-lg hover:border-primary-500 hover:text-primary-500 transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
                             >
                                 Me contacter
                             </Link>

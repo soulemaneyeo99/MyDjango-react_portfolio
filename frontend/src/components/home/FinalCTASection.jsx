@@ -24,27 +24,27 @@ const FinalCTASection = () => {
                         <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-primary-400">READY_FOR_ENGAGEMENT</span>
                     </div>
 
-                    <h2 className="text-5xl md:text-9xl font-bold text-text-primary mb-12 tracking-tighter leading-[0.85]">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-text-primary mb-8 md:mb-12 tracking-tighter leading-[0.9] md:leading-[0.85]">
                         LET'S BUILD <span className="text-white/20 block">THE FUTURE</span>
                         <span className="text-primary-500 italic block">OF YOUR TECH</span>
                     </h2>
 
-                    <p className="text-xl md:text-2xl text-text-secondary mb-16 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-base md:text-xl lg:text-2xl text-text-secondary mb-12 md:mb-16 max-w-2xl mx-auto font-light leading-relaxed px-4 md:px-0">
                         Que vous ayez une vision complexe ou un besoin précis, je traduis vos objectifs en
                         <span className="text-white font-medium"> code haute fidélité</span>.
                     </p>
 
-                    <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+                    <div className="flex flex-col sm:flex-row gap-4 md:gap-8 justify-center items-center px-4 md:px-0">
                         <Link
                             to="/contact"
-                            className="px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-sm hover:bg-primary-500 hover:text-white transition-all duration-500 shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)]"
+                            className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-xs md:text-sm hover:bg-primary-500 hover:text-white transition-all duration-500 shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)] text-center min-h-[44px] flex items-center justify-center"
                         >
                             INIT_CONVERSATION
                         </Link>
 
                         <a
                             href={`mailto:${PERSONAL_INFO.email}`}
-                            className="px-12 py-6 border border-white/10 text-text-primary font-medium uppercase tracking-[0.2em] text-sm hover:border-primary-500 transition-all duration-500 group"
+                            className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-6 border border-white/10 text-text-primary font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] text-xs md:text-sm hover:border-primary-500 transition-all duration-500 group text-center min-h-[44px] flex items-center justify-center"
                         >
                             <span className="flex items-center space-x-4">
                                 <span>DIRECT_EMAIL</span>

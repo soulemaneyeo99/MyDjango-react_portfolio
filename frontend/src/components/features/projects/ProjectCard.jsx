@@ -41,7 +41,7 @@ const ProjectCard = ({ project, hasIntersected = true, delay = 0 }) => {
 
             <div className="p-6 flex flex-col flex-grow relative z-10">
                 <div className="mb-4 flex-grow">
-                    <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary-500 transition-colors drop-shadow-md">
+                    <h3 className="text-lg md:text-xl font-bold text-text-primary mb-2 group-hover:text-primary-500 transition-colors drop-shadow-md break-words">
                         {project.title}
                     </h3>
                     <p className="text-text-secondary text-sm mb-4 line-clamp-3">
@@ -64,13 +64,13 @@ const ProjectCard = ({ project, hasIntersected = true, delay = 0 }) => {
                     </div>
 
                     <div className="flex justify-between items-center pt-4 border-t border-border-default">
-                        <div className="flex space-x-3">
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                             {project.demoUrl && project.demoUrl !== '#' && (
                                 <a
                                     href={project.demoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-primary-500 hover:text-primary-400 text-sm font-medium transition-colors"
+                                    className="text-primary-500 hover:text-primary-400 text-sm font-medium transition-colors py-2 min-h-[44px] flex items-center"
                                 >
                                     Live Demo
                                 </a>
@@ -80,7 +80,7 @@ const ProjectCard = ({ project, hasIntersected = true, delay = 0 }) => {
                                     href={project.sourceUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-text-secondary hover:text-white text-sm font-medium transition-colors"
+                                    className="text-text-secondary hover:text-white text-sm font-medium transition-colors py-2 min-h-[44px] flex items-center"
                                 >
                                     Code
                                 </a>
@@ -88,7 +88,7 @@ const ProjectCard = ({ project, hasIntersected = true, delay = 0 }) => {
                         </div>
 
                         <Link to={`/projects/${project.id}`}>
-                            <Button variant="ghost" size="sm" className="group">
+                            <Button variant="ghost" size="sm" className="group min-h-[44px] flex items-center">
                                 Détails <span className="group-hover:translate-x-1 transition-transform ml-1">→</span>
                             </Button>
                         </Link>

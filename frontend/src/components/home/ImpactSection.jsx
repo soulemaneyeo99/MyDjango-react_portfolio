@@ -28,7 +28,7 @@ const ImpactSection = () => {
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className={`p-6 md:p-10 bg-black/40 group hover:bg-white/[0.03] transition-all duration-500 transform ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
+                            className={`p-6 sm:p-8 md:p-10 bg-black/40 group hover:bg-white/[0.03] transition-all duration-500 transform ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
                             style={{ transitionDelay: `${index * 150}ms` }}
                         >
                             <div className="flex justify-between items-start mb-12">
@@ -55,7 +55,7 @@ const ImpactSection = () => {
 
                     <div className="max-w-4xl mx-auto space-y-12">
                         <div className="font-mono text-primary-400 text-4xl leading-none select-none">"</div>
-                        <p className="text-2xl md:text-4xl font-light text-text-primary leading-tight tracking-tight">
+                        <p className="text-xl sm:text-2xl md:text-4xl font-light text-text-primary leading-tight tracking-tight">
                             Chaque ligne de code que j'écris est une <span className="text-primary-500 italic font-medium">brique</span> vers la création de systèmes qui transcendent le simple besoin pour devenir des <span className="text-primary-500 font-medium">solutions durables</span>.
                         </p>
                         <div className="flex items-center space-x-6">

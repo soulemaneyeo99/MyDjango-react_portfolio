@@ -162,7 +162,7 @@ const SkillContent = ({ categoryKey, category, hasIntersected }) => (
             </div>
         </div>
 
-        <div className="space-y-8 bg-black/40 p-6 md:p-8 border border-white/5">
+        <div className="space-y-6 md:space-y-8 bg-black/40 p-5 md:p-8 border border-white/5">
             <div className="font-mono text-[8px] md:text-[10px] text-primary-400/50 uppercase tracking-[0.3em]">Spécialisations</div>
             <div className="space-y-4">
                 {getSkillDescription(categoryKey).map((desc, index) => (
