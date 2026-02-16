@@ -51,42 +51,42 @@ const TimelineSection = () => {
                     </h2>
                 </div>
 
-                <div className="relative max-w-5xl">
+                <div className="relative max-w-5xl mx-auto">
                     {/* Ligne Centrale Tech */}
-                    <div className="absolute left-[20px] md:left-[50px] top-0 bottom-0 w-[1px] bg-white/5" />
+                    <div className="absolute left-[16px] md:left-[50px] top-0 bottom-0 w-[1px] bg-white/5" />
 
                     <div className="space-y-16">
                         {timelineData.map((item, index) => (
                             <div
                                 key={index}
-                                className={`relative pl-12 md:pl-24 group transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
+                                className={`relative pl-10 md:pl-24 pr-4 md:pr-0 group transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
                                 style={{ transitionDelay: `${index * 200}ms` }}
                             >
                                 {/* Node */}
-                                <div className="absolute left-4 md:left-[44px] top-1 w-3 h-3 bg-bg-dark border border-white/20 group-hover:border-primary-500 transition-colors z-20">
+                                <div className="absolute left-[10px] md:left-[44px] top-1 w-3 h-3 bg-bg-dark border border-white/20 group-hover:border-primary-500 transition-colors z-20">
                                     <div className="absolute inset-1 bg-white/10 group-hover:bg-primary-500 transition-colors" />
                                 </div>
 
-                                <div className="grid md:grid-cols-[100px_1fr] gap-8 items-start">
-                                    <div className="font-mono text-xl font-bold text-text-muted group-hover:text-primary-400 transition-colors">
+                                <div className="grid md:grid-cols-[100px_1fr] gap-4 md:gap-8 items-start">
+                                    <div className="font-mono text-lg md:text-xl font-bold text-text-muted group-hover:text-primary-400 transition-colors">
                                         {item.year}
                                     </div>
 
-                                    <div className="p-6 md:p-8 border border-white/5 bg-bg-card/[0.02] group-hover:border-white/10 transition-all duration-500">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <h3 className="text-xl font-bold text-text-primary tracking-widest">{item.title}</h3>
-                                            <span className="text-[10px] font-mono text-primary-400/50 uppercase tracking-widest px-2 py-1 border border-primary-500/10">
+                                    <div className="p-4 md:p-8 border border-white/5 bg-bg-card/[0.02] group-hover:border-white/10 transition-all duration-500">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
+                                            <h3 className="text-base md:text-xl font-bold text-text-primary tracking-wide md:tracking-widest break-words">{item.title}</h3>
+                                            <span className="text-[9px] md:text-[10px] font-mono text-primary-400/50 uppercase tracking-wider md:tracking-widest px-2 py-1 border border-primary-500/10 whitespace-nowrap self-start">
                                                 {item.tag}
                                             </span>
                                         </div>
                                         <p className="text-text-secondary text-sm leading-relaxed mb-6 font-light max-w-2xl">
                                             {item.description}
                                         </p>
-                                        <div className="flex flex-wrap gap-4">
+                                        <div className="flex flex-wrap gap-3 md:gap-4">
                                             {item.achievements.map((ach, i) => (
                                                 <div key={i} className="flex items-center space-x-2">
-                                                    <span className="w-1 h-1 bg-primary-500/50 rounded-full" />
-                                                    <span className="text-[10px] uppercase font-mono text-text-secondary tracking-wider font-medium">{ach}</span>
+                                                    <span className="w-1 h-1 bg-primary-500/50 rounded-full flex-shrink-0" />
+                                                    <span className="text-[9px] md:text-[10px] uppercase font-mono text-text-secondary tracking-wide md:tracking-wider font-medium break-words">{ach}</span>
                                                 </div>
                                             ))}
                                         </div>
