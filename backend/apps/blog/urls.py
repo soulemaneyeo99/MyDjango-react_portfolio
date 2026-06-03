@@ -20,4 +20,7 @@ urlpatterns = [
     # Métadonnées
     path('categories/', views.blog_categories, name='categories'),
     path('tags/', views.blog_tags, name='tags'),
+    
+    # Statistiques
+    path('stats/', views.blog_stats, name='blog-stats'),
 ]

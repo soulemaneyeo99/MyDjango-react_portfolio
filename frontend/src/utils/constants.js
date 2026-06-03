@@ -69,6 +69,101 @@ export const PERSONAL_INFO = {
 // Projets phares avec vos vraies images
 export const FEATURED_PROJECTS = [
   {
+    id: 'assurai',
+    title: 'AssurAI',
+    description: 'Plateforme intelligente de prévention des risques et d\'assurance prédictive basée sur l\'IA.',
+    detailed_description: `AssurAI est une plateforme intelligente de prévention des risques et d'assurance prédictive basée sur l'IA, ayant remporté le **1er Prix du RARM Challenge 2025** lors des Rencontres Africaines du Risk Management à Abidjan.
+
+    🎯 **Contexte & Mission** :
+    Développée dans le cadre du RARM Challenge sous le thème *« Risques, durabilité et données : l'intelligence artificielle au service des industries extractives et énergétiques africaines »*, notre mission était de concevoir une solution capable d'utiliser l'IA pour améliorer la gestion des risques dans les secteurs énergétiques et extractifs africains.
+
+    🚀 **Le Problème Résolu** :
+    Dans de nombreuses entreprises industrielles africaines, les risques sont identifiés trop tard, causant des pertes financières majeures, des accidents corporels, des pollutions environnementales et des interruptions d'activité. Les responsables HSE manquent d'outils d'anticipation et les données terrain ne sont pas exploitées en temps réel.
+
+    ⚙️ **La Solution AssurAI** :
+    AssurAI combine l'Intelligence Artificielle, l'IoT (capteurs connectés) et l'analyse prédictive pour passer d'une logique curative (réagir après incident) à une logique préventive (anticiper avant l'incident).
+
+    📊 **Fonctionnalités Principales** :
+    - **Surveillance IoT & Détection Précoce** : Analyse en temps réel de la température, fumée et anomalies par capteurs (ex: Arduino) pour identifier les risques d'incendie ou de surchauffe.
+    - **Alertes en Temps Réel** : Notifications push instantanées (web/mobile) pour une intervention rapide des équipes HSE.
+    - **Chatbot IA Spécialisé** : Dialogue en langage naturel pour expliquer les risques et fournir des conseils de sécurité.
+    - **Analyse Prédictive** : Calcul de score de risque et recommandations basées sur l'historique et les données de capteurs.
+    - **Dashboard Décisionnel** : Plateforme web de visualisation de statistiques et d'indicateurs clés.
+
+    🛠️ **Architecture de la Solution** :
+    - **Application Mobile** : Développée en *Flutter* pour la réception des alertes et le chatbot IA.
+    - **Plateforme Web** : Développée en *React* (Frontend) et *Django* (Backend) pour la gestion et l'administration.
+    - **API IA** : Développée en *FastAPI* pour l'orchestration des échanges IA et du chatbot.
+    - **Modèle de Langage (LLM)** : Modèle *Phi-3* de Microsoft exécuté localement (via *Ollama*) pour garantir la confidentialité et réduire les coûts.
+
+    👨‍💻 **Ma Contribution Personnelle** :
+    - **Backend FastAPI** : Développement de l'API d'authentification, de gestion de données et d'orchestration IA pour l'application mobile.
+    - **Intégration LLM** : Déploiement et configuration locale du chatbot avec Phi-3.
+    - **Frontend React & Backend Django** : Développement du dashboard web interactif, des visualisations de données et de l'interface d'administration.`,
+    techStack: ['FastAPI', 'Django', 'React', 'Flutter', 'Phi-3', 'Ollama', 'PostgreSQL', 'IoT', 'Tailwind CSS'],
+    status: '🏆 1er Prix – RARM Challenge 2025',
+    category: 'IA & Assurance / IoT',
+    image: '/images/assurai_hero.png',
+    images: [
+      { image: '/images/assurai_hero.png', caption: 'Dashboard principal et Assistant IA AssurAI' }
+    ],
+    demoUrl: 'https://www.linkedin.com/posts/sande-fatola-crm-arm-1489ab1a_assurai-rarm2025-riskmanagement-activity-7343598110360694784-j9I9',
+    sourceUrl: 'https://github.com/soulemaneyeo99/AssurAI',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-02-15',
+  },
+  {
+    id: 'remedia',
+    title: 'REMÉDIA',
+    description: 'Intelligence Artificielle au service de la Biodiversité et de la préservation écologique.',
+    detailed_description: `REMÉDIA est une plateforme web et mobile de conservation de la biodiversité qui combine intelligence artificielle, science citoyenne, cartographie environnementale, reboisement participatif et monitoring par capteurs IoT afin de protéger, valoriser et suivre les plantes de manière durable. Le projet a été récompensé par la **3e place du Hackathon du Gnambélé Boot Camp 2025** organisé par le Programme des Nations Unies pour le Développement (PNUD Côte d'Ivoire).
+
+    🎯 **Contexte & Hackathon** :
+    Conçu lors du Gnambélé Boot Camp 2025 au Jardin Botanique de Bingerville sous la thématique *« L'intelligence artificielle au service de la biodiversité, de la lutte contre les espèces exotiques envahissantes et des services écosystémiques »*, REMÉDIA a été primé parmi plusieurs équipes.
+
+    🚀 **Le Problème Résolu** :
+    La perte de la biodiversité végétale, le déclin des savoirs traditionnels sur les plantes, l'absence de données écologiques locales fiables en temps réel et le manque d'outils accessibles pour que les citoyens participent activement à la protection de l'environnement.
+
+    ⚙️ **Évolution & Concept** :
+    D'abord simple scanner de plantes lors du hackathon, REMÉDIA a évolué pour devenir une solution complète alliant :
+    - **🌿 Conservation** : Protection active des plantes.
+    - **🤖 Intelligence Artificielle** : Identification automatique et diagnostic de santé.
+    - **🌍 Science Citoyenne** : Collecte collaborative de signalements de plantes.
+    - **🌱 Reboisement** : Mobilisation et suivi communautaire (Mission Racines).
+    - **📡 Monitoring Environnemental** : Télémétrie par capteurs connectés (ESP32).
+
+    📊 **Fonctionnalités Clés** :
+    - **Scanner Intelligent** : Identification instantanée du nom scientifique et diagnostic de maladies des plantes par analyse d'image IA.
+    - **Fiches Scientifiques Détaillées** : Description, composés actifs, propriétés thérapeutiques, statut de conservation UICN et géolocalisation.
+    - **Assistant IA Spécialisé** : Chatbot environnemental pour assister les utilisateurs dans les pratiques de durabilité et de soin des plantes.
+    - **Carte Collaborative** : Cartographie participative pour répertorier et localiser les espèces végétales sur le terrain.
+    - **Mission Racines** : Gamification du reboisement où les citoyens déclarent les arbres plantés, relèvent des défis et gagnent des badges.
+    - **Monitoring IoT** : Suivi en temps réel de la température, de l'humidité, de la luminosité et du pH du sol via des capteurs ESP32.
+
+    🛠️ **Technologies Utilisées** :
+    - **Frontend** : *React.js*, *Tailwind CSS* et *Leaflet* (pour les cartes collaboratives).
+    - **Backend** : *FastAPI* avec *PostgreSQL* et *SQLAlchemy*.
+    - **Mobile** : *Flutter* (application cross-platform).
+    - **IA** : Modèles open-source (*Mistral*, *Mixtral*, *LLaVA*) orchestrés en local via *Ollama*.
+    - **IoT** : Protocole *MQTT*, microcontrôleurs *ESP32* et capteurs de sol.
+
+    👨‍💻 **Mon Rôle (Lead Technique)** :
+    En tant que co-concepteur et Lead Technique, j'ai conçu l'architecture technique, développé l'interface web React, implémenté l'intégration des modèles d'IA et de chatbot, et structuré la vision de la plateforme post-hackathon.`,
+    techStack: ['React', 'FastAPI', 'Flutter', 'Mistral', 'LLaVA', 'Ollama', 'ESP32', 'Tailwind CSS', 'Leaflet'],
+    status: '🥉 3e place - Hackathon PNUD 2025',
+    category: 'IA & Environnement / IoT',
+    image: '/images/remedia_hero.png',
+    images: [
+      { image: '/images/remedia_hero.png', caption: 'Dashboard principal et Télémétrie Écologique REMÉDIA' }
+    ],
+    demoUrl: 'https://remediav2.vercel.app/',
+    sourceUrl: '#',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-03-20',
+  },
+  {
     id: 'vision-360',
     title: 'Vision 360 - Assistant Académique',
     description: 'Centralisation proactive des activités Moodle pour l\'excellence académique à l\'UVCI. Un assistant intelligent automatisant le suivi des échéances.',

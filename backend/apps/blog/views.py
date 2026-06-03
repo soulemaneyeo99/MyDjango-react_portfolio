@@ -206,12 +206,13 @@ def add_comment(request, slug):
 def blog_stats(request):
     """Statistiques du blog"""
     try:
+        recent_posts = BlogPost.objects.filter(status='published').order_by('-published_at')[:5]
         stats = {
             'total_posts': BlogPost.objects.filter(status='published').count(),
             'total_categories': BlogCategory.objects.count(),
             'total_tags': Tag.objects.count(),
             'total_comments': Comment.objects.filter(approved=True).count(),
-            'recent_posts': BlogPost.objects.filter(status='published').count()[:5],
+            'recent_posts': BlogPostListSerializer(recent_posts, many=True).data,
         }
         return Response(stats)
     except Exception as e:
@@ -219,3 +220,4 @@ def blog_stats(request):
             {'error': 'Erreur lors de la récupération des statistiques'}, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+

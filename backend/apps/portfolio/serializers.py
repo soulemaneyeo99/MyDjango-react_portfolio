@@ -56,8 +56,10 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
     
     def get_is_recent(self, obj):
         """Vérifie si le projet est récent (moins de 6 mois)"""
-        from datetime import datetime, timedelta
-        return obj.created_at > datetime.now() - timedelta(days=180)
+        from django.utils import timezone
+        from datetime import timedelta
+        return obj.created_at > timezone.now() - timedelta(days=180)
+
 
 class ProjectCreateSerializer(serializers.ModelSerializer):
     """Serializer pour créer/modifier un projet"""
