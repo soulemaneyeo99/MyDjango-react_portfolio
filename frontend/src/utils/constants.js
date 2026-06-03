@@ -164,6 +164,52 @@ export const FEATURED_PROJECTS = [
     created_at: '2025-03-20',
   },
   {
+    id: 'amazoon',
+    title: 'AmazoOn',
+    description: 'Chatbot éducatif vocal & assistant RAG pour l\'entrepreneuriat féminin en Afrique de l\'Ouest.',
+    detailed_description: `AmazoOn est une plateforme d'apprentissage numérique interactive conçue pour les femmes entrepreneures et commerçantes d'Afrique de l'Ouest, qui font face à des barrières d'accès aux technologies numériques. Le projet propose un **chatbot éducatif vocal et intelligent** capable de converser naturellement en français local avec une interface entièrement optimisée pour la voix.
+
+    🎯 **Le Problème Résolu** :
+    L'alphabétisation variable et la complexité des interfaces textuelles classiques freinent l'adoption d'outils numériques (Facebook Messenger, WhatsApp Business, Mobile Money) par de nombreuses femmes entrepreneures. AmazoOn rend la technologie accessible par la voix.
+
+    🚀 **La Solution AmazoOn** :
+    Un chatbot vocal bidirectionnel où l'utilisatrice peut poser ses questions à voix haute (ex: "Comment créer ma page Facebook ?"), uploader des documents (factures, contrats), et recevoir des conseils pédagogiques hautement personnalisés. L'IA utilise des analogies simples et un ton localisé adapté au contexte ouest-africain ("On est ensemble", "Ça avance bien").
+
+    🧠 **RAG Hybride avec Fusion Intelligente** :
+    Le système combine en temps réel 3 sources documentaires :
+    - **Base Officielle** : Contenus pédagogiques de formation entrepreneuriale.
+    - **Documents Personnels** : Factures, contrats, reçus uploadés par l'utilisatrice (avec OCR intégré pour les images).
+    - **Algorithme de Fusion** : Selon l'intention de la question, le moteur applique les stratégies *personal_priority*, *official_priority* ou *balanced* pour construire le contexte le plus pertinent possible.
+
+    🛠️ **Défis Techniques Résolus** :
+    - **Deadlocks d'indexation vectorielle** : Remplacement de threading.Lock() par threading.RLock() (verrou réentrant) pour éliminer 100% des freezes lors des uploads massifs en concurrence.
+    - **Instabilité réseau mobile (Afrique de l'Ouest)** : Implémentation d'un système multi-niveaux de résilience IP avec matching sur sous-réseau /16 et /8 pour compenser les rotations d'IP mobile (Orange/MTN), TTL de 15 min et FIFO des derniers documents uploadés.
+    - **Pipeline documentaire robuste** : Ingestion asynchrone de PDF, DOCX, TXT et images avec déduplication par hash SHA-256, chunking adaptatif et analyse qualitative IA.
+
+    ⚙️ **Architecture Technique** :
+    - **Backend** : *FastAPI* (Python 3.11) asynchrone, *PostgreSQL* + *SQLAlchemy*, *SQLite* pour la mémoire long terme.
+    - **IA Vocale** : *OpenAI Whisper* (STT), *ElevenLabs* (TTS multi-langue), *GPT-4o / Claude 3* pour la génération de réponses.
+    - **RAG** : *FAISS* (recherche vectorielle) + *all-MiniLM-L6-v2* (embeddings sémantiques).
+    - **Mobile** : Application *Flutter* cross-platform avec interface voice-first.
+    - **DevOps** : *Docker Compose* (4 conteneurs), proxy *Caddy* (HTTPS auto Let's Encrypt), rate limiting et sauvegardes *pg_dump* automatiques (cron).`,
+    techStack: ['FastAPI', 'Flutter', 'GPT-4o', 'Whisper', 'ElevenLabs', 'FAISS', 'PostgreSQL', 'Docker', 'Caddy'],
+    status: 'En production',
+    category: 'IA & EdTech / Voice',
+    image: '/images/amazoon_hero.png',
+    images: [
+      { image: '/images/amazoon_hero.png', caption: 'Dashboard principal AmazoOn – Interface vocale & RAG' }
+    ],
+    demo_video_url: '/videos/amazoon_demo1.mp4',
+    demo_video_file: '/videos/amazoon_demo1.mp4',
+    video_type: 'local',
+    video_thumbnail: '/images/amazoon_hero.png',
+    demoUrl: '#',
+    sourceUrl: '#',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-05-01',
+  },
+  {
     id: 'vision-360',
     title: 'Vision 360 - Assistant Académique',
     description: 'Centralisation proactive des activités Moodle pour l\'excellence académique à l\'UVCI. Un assistant intelligent automatisant le suivi des échéances.',
