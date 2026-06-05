@@ -297,6 +297,52 @@ export const FEATURED_PROJECTS = [
     created_at: '2025-06-01',
   },
   {
+    id: 'ai-voice-assistant',
+    title: 'AI Voice Assistant',
+    description: 'Assistant vocal temps réel multilingue : parlez dans le navigateur, obtenez une réponse vocale neurale en français ou anglais — transcription et IA en un seul appel Gemini, synthèse vocale via Edge TTS, coût zéro.',
+    detailed_description: `AI Voice Assistant est une application full-stack de conversation vocale temps réel, démontrant une pipeline STT → LLM → TTS optimisée au maximum avec des APIs gratuites.
+
+    🎯 **Le Problème Résolu** :
+    Les pipelines vocales classiques enchaînent 3 modèles distincts (Whisper → GPT → ElevenLabs), multipliant la latence et les coûts. Cette app réduit les 3 étapes à 1 seul appel IA, et remplace les TTS payants par une solution neurale gratuite.
+
+    🚀 **Architecture optimisée** :
+    L'audio WebM/Opus est encodé en base64 et envoyé inline à Gemini via \`inlineData\`. Gemini retourne directement \`{user_text, reply}\` en JSON typé (responseSchema). Edge TTS synthétise la réponse et retourne un MP3 en data URL, joué immédiatement dans le navigateur.
+
+    🧠 **Décisions Techniques Clés** :
+    - **STT + LLM en 1 appel** — Gemini 2.5 Flash reçoit l'audio encodé et retourne transcription + réponse en une seule requête, éliminant Whisper et réduisant la latence
+    - **thinkingBudget: 0** — Gemini 2.5 Flash consommait 982/1024 tokens en "thinking tokens" invisibles, tronquant le JSON. Désactiver le budget de réflexion + monter \`maxOutputTokens: 2048\` a résolu le bug
+    - **Edge TTS vs alternatives** — ElevenLabs (payant, API bloquée en free tier), Chatterbox local (3 GB, 12s/requête, mauvais français) → Edge TTS Microsoft offre des voix neurales haute qualité, sans clé API, en streaming asynchrone
+
+    ⚙️ **Stack Technique** :
+    - **Frontend** : React 18, Web Audio API, MediaRecorder API (WebM/Opus)
+    - **Backend** : FastAPI (Python), Uvicorn
+    - **IA** : Google Gemini 2.5 Flash (audio base64 + responseSchema JSON)
+    - **TTS** : Microsoft Edge TTS (fr-FR-DeniseNeural, en-US-JennyNeural)
+    - **Transport** : REST, multipart/form-data, data URL base64
+
+    📊 **Fonctionnalités** :
+    - Enregistrement micro avec détection de silence automatique
+    - Détection de langue automatique (FR/EN) → sélection de voix TTS correspondante
+    - Fallback Web Speech API si Edge TTS indisponible
+    - Personnalisation : nom, accent, langue, phrases fréquentes (localStorage)
+    - Design responsive mobile-first, dark mode
+
+    📈 **Métriques** : 1500 req/jour (Gemini free tier), latence <2s bout-en-bout, coût total = 0€`,
+    techStack: ['React 18', 'FastAPI', 'Gemini 2.5 Flash', 'Edge TTS', 'Web Audio API', 'Python', 'MediaRecorder API'],
+    status: 'Production-ready',
+    category: 'IA & Voice',
+    image: '/images/ai-voice-assistant_hero.png',
+    images: [
+      { image: '/images/ai-voice-assistant_hero.png', caption: 'Interface principale — bouton micro centré, design dark minimaliste' },
+      { image: '/images/ai-voice-assistant_settings.png', caption: 'Panneau Settings — configuration voix, langue et personnalisation' }
+    ],
+    demoUrl: '#',
+    sourceUrl: '#',
+    featured: true,
+    view_count: 0,
+    created_at: '2026-06-01',
+  },
+  {
     id: 'opportunci',
     title: 'OpportuCI',
     description: 'Plateforme intelligente centralisant les opportunités académiques pour les étudiants ivoiriens. Une solution complète avec IA pour recommandations personnalisées.',
