@@ -247,6 +247,56 @@ export const FEATURED_PROJECTS = [
     created_at: '2025-05-01',
   },
   {
+    id: 'formaassist',
+    title: 'FormaAssist IA',
+    description: 'Plateforme d\'IA conversationnelle d\'entreprise : chat en temps réel avec streaming, base de connaissances RAG multiformat, requêtes SQL en langage naturel et dashboard d\'administration.',
+    detailed_description: `FormaAssist IA est une plateforme complète d'assistant IA destinée aux entreprises, conçue pour être déployée en production. Elle permet à n'importe quel collaborateur d'interroger l'ensemble du patrimoine informationnel de l'entreprise en langage naturel.
+
+    🎯 **Le Problème Résolu** :
+    Les entreprises accumulent des connaissances dispersées : PDF, Word, spreadsheets, vidéos de formation, bases de données SQL. Les employés perdent un temps considérable à chercher l'information. FormaAssist centralise tout et répond en langage naturel.
+
+    🚀 **Ce que fait l'application** :
+    L'utilisateur ouvre un chat et pose une question. L'agent IA comprend l'intention, choisit les bons outils automatiquement, cherche dans les documents via recherche sémantique, interroge les bases de données en générant du SQL, et streame la réponse token par token avec sources citées (nom de fichier, page).
+
+    🧠 **Intelligence Artificielle** :
+    - **Google Gemini 2.5 Flash** — modèle de génération (LLM)
+    - **gemini-embedding-001** (3 072 dimensions) — embeddings sémantiques
+    - **Pipeline RAG complet** : chunking récursif/markdown, BM25 hybride, Reciprocal Rank Fusion, reranking
+    - **Gemini File API** — traitement vidéo et audio (transcription/description)
+    - **Gemini Vision** — OCR et description d'images
+
+    ⚙️ **Architecture Technique** :
+    - **Backend** : FastAPI + PydanticAI (Python 3.12), JWT + API Key auth, RBAC, SQLAlchemy async + Alembic
+    - **Frontend** : Next.js 15 (App Router, React 19, TypeScript strict), Tailwind CSS v4, Zustand + TanStack Query v5, next-intl (EN/FR)
+    - **Bases vectorielles** : Qdrant (vectors) + BM25 hybride
+    - **Infrastructure** : Docker Compose (7 services), Traefik + Nginx, Celery + Redis (tâches asynchrones), Flower (monitoring)
+
+    📊 **Fonctionnalités Clés** :
+    - **Chat IA en streaming temps réel** : WebSocket bidirectionnel avec PydanticAI Events, outil calls visibles en temps réel
+    - **RAG Multiformat** : PDF, DOCX, XLSX, CSV, JPG, PNG, MP4, MOV, MP3, WAV, et 10+ autres formats
+    - **SQL en langage naturel** : connexion à PostgreSQL/MySQL/SQLite/MSSQL externes, cache du schéma, logs complets
+    - **Sync sources automatique** : dossier local, Google Drive, S3/MinIO avec Celery Beat incrémental
+    - **Partage de conversations** : lien unique avec expiration optionnelle
+    - **Dashboard admin** : analytics évaluations 👍/👎, gestion utilisateurs, logs SQL, export CSV/JSON
+
+    📈 **Métriques du projet** :
+    - 12 modèles de base de données, 35+ endpoints REST, 20+ formats de fichiers, 26+ composants UI, 7 services Docker, 2 langues (EN/FR)
+
+    🏗️ **Architecture en couches** : Routes → Services → Repositories. Session auto-commit, injection de dépendances via Annotated aliases, exceptions métier centralisées, chiffrement Fernet des mots de passe DB, health checks Kubernetes-ready.`,
+    techStack: ['FastAPI', 'Next.js 15', 'PydanticAI', 'Gemini 2.5', 'Qdrant', 'PostgreSQL', 'Redis', 'Celery', 'Docker', 'TypeScript'],
+    status: 'Production-ready',
+    category: 'IA & Enterprise',
+    image: '/images/formaassist_hero.png',
+    images: [
+      { image: '/images/formaassist_hero.png', caption: 'Chat IA en streaming temps réel avec Tool Calls visibles' }
+    ],
+    demoUrl: '#',
+    sourceUrl: '#',
+    featured: true,
+    view_count: 0,
+    created_at: '2025-06-01',
+  },
+  {
     id: 'opportunci',
     title: 'OpportuCI',
     description: 'Plateforme intelligente centralisant les opportunités académiques pour les étudiants ivoiriens. Une solution complète avec IA pour recommandations personnalisées.',
@@ -443,7 +493,7 @@ export const TYPING_MESSAGES = [
   'Créateur d\'Agents IA Intelligents',
   'Développeur Mobile sur mesure',
   'Passionné par le Machine Learning',
-  'Créateur d\'OpportuCI',
+  'Créateur de Vision360',
 ];
 
 // Navigation mise à jour

@@ -52,13 +52,13 @@ const About = () => {
       ]
     },
     {
-      title: "Fondateur du projet OpportuCI",
-      organization: "Projet personnel (En développement)",
+      title: "Créateur de Vision360 - Assistant Académique IA",
+      organization: "Projet personnel (Beta / Prêt pour pilote)",
       period: "Depuis 2025",
       tasks: [
-        "Conception et développement d'une plateforme éducative pour centraliser les opportunités académiques en Côte d'Ivoire",
-        "Stack : Django, FastAPI, React, IA. En cours de réalisation",
-        "Gestion de la base de données, du backend, du frontend et de l'architecture globale du projet"
+        "Conception et développement d'une plateforme EdTech centralisant les activités Moodle pour les étudiants de l'UVCI",
+        "Stack : Next.js, FastAPI, Python, TypeScript, PostgreSQL, Docker, AES-256",
+        "Implémentation d'un moteur de scraping intelligent, d'alertes push/email et d'un système communautaire Agora"
       ]
     }
   ];

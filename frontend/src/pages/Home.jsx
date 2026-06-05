@@ -56,8 +56,8 @@ const Home = () => {
     <>
       <SEOHead
         title="Accueil"
-        description="Portfolio de Souleymane Yeo - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur d'OpportuCI. Basé en Côte d'Ivoire."
-        keywords={['développeur', 'python', 'django', 'fastapi', 'react', 'côte d\'ivoire', 'full-stack', 'opportunci']}
+        description="Portfolio de Souleymane Yeo - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur de Vision360. Basé en Côte d'Ivoire."
+        keywords={['développeur', 'python', 'django', 'fastapi', 'react', 'côte d\'ivoire', 'full-stack', 'vision360']}
       />
 
       <HeroSection

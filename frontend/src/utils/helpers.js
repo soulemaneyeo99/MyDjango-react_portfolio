@@ -76,7 +76,7 @@ export const getLocalImage = (imageName) => {
   const imageMap = {
     'profile': '/images/moi2.jpg',
     'hero-bg': '/images/hero-bg.jpg',
-    'opportuci': '/images/OpotuCI.png',
+    'vision360': '/images/vision360_hero.png',
     'ecommerce-django': '/images/portfolio/e-comerceclienDjango.jpg',
     'ecommerce-fastapi': '/images/Fastapiecommerce.jpeg',
     'react-todo': '/images/react_todo.jpeg',

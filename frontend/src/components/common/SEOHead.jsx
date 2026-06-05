@@ -18,7 +18,7 @@ const SEOHead = ({
   const defaultImage = `${siteUrl}/images/og-image.jpg`;
   
   const fullTitle = title ? `${title} | ${PERSONAL_INFO.name}` : `${PERSONAL_INFO.name} - Développeur Full-Stack`;
-  const fullDescription = description || `Portfolio de ${PERSONAL_INFO.name} - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur d'OpportuCI.`;
+  const fullDescription = description || `Portfolio de ${PERSONAL_INFO.name} - Développeur Full-Stack Python/React spécialisé en Django, FastAPI et IA. Créateur de Vision360.`;
   const fullImage = image || defaultImage;
   const fullUrl = url || siteUrl;
 

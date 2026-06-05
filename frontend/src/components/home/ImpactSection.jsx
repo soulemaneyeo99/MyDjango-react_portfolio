@@ -62,7 +62,7 @@ const ImpactSection = () => {
                             <div className="h-[1px] w-12 bg-primary-500" />
                             <div className="space-y-1">
                                 <div className="text-sm font-bold text-text-primary tracking-widest uppercase">Souleymane Yeo</div>
-                                <div className="text-[10px] font-mono text-text-secondary uppercase tracking-widest">Lead Architect @ OpportuCI</div>
+                                <div className="text-[10px] font-mono text-text-secondary uppercase tracking-widest">Lead Architect @ Vision360</div>
                             </div>
                         </div>
                     </div>

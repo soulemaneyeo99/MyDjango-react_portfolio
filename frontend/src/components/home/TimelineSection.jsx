@@ -7,10 +7,10 @@ const TimelineSection = () => {
     const timelineData = [
         {
             year: '2025',
-            title: 'OPPORTUCI_LAUNCH',
-            description: "Pivot stratégique vers l'IA appliquée à l'éducation ivoirienne.",
-            tag: 'PLATFORM_CORE',
-            achievements: ['Integrated Neural Engine', 'Scalable Architecture', '1000+ Opportunities']
+            title: 'VISION360_LAUNCH',
+            description: "Création de Vision360 : assistant académique IA centralisant les activités Moodle pour l'UVCI.",
+            tag: 'EDTECH_CORE',
+            achievements: ['AES-256 Security', 'Intelligent Scraping Engine', 'Push & Email Alerts']
         },
         {
             year: '2024',
