@@ -6,10 +6,10 @@ const ImpactSection = () => {
     const { targetRef, hasIntersected } = useIntersectionObserver();
 
     const stats = [
-        { number: '3+', label: 'Years Experience', description: 'Building production systems', tag: 'EXP' },
-        { number: '8+', label: 'Projects Shipped', description: 'Full-stack applications', tag: 'PRJ' },
-        { number: '2', label: 'Awards Won', description: 'RARM 1st & PNUD 3rd place', tag: 'AWD' },
-        { number: '0€', label: 'AI Stack Cost', description: 'Free-tier production pipelines', tag: 'COST' },
+        { number: '3+', label: 'Ans d\'Expérience', description: 'Systèmes en production', tag: 'EXP' },
+        { number: '8+', label: 'Projets Livrés', description: 'Applications full-stack', tag: 'PRJ' },
+        { number: '2', label: 'Prix Remportés', description: '1er RARM & 3e PNUD 2025', tag: 'AWD' },
+        { number: '0€', label: 'Coût Stack IA', description: 'Pipelines IA en production', tag: 'COST' },
     ];
 
     return (
@@ -17,9 +17,9 @@ const ImpactSection = () => {
             <div className="container-custom relative z-10">
                 <div className={`mb-20 grid lg:grid-cols-[1.5fr_1fr] gap-8 items-end transform transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                     <div>
-                        <div className="font-mono text-[10px] text-primary-400 uppercase tracking-[0.4em] mb-4">Metrics_&_Data</div>
+                        <div className="font-mono text-[10px] text-primary-400 uppercase tracking-[0.4em] mb-4">Métriques_&_Données</div>
                         <h2 className="text-4xl md:text-7xl font-bold tracking-tighter text-text-primary">
-                            MEASURABLE <span className="text-primary-500 italic">IMPACT</span>
+                            IMPACT <span className="text-primary-500 italic">MESURABLE</span>
                         </h2>
                     </div>
                 </div>
