@@ -18,3 +18,7 @@ staticfiles/
 .tmp/
 credentials.json
 token.json
+
+# Raw exports (WhatsApp, etc.) — use frontend/public/videos/ instead
+WhatsApp*.mp4
+WhatsApp*.mov
